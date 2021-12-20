@@ -1,0 +1,12 @@
+../dataen/dhamma/s001.mp3
+../dataen/dhamma/s002.mp3
+../dataen/dhamma/s003.mp3
+../dataen/dhamma/s004.mp3
+../dataen/dhamma/s005.mp3
+../dataen/dhamma/s006.mp3
+../dataen/dhamma/s007.mp3
+../dataen/dhamma/s008.mp3
+../dataen/dhamma/s009.mp3
+../dataen/dhamma/s010.mp3
+../dataen/dhamma/s011.mp3
+../dataen/dhamma/s012.mp3

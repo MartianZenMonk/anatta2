@@ -1,0 +1,5 @@
+../datath/buddhadham/6senses.mp3
+../datath/buddhadham/paticcasamuppda.mp3
+../datath/buddhadham/happiness.mp3
+../datath/buddhadham/yoniso.mp3
+../datath/buddhadham/sati.mp3

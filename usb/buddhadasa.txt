@@ -1,0 +1,6 @@
+../dataen/buddhadasa/burden_of_life.mp3
+../dataen/buddhadasa/vipassana.mp3
+../dataen/buddhadasa/paticcasamuppda.mp3
+../dataen/buddhadasa/instinct.mp3
+../dataen/buddhadasa/heart_of_buddhism.mp3
+../dataen/buddhadasa/five_khandhas.mp3
