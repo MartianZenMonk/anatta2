@@ -4,15 +4,17 @@ THANK YOU VERY MUCH TO MR. Peter Malkin FOR GIVING ME THE VOICEKIT AND CORAL DEV
 THANK YOU VERY MUCH TO MR SUTHEE @ https://www.techtalkthai.com/ FOR GIVING THE ASUS ZENBOOK DUO LAPTOP ( FOR MONKS PROPERTY )
 
 
-Anatta Meditation Voice Kit For rasberry pi os / ubuntu
+Anatta Meditation Voice For rasberry pi os / ubuntu
 
-
-use
 
 git clone https://github.com/MartianZenMonk/anatta2
 
 - then you can use git pull for updating
 
+How to run
+- copy folder m_tapaguno to m_yourname
+- cd m_yourname
+- python3 anatta.py
 
 You may have to install the following packages
 - pip3 install vosk
