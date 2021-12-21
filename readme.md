@@ -15,6 +15,7 @@ How to run
 - copy folder m_tapaguno to m_yourname
 - cd m_yourname
 - python3 anatta.py
+- note. need webcam for motion detect for terminating some functions
 
 You may have to install the following packages
 - pip3 install vosk
