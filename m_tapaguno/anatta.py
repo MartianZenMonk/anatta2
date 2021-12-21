@@ -2054,6 +2054,7 @@ def testing_mode1():
 
 def testing_mode3():
 	adjust_volume()
+	vol = '4000'
 	meditation_goal(1)
 	# walking
 	lg = ['th','en'] # ['zh','ja','ko']
@@ -2082,6 +2083,7 @@ def testing_mode3():
 
 def testing_mode4():
 	adjust_volume()
+	vol = '4000'
 	meditation_goal(1)
 	# walking
 	lg = ['th','en'] # ['zh','ja','ko']
@@ -2099,9 +2101,9 @@ def testing_mode4():
 	bell('1')
 	play_mp3('../datath/chanting/Bhadhdherattakadha.mp3',137)
 	bell('1')
-	om_meditation(10,'off','4000')
-	thunder_meditation(10,'off','4000')
-	jungle_meditation(10,'off','4000')
+	om_meditation(10,'off',vol)
+	thunder_meditation(10,'off',vol)
+	jungle_meditation(10,'off',vol)
 	bell('3')
 	tibetan_metta_chanting(vol)
 
