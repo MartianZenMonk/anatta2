@@ -35,4 +35,4 @@ Let's be meditation tools maker and join our facebook group : https://free.faceb
 
 Meditation tool  สำหรับ ผู้เริ่มต้นฝึกปฏิบัติ จะเน้นช่วยให้เกิดฉันทะ อยากฝึกปฏิบัติอย่างต่อเนื่อง และ ช่วยเน้นการฝึก เจริญ สติ พระท่านว่า สติ ยิ่งมีมากยิ่งดี เพราะเป็น ตัวช่วยให้เกิด สัมมาสมาธิ ได้ง่าย และ ช่วยในการทำวิปัสสนา
 
-![s24](https://user-images.githubusercontent.com/79086623/146862600-18270690-1724-48af-b544-1118768ce460.png)
+![s24](https://user-images.githubusercontent.com/79086623/146866133-8e84faee-e379-41f2-a1ee-b352e87e6a36.png)
