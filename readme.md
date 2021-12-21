@@ -25,8 +25,8 @@ You may have to install the following packages
 - sudo apt install filezilla
 
 For Virtualbox + VirtualBox Extension Pack
-https://www.virtualbox.org/wiki/Downloads
-https://ubuntu-mate.org/download/
+- https://www.virtualbox.org/wiki/Downloads
+- https://ubuntu-mate.org/download/
 
 Let's be meditation tools maker and join our facebook group : https://free.facebook.com/groups/393633318920656/
 
