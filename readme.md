@@ -1,4 +1,6 @@
 THANK YOU VERY MUCH TO MR. Peter Malkin FOR GIVING ME THE VOICEKIT AND CORAL DEV BOARD
+
+
 THANK YOU VERY MUCH TO MR SUTHEE @ https://www.techtalkthai.com/ FOR GIVING THE ASUS ZENBOOK DUO LAPTOP ( FOR MONKS PROPERTY )
 
 
@@ -9,7 +11,7 @@ use
 
 git clone https://github.com/MartianZenMonk/anatta2
 
-- then you can use git pull to update the code
+- then you can use git pull for updating
 
 
 You may have to install the following packages
@@ -25,3 +27,5 @@ You may have to install the following packages
 For Virtualbox + VirtualBox Extension Pack
 https://www.virtualbox.org/wiki/Downloads
 https://ubuntu-mate.org/download/
+
+![templex04](https://user-images.githubusercontent.com/79086623/146861353-9088641e-78f4-4b87-86ee-827bcb0939ac.png)
