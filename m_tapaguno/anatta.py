@@ -2069,7 +2069,7 @@ def testing_mode3():
 	speak("you have 5 miniutes before sitting meditation start")
 	delay(5)
 	bell('1')
-	play_mp3('../datath/basic_chanting/paticca.mp3',t*60)
+	play_mp3('../datath/chanting/Bhadhdherattakadha.mp3',137)
 	bell('1')
 	delay(10)
 	bell('1')
@@ -2081,8 +2081,29 @@ def testing_mode3():
 
 
 def testing_mode4():
-	speak("out off service!")
-	pass
+	adjust_volume()
+	meditation_goal(1)
+	# walking
+	lg = ['th','en'] # ['zh','ja','ko']
+	lgx = random.choice(lg)
+	bell('1')
+	three_stages_th_en('off',10,lgx)
+	bell('1')
+	counting_walk(10,False,lgx)
+	bell('1')
+	counting_walk(10,True,lgx)
+	bell('1')
+	# sitting in nature
+	speak("you have 5 miniutes before sitting meditation start")
+	delay(5)
+	bell('1')
+	play_mp3('../datath/chanting/Bhadhdherattakadha.mp3',137)
+	bell('1')
+	om_meditation(10,'off','4000')
+	thunder_meditation(10,'off','4000')
+	jungle_meditation(10,'off','4000')
+	bell('3')
+	tibetan_metta_chanting(vol)
 
 
 def testing_mode5():
@@ -2537,7 +2558,11 @@ def morning_practice(c='off',vol="6000",mode=1):
 	cheerful_payutto(1,vol)
 	play_mp3("../datath/chanting/8.mp3",1010,vol)
 	# play_sutra('6000',20)
-	chinese_chanting(0)
+	now = datetime.today().strftime('%H %M')
+	tn = now.split()
+	mn = (6-int(tn[0]))*60 - int(tn[1])
+	chinese_chanting(mn)
+	os.system("sudo shutdown now")
 	return None
 
 
@@ -2856,10 +2881,10 @@ try:
 								speak("testing 2")
 								testing_mode2()
 							elif "three" in words:
-								speak("testing 3")
+								speak("testing 3, 30 minutes walking and 30 minutes sitting")
 								testing_mode3()
 							elif "four" in words:
-								speak("testing 4")
+								speak("testing 4, 30 minutes walking and 30 minutes sitting in nature sound")
 								testing_mode4()
 							elif "five" in words:
 								speak("testing 5")
@@ -3335,7 +3360,7 @@ try:
 							elif "one" in words:
 								play_dhamma2()
 							elif "two" in words:
-								play_dhamma_with_alarm(180,15,'../datath/dhamma1')
+								play_dhamma_with_alarm(180,15,'../datath/dhamma')
 							elif "three" in words:
 								play_dhamma_with_alarm(120,15,'../datath/chanting')
 							elif "six" in words:
