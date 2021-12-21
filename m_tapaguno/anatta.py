@@ -2053,8 +2053,31 @@ def testing_mode1():
 	return None
 
 def testing_mode3():
-	speak("out off service!")
-	pass
+	adjust_volume()
+	meditation_goal(1)
+	# walking
+	lg = ['th','en'] # ['zh','ja','ko']
+	lgx = random.choice(lg)
+	bell('1')
+	three_stages_th_en('off',10,lgx)
+	bell('1')
+	counting_walk(10,False,lgx)
+	bell('1')
+	counting_walk(10,True,lgx)
+	bell('1')
+	# sitting
+	speak("you have 5 miniutes before sitting meditation start")
+	delay(5)
+	bell('1')
+	play_mp3('../datath/basic_chanting/paticca.mp3',t*60)
+	bell('1')
+	delay(10)
+	bell('1')
+	delay(10)
+	bell('1')
+	delay(10)
+	bell('3')
+	tibetan_metta_chanting(vol)
 
 
 def testing_mode4():
@@ -2443,9 +2466,11 @@ def morning_practice(c='off',vol="6000",mode=1):
 	mixed_mode('off',t,13,vol)
 	mixed_mode('off',10-t,15,vol)
 	i += 1
-	mixed_mode('off',10,walk[i],vol)
+	mixed_mode('off',t,walk[i],vol)
+	mixed_mode('off',10-t,15,vol)
 	i += 1
-	mixed_mode('off',10,walk[i],vol)
+	mixed_mode('off',t,walk[i],vol)
+	mixed_mode('off',10-t,15,vol)
 	#delay(5)
 	fast_buddho(c,5,vol)
 	relax_thai(vol)
