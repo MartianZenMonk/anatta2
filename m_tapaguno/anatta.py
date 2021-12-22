@@ -2477,23 +2477,19 @@ def music_meditation(t=0,c='d',vol="6000"):
 
 def morning_practice(c='off',vol="6000",mode=1):
 	ledc(c)
-	walk = [0,1,2,4,5,6,9,16,17]
+	walk = [0,1,2,4,5,9,16,17]
 	i = random.randint(1,3)
 	for x in range(i):
 		random.shuffle(walk)
-	i = 0
 	# warm up
 	t = random.randint(2,6)
 	mixed_mode('off',t,14,vol)
 	mixed_mode('off',10-t,15,vol)
 	mixed_mode('off',t,13,vol)
 	mixed_mode('off',10-t,15,vol)
-	i += 1
-	mixed_mode('off',t,walk[i],vol)
-	mixed_mode('off',10-t,15,vol)
-	i += 1
-	mixed_mode('off',t,walk[i],vol)
-	mixed_mode('off',10-t,15,vol)
+	for i in range(1,5):
+		mixed_mode('off',t,walk[i],vol)
+		mixed_mode('off',10-t,15,vol)
 	#delay(5)
 	fast_buddho(c,5,vol)
 	relax_thai(vol)
