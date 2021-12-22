@@ -1334,15 +1334,15 @@ def mixed_mode(c='',t=10,n=0,vol='6000'):
 	elif n == 3:
 		six_stages_th_en(c,t)
 	elif n == 4:
-		slow_buddho(c,t,'1000',True)
+		slow_buddho(c,t,'2000',True)
 	elif n == 5:
-		slow_buddho(c,t,'1000',False)
+		slow_buddho(c,t,'2000',False)
 	elif n == 6:
 		slow_buddho2(c,t)
 	elif n == 7:
 		anapanasati_walk(t)
 	elif n == 8:
-		remind_breathing(t,'1000','th5')
+		remind_breathing(t,'3000','th5')
 	elif n == 9:
 		remind_walking2(t,vol,1)
 	elif n == 10:
@@ -1387,9 +1387,9 @@ def adjust_volume():
 	tn = now.split()
 			
 	if int(tn[0]) > 18 or int(tn[0]) < 6:
-		call(["amixer","-q","-M","sset","Master","60%"])
+		call(["amixer","-q","-M","sset","Master","65%"])
 	else:
-		call(["amixer","-q","-M","sset","Master","100%"])
+		call(["amixer","-q","-M","sset","Master","95%"])
 
 
 def play_dhamma(fp="../datath/dhamma",v='1',vol='9000'):
