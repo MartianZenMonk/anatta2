@@ -1264,24 +1264,22 @@ def be_happy(vol='6000'):
 	os.system("mpg123 -q -f "+ vol + st)
 
 
-def cheerful_payutto(t=5,vol='6000'):
+def cheerful_payutto(t=1,vol='6000'):
 	proc = subprocess.Popen(["mpg123","-f",vol,"-q","--loop","-1","../sound/cheerful_payutto.mp3"])
 	delay(t)
 	proc.kill()
 	return None
 
-def cheerful_payutto2(t=5,vol='6000'):
-	proc = subprocess.Popen(["mpg123","-f",vol,"-q","--loop","-1","../sound/cheerful_citta.mp3"])
+def cheerful_payutto2(t=1,vol='3000'):
+	i = random.randint(1,2)
+	if i == 1:
+		fn = "../sound/cheerful_citta.mp3"
+	else:
+		fn = "../sound/cheerful_citta2.mp3"
+	proc = subprocess.Popen(["mpg123","-f",vol,"-q","--loop","-1",fn])
 	delay(t)
 	proc.kill()
 	return None
-
-def cheerful_payutto3(t=5,vol='6000'):
-	proc = subprocess.Popen(["mpg123","-f",vol,"-q","--loop","-1","../sound/cheerful_citta2.mp3"])
-	delay(t)
-	proc.kill()
-	return None
-
 
 def walking_reward():
 	read_sutta(sutta["sutta"][0]) 
@@ -2071,6 +2069,7 @@ def testing_mode3():
 	delay(5)
 	bell('1')
 	play_mp3('../datath/chanting/Bhadhdherattakadha.mp3',137)
+	cheerful_payutto2(1,vol)
 	bell('1')
 	delay(10)
 	bell('1')
@@ -2100,6 +2099,7 @@ def testing_mode4():
 	delay(5)
 	bell('1')
 	play_mp3('../datath/chanting/Bhadhdherattakadha.mp3',137)
+	cheerful_payutto2(1,vol)
 	bell('1')
 	om_meditation(10,'off',vol)
 	thunder_meditation(10,'off',vol)
@@ -2497,7 +2497,7 @@ def morning_practice(c='off',vol="6000",mode=1):
 	# start
 	ledc('off')
 	if mode == 1:
-		remind_breathing(1,vol,'th')
+		cheerful_payutto2(1,vol)
 		alpha_wave(15)
 		bell('1',vol)
 		remind_breathing2(1)
@@ -2516,7 +2516,7 @@ def morning_practice(c='off',vol="6000",mode=1):
 		blessed_one(30,vol)
 		bell('1',vol)
 	elif mode == 3:
-		remind_breathing(1,vol,'th')
+		cheerful_payutto2(1,vol)
 		thunder_meditation(30,c,vol)
 		remind_breathing2(1)
 		blessed_one(30,vol)
@@ -2529,13 +2529,13 @@ def morning_practice(c='off',vol="6000",mode=1):
 		bell('1',vol)
 		#tibetan_metta_chanting(vol)
 	elif mode == 5:
-		remind_breathing(1,vol,'th')
+		cheerful_payutto2(1,vol)
 		alpha_wave(30)
 		remind_breathing2(1)
 		play_mp3("../datath/basic_chanting/pahung.mp3",1800,vol)
 		bell('1',vol)
 	elif mode == 6:
-		remind_breathing(1,vol,'th')
+		cheerful_payutto2(1,vol)
 		play_mp3("../datath/basic_chanting/pahung.mp3",1800,vol)
 		blessed_one(30,vol)
 		bell('1',vol)
