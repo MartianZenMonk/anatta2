@@ -1945,6 +1945,11 @@ def play_tripataka_chapter(p):
 def pali_chanting():
 	speak("out off service!")
 	pass
+
+def morning_merit(vol="6000"):
+	killPlayer()  
+	proc = subprocess.Popen(["mpg123","-f",vol,"../datath/chanting/morning-merit.mp3"])
+	press_for_stop('d',proc,192)
 	
 def tibetan_metta_chanting(vol="6000"):
 	killPlayer()  
@@ -2068,7 +2073,7 @@ def testing_mode3():
 	speak("you have 5 miniutes before sitting meditation start")
 	delay(5)
 	bell('1')
-	play_mp3('../datath/chanting/Bhadhdherattakadha.mp3',137)
+	play_mp3('../sound/bhadhdhe-phakhue.mp3',130)
 	cheerful_payutto2(1,vol)
 	bell('1')
 	delay(10)
@@ -2542,7 +2547,8 @@ def morning_practice(c='off',vol="6000",mode=1):
 		#tibetan_metta_chanting(vol)
 	
 	# cool down
-	tibetan_metta_chanting(vol)
+	# tibetan_metta_chanting(vol)
+	morning_merit(vol)
 	i = random.randint(1,3)
 	if i == 1 :
 		play_dhamma_with_alarm(50,10,'../datath/blessingmp3',vol)
