@@ -1694,19 +1694,37 @@ def play_buddha_story():
 		speak("sorry can not play video clip")
 
 
-def walking_meditation_count(c='oo'):
+def walking_meditation_count(lg='th'):
 	
 	speak("one stage walking practice, please count your step then you can verify it in the end")
 
-	th_right = thwords(['ขวา','ย่าง','หนอ'])
-	th_left = thwords(['ซ้าย','ย่าง','หนอ'])
-	th_stand = thwords(["ยืน","หนอ"])
+	if lg == 'th':
+		right_foot = thwords(['ขวา','ย่าง','หนอ'])
+		left_foot  = thwords(['ซ้าย','ย่าง','หนอ'])
+		standing   = thwords(["ยืน","หนอ"])
+	elif lg == 'ja':
+		right_foot = jawords(['右足で行く'])
+		left_foot  = jawords(['左足が行く'])
+		standing   = jawords(['台'])
+	elif lg == 'zh':
+		right_foot = zhwords(['右脚走'])
+		left_foot  = zhwords(['左脚走'])
+		standing   = zhwords(['站立'])
+	elif lg == 'ko':
+		right_foot = kowords(['오른발'])
+		left_foot  = kowords(['왼발'])
+		standing   = kowords(['서다'])
+	else:
+		right_foot = enwords(['right','goes','thus'])
+		left_foot  = enwords(['left','goes','thus'])
+		standing   = enwords(['standing'])
+
+
 	en_right = enwords(['right','goes','thus'])
-	en_left = enwords(['left','goes','thus'])
+	en_left  = enwords(['left','goes','thus'])
 	
-	ledc(c)
 	for i in range(3):
-		os.system('mpg123 -f 6000 ' + th_stand)
+		os.system('mpg123 -f 6000 ' + standing)
 		time.sleep(1)
 		speak("standing")
 		time.sleep(1)
@@ -1722,9 +1740,9 @@ def walking_meditation_count(c='oo'):
 		else:
 			t1 = random.randint(1,2)
 			t2 = random.randint(1,2)
-			os.system('mpg123 -f 6000 ' + th_right)
+			os.system('mpg123 -f 6000 ' + right_foot)
 			time.sleep(t1)
-			os.system('mpg123 -f 6000 ' + th_left)
+			os.system('mpg123 -f 6000 ' + left_foot)
 			time.sleep(t2)
 
 			os.system('mpg123 -f 6000 ' + en_right)
@@ -1737,9 +1755,9 @@ def walking_meditation_count(c='oo'):
 	bell('1')
 	speak("you walk for " + str(count*4) + "steps")
 
-	del th_left
-	del th_right
-	del th_stand
+	del right_foot
+	del left_foot
+	del standing
 	del en_left
 	del en_right
 	gc.collect()
@@ -2012,10 +2030,11 @@ def testing_mode2():
 # walking 1 hr
 def testing_mode1():
 	adjust_volume()
+	vol = '2000'
 	meditation_goal(1)
 	lg = ['th','en','zh','ja','ko']
 	lgx = random.choice(lg)
-	walk = [0,1,2,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]
+	walk = [0,1,2,4,5,6,7,8,9,10,11,12,13,14,16,17,18]
 	i = random.randint(1,3)
 	for x in range(i):
 		random.shuffle(walk)
@@ -2033,22 +2052,16 @@ def testing_mode1():
 	speak("mind your step")
 	counting_walk(10,True,lgx)
 	bell('1')
-	i = 0
 	
-	mixed_mode('off',10,walk[i])
-	i += 1
-	
-	mixed_mode('off',10,walk[i])
-	i += 1
-	if walk[i] == 2:
-		i += 1
-	
-	mixed_mode('off',10,walk[i])
-	i += 1
-	if walk[i] == 2:
-		i += 1
-	
-	mixed_mode('oo',10,walk[i])
+	for i in range(1,5):
+		t = random.randint(2,6)
+		n = random.randint(0,1)
+		if n == 0:
+			mixed_mode('off',t,walk[i],vol)
+			mixed_mode('off',10-t,15,vol)
+		else:
+			mixed_mode('off',10,walk[i])
+
 	#proc1.kill()
 	#pkill_proc_name("testgif")
 	bell('1')
@@ -2158,7 +2171,7 @@ def testing_mode7():
 		counting_walk(5,False,'th','6000')
 		bell('1')
 		counting_walk(5,True,'th','6000')
-		walking_meditation_count()
+		walking_meditation_count('th')
 	else:
 		pass
 	fast_buddho('off',10,'6000')
@@ -3060,16 +3073,19 @@ try:
 							three_stages_th_en('off',10,'ja')
 							counting_walk(10,False,'ja','6000')
 							counting_walk(10,True,'ja','6000')
+							walking_meditation_count('ja')
 
 						elif "walking" in words and "chinese" in words:
 							three_stages_th_en('off',10,'zh')
 							counting_walk(10,False,'zh','6000')
 							counting_walk(10,True,'zh','6000')
+							walking_meditation_count('zh')
 
 						elif "walking" in words and "korean" in words:
 							three_stages_th_en('off',10,'ko')
 							counting_walk(10,False,'ko','6000')
 							counting_walk(10,True,'ko','6000')
+							walking_meditation_count('ko')
 
 						elif "walking" in words and "thai" in words:
 							meditation_goal(1)
@@ -3077,14 +3093,14 @@ try:
 							counting_walk(5,False,'th','6000')
 							bell('1')
 							counting_walk(5,True,'th','6000')
-							walking_meditation_count()
+							walking_meditation_count('th')
 							
 						elif "walking" in words and "english" in words:
 							three_stages_th_en('off',10,'en')
 							counting_walk(5,False,'en','6000')
 							bell('1')
 							counting_walk(5,True,'en','6000')
-							walking_meditation_count()
+							walking_meditation_count('en')
 
 						elif "practice" in words:
 
