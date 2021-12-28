@@ -20,6 +20,11 @@ from subprocess import call
 import datetime as dt
 from datetime import datetime
 
+# sd._terminate()
+# time.sleep(5)
+# sd._initialize()
+# sd.default.latency = 'low'
+
 import pyttsx3
 engine = pyttsx3.init() # object creation
 engine.setProperty('voice','english-us') 
@@ -1932,6 +1937,28 @@ def om_meditation(t=0,c='d',vol="6000"):
 		clear_q()
 	return None
 
+# FOR MARTIAN MONK ONLY
+def play_plants(w):
+	speak("out off service!")
+	pass
+	# plants = ['cells.mp4','light-sd.mp4','seed-sd.mp4','water-sd.mp4','co2.mp4','npk.mp4']
+	# plists = ['cell','light','seed','water','carbon','food']           
+	# try:
+	# 	i = plists.index(w)
+	# 	speak("Play Plants " + w)
+	# 	command = "export DISPLAY=:0.0; vlc -f --loop --video-on-top ../datath/basic_chanting/plants/" + plants[i]
+	# 	proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
+	# 	motion_detect(proc)
+	# except:
+	# 	speak("sorry can not play video clip")
+
+def play_tripataka_chapter(p):
+	speak("out off service!")
+	pass
+	# killPlayer()  
+	# speak("play Thai reading Tripitaka Chapter " + p)
+	# proc = subprocess.Popen(["mpg123","-d","2","-f","6000","../datath/basic_chanting/tripitaka/Tripidok" + p + ".mp3"])
+	# press_for_stop('d',proc)
 
 def pali_chanting():
 	speak("out off service!")
@@ -2838,6 +2865,32 @@ try:
 										pass
 							else:
 								morsecode('sati sati sati')
+						# elif "plants" in words:
+						# 	i = words.index('plants') + 1
+						# 	try:
+						# 		if len(words[i]) > 1:
+						# 			play_plants(words[i])
+						# 		else:
+						# 			pass
+						# 	except:
+						# 		pass
+
+						# elif "chapter" in words:
+						# 	if "sixteen" in words:
+						# 		p = '16'
+						# 	elif "seventeen" in words:
+						# 		p = '17'
+						# 	elif "eighteen" in words:
+						# 		p = '18'
+						# 	elif "nineteen" in words:
+						# 		p = '19'
+						# 	else:
+						# 		p = ''
+
+						# 	if p == '':
+						# 		pass
+						# 	else:
+						# 		play_tripataka_chapter(p)
 
 						elif "testing" in words:
 							if "one" in words:
@@ -3080,7 +3133,52 @@ try:
 									time.sleep(1)
 
 								sit   = True
-								focus = True                            
+								focus = True
+							# # for martian monk only     
+							# elif "morning" in words:
+							# 	if"one" in words:
+							# 		verify_words = 'Do you want to play pahoong chanting morning practice?'
+							# 		mn = 1
+							# 	elif "two" in words:
+							# 		verify_words = 'Do you want to play martika chanting morning practice?'
+							# 		mn = 2
+							# 	elif "three" in words:
+							# 		verify_words = 'Do you want to play 7 kumpee chanting morning practice?'
+							# 		mn = 3
+							# 	else:
+							# 		verify_words = 'Do you want to play morning practice?'
+							# 		mn = 0
+
+							# 	mp = True    
+							# 	verify = True
+							# 	focus  = True
+
+							# elif "evening" in words:
+							# 	if "one" in words:
+							# 		verify_words = 'Do you want to play pahoong chanting in the morning?'
+							# 		mn = 1
+							# 	elif "two" in words:
+							# 		verify_words = 'Do you want to play martika chanting in the morning?'
+							# 		mn = 2
+							# 	elif "three" in words:
+							# 		verify_words = 'Do you want to play 7 kumpee chanting in the morning?'
+							# 		mn = 3
+							# 	elif "four" in words:
+							# 		verify_words = 'Do you want to play random chanting in the morning?'
+							# 		mn = 4
+							# 	elif "six" in words:
+							# 		verify_words = 'Do you want to play alpha sound in the evening?'
+							# 		mn = 6 
+							# 	else:
+							# 		verify_words = 'Do you want to play basic mode evening practice?'
+							# 		mn = 0
+
+							# 	ep = True
+							# 	verify = True
+							# 	focus  = True
+							# else:
+							# 	speak("what practice mode do you want ?")
+							# 	clear_q()                             
 
 						elif "spelling" in words and "mode" in words:
 							speak("spelling mode, please use international code of signals such as, c charlie but can say letter c too")
