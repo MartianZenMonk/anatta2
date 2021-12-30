@@ -21,6 +21,7 @@ You may have to install the following packages
 
 - https://www.raspberrypi.org/documentation/remote-access/web-server/nginx.md  (for raspberry pi os), change root documents to ~/anatta2
 - unzip  tripitakaofflineV07.zip
+- for other languages please visit https://github.com/suttacentral
 
 For Virtualbox + VirtualBox Extension Pack
 - https://www.virtualbox.org/wiki/Downloads
