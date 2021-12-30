@@ -20,6 +20,7 @@ You may have to install the following packages
 - sudo apt  install vorbis-tools (ogg123 - option)
 
 - https://www.raspberrypi.org/documentation/remote-access/web-server/nginx.md  (for raspberry pi os), change root documents to ~/anatta2
+- unzip  tripitakaofflineV07.zip
 
 For Virtualbox + VirtualBox Extension Pack
 - https://www.virtualbox.org/wiki/Downloads

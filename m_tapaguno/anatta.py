@@ -1361,10 +1361,10 @@ def mixed_mode(c='',t=10,n=0,vol='6000'):
 	return None
 
 
-def get_new_dhamma_files(fp="../datath/basic_chanting/dhamma"):
+def get_new_dhamma_files(fp="../datath/dhamma"):
 	new_files = []
 	for file in os.listdir(fp):
-		if file.endswith(".mp3"):
+		if file.endswith(".mp3") or file.endswith(".m4a"):
 			new_files.append(os.path.join(fp, file))
 
 	# print(new_files)
@@ -1419,11 +1419,10 @@ def play_dhamma2(fp="../datath/dhamma",v='1',vol='9000'):
 	return None
 
 	
-def play_my_dhamma_vlc(fp="../datath/dhamma"):
-	play_mp3("../voices/pay-attention.mp3",15)
+def play_my_dhamma_vlc(fp="../datath/dhamma",rate='1.00'):
 	play_mp3("../voices/pay-attention.mp3",15)
 	files= get_new_dhamma_files(fp)
-	cmd = "cvlc --loop --rate=1.00 "+files
+	cmd = "cvlc --loop --rate " + rate + " " + files
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc)   
 	del files
@@ -1676,6 +1675,11 @@ def play_sutra(vol="6000",t=0):
 	proc2 = subprocess.Popen(["mpg123","-f",vol,"-C","-z","--list","sutra.txt"], stdin=master)
 	press_for_stop('d',proc2,60*t)
 
+def read_buddha_story():
+	cmd = "cvlc --play-and-exit --rate 1.50 ../mars/buddha/buddha-history1.m4a ../mars/buddha/buddha-story2.m4a"
+	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
+	press_for_stop('d',proc) 
+	 
 
 def play_buddha_story():
 	speak("play buddha story")
@@ -1698,18 +1702,23 @@ def walking_meditation_count(lg='th'):
 		left_foot  = thwords(['ซ้าย','ย่าง','หนอ'])
 		standing   = thwords(["ยืน","หนอ"])
 	elif lg == 'ja':
+		os.system('mpg123 -q -f ' + vol + ' ../voices/ja/japanese_walk.mp3')
 		right_foot = jawords(['右足で行く'])
 		left_foot  = jawords(['左足が行く'])
 		standing   = jawords(['台'])
 	elif lg == 'zh':
+		os.system('mpg123 -q -f ' + vol + ' ../voices/zh/chinese_walk.mp3')
 		right_foot = zhwords(['右脚走'])
 		left_foot  = zhwords(['左脚走'])
 		standing   = zhwords(['站立'])
 	elif lg == 'ko':
+		os.system('mpg123 -q -f ' + vol + ' ../voices/ko/b4walk.mp3')
 		right_foot = kowords(['오른발'])
 		left_foot  = kowords(['왼발'])
 		standing   = kowords(['서다'])
 	else:
+		tt = "Percipient of what lies in front & behind, set a distance to meditate walking back & forth, your senses inwardly immersed, your mind not straying outwards, mind your step"
+		speak(tt)
 		right_foot = enwords(['right','goes','thus'])
 		left_foot  = enwords(['left','goes','thus'])
 		standing   = enwords(['standing'])
@@ -3100,6 +3109,9 @@ try:
 
 						elif "buddha" in words and "day" in words:
 							buddha_day()
+
+						elif "buddha" in words and "one" in words:
+							read_buddha_story()
 							
 						elif "zen" in words and "story" in words:
 							nn = sequence[n]
