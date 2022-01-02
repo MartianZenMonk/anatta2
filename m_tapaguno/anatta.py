@@ -92,6 +92,14 @@ sutta = {
 		 ]
 	}
 
+from bs4 import BeautifulSoup
+import requests
+
+def listFD(url, ext=''):
+    page = requests.get(url).text
+    #print(page)
+    soup = BeautifulSoup(page, 'html.parser')
+    return [url + '/' + node.get('href') for node in soup.find_all('a') if node.get('href').endswith(ext)]
 
 def morsecode(message):
 	
@@ -760,7 +768,7 @@ def pure_alpha(c='yy'):
 
 def alpha_wave(t,vol='6000'):
 	# proc = subprocess.Popen(["mpg123","-q","-f",vol,"--loop","-1","../sound/pureAlpha2.mp3"])
-	proc = subprocess.Popen(["mpg123","-q","--loop","-1","../sound/OM417Hz.mp3"])
+	proc = subprocess.Popen(["mpg123","-q","--loop","-1","../sound/alpha.mp3"])
 	delay(t)
 	proc.kill()
 	clear_q()
@@ -886,14 +894,16 @@ def remind_walking2(t=30,vol='6000',n=0):
 	elif n == 2:
 		text =  [["รู้"],["เท้า"],["เคลื่อน"],["ไหว"],["รู้"],["ใจ"],["นึก"],["คิด"],["มี"],["จิต"],["เบิก"],["บาน"],["อยู่"],["กับ"],["ปัจ"],["จุ"],["บัน"]]
 	elif n == 3:
-		text = ["ตะ","ถะ","ตา","เช่น","นั้น","เอง","อิ","ทัป","ปัจ","จะ","ยะ","ตา","เพราะ","มี","สิ่ง","นี้","สิ่ง","นี้","เป็น","ปัจ","จัย","สิ่ง","นี้","สิ่ง","นี้","จึง","เกิด","ขึ้น"]
+		text = [["พุท"],["โธ"],["พุท"],["โธ"],["คิด"],["ก่อน"],["เคลื่อน"],["ไหว"]]
 	elif n == 4:
-		text  = [["ไม่"],["คิด"],["หนอ"],["ไม่"],["คิด"],["หนอ"],["พุท"],["โธ"],["พุท"],["โธ"]]
+		text  = [["มี"],["สติ"],["ไม่"],["คิด"],["หนอ"],["ไม่"],["คิด"],["หนอ"],["พุท"],["โธ"],["พุท"],["โธ"]]
 	elif n == 5:
 		text  = [["ยกย่างเหยียบ1"],["ยกย่างเหยียบ1"]]
 		tt = 0
 	elif n == 6:
 		text  = [["รู้"],["เท้า"],["เคลื่อน"],["ไหว"],["ไม่"],["ส่ง"],["ใจ"],["ออก"],["นอก"]]
+	elif n == 7:
+		text = [['ไม่กังวล'],['อะไร'],['ไม่ต้องการ'],['สิ่งใด'],['สุขหนอ'],['สุขหนอ']]
 	else:
 		text =  [["รู้"],["กาย"],["เคลื่อน"],["ไหว"],["รู้"],["ใจ"],["นึก"],["คิด"],["มี"],["จิต"],["เบิก"],["บาน"],["อยู่"],["กับ"],["ปัจ"],["จุ"],["บัน"]]
 	
@@ -1337,7 +1347,7 @@ def mixed_mode(c='',t=10,n=0,vol='6000'):
 	elif n == 8:
 		remind_breathing(t,'3000','th5')
 	elif n == 9:
-		remind_walking2(t,vol,1)
+		remind_walking2(t,vol,3)
 	elif n == 10:
 		remind_walking2(t,vol,2)
 	elif n == 11:
@@ -1356,6 +1366,8 @@ def mixed_mode(c='',t=10,n=0,vol='6000'):
 		alpha_wave(t)
 	elif n == 18:
 		remind_walking_en(t,vol,3)
+	elif n == 19:
+		remind_walking2(t,vol,7)
 	else:
 		one_stage_th_en(c,t)
 	return None
@@ -1385,7 +1397,7 @@ def adjust_volume():
 		call(["amixer","-q","-M","sset","Master","95%"])
 
 
-def play_dhamma(fp="../datath/dhamma",v='1',vol='9000'):
+def play_dhamma(fp="../datath/dhamma",v='1',vol='6000'):
 	play_mp3("../voices/pay-attention.mp3",15)
 	files= get_new_dhamma_files(fp)
 	cmd = "mpg123 -C -d " + v + " -f " + vol + " " + files
@@ -1407,12 +1419,23 @@ def play_dhamma(fp="../datath/dhamma",v='1',vol='9000'):
 	return None
 
 
-def play_dhamma2(fp="../datath/dhamma",v='1',vol='9000'):
+def play_dhamma2(fp="../datath/dhamma",v='1',vol='6000'):
 	play_mp3("../voices/pay-attention.mp3",15)
 	files= get_new_dhamma_files(fp)
 	cmd = "mpg123 -C -z -d " + v + " -f " + vol + " " + files
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	motion_detect(proc)
+	killPlayer()    
+	del files
+	gc.collect() 
+	return None
+
+def play_mp3_folder(fp="../mars/classical",vol='6000',t=60):
+	play_mp3("../voices/pay-attention.mp3",15)
+	files= get_new_dhamma_files(fp)
+	cmd = "mpg123 -C -z -f " + vol + " " + files
+	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
+	delay(t)
 	killPlayer()    
 	del files
 	gc.collect() 
@@ -1638,12 +1661,42 @@ def thai_chanting(t=0,vol="6000"):
 	press_for_stop('off',proc,t)
 
 
-def play_radio(vol='6000'):
+def play_radio(vol='10000'):
 	killPlayer()                                    
 	if have_internet():
-		speak("Tibetan Buddhist internet radio")
-		proc = subprocess.Popen(["mpg123","-f",vol,"-q","http://199.180.72.2:9097/lamrim"])
+		# speak("Tibetan Buddhist internet radio")
+		# proc = subprocess.Popen(["mpg123","-f",vol,"-q","http://199.180.72.2:9097/lamrim"])
+		proc = subprocess.Popen(["mpg123","-f",vol,"-q","http://202.142.203.28:8000/siangdham.mp3"])
 		press_for_stop('d',proc)
+	else:
+		speak("sorry no internet connection") 
+
+# http://www.thammapedia.com/listen/
+def play_radio_mp3(vol='10000'):
+	killPlayer()                                    
+	if have_internet():
+		m = random.randint(1,5)
+		if m == 1:
+			url = 'http://www.thammapedia.com/listen/bdds/mp3/'
+		elif m == 2:
+			url = 'http://www.thammapedia.com/listen/char/mp3'
+		elif m == 3:
+			url = 'http://www.thammapedia.com/listen/payutto/mp3'
+		elif m == 4:
+			url = 'http://www.thammapedia.com/listen/plean/mp3'
+		elif m == 5:
+			url = 'http://www.thammapedia.com/listen/bua/mp3'
+
+		ext = 'mp3'
+
+		mp3list = listFD(url, ext)
+		random.shuffle(mp3list)
+
+		for file in mp3list[:5]:
+			print(file)
+			proc = subprocess.Popen(["mpg123","-f",vol,file])
+			press_for_stop('d',proc)
+		
 	else:
 		speak("sorry no internet connection")  
 
@@ -1676,7 +1729,16 @@ def play_sutra(vol="6000",t=0):
 	press_for_stop('d',proc2,60*t)
 
 def read_buddha_story():
-	cmd = "cvlc --play-and-exit --rate 1.50 ../mars/buddha/buddha-history1.m4a ../mars/buddha/buddha-story2.m4a"
+	cmd = "cvlc --play-and-exit ../mars/buddha/buddha-history1.m4a"
+	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
+	press_for_stop('d',proc) 
+	cmd = "cvlc --play-and-exit ../mars/buddha/buddha-history2.m4a"
+	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
+	press_for_stop('d',proc)
+
+
+def buddha_80():
+	cmd = "cvlc --rate 1.50 --play-and-exit ../mars/nibbanasutra.m4a"
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc) 
 	 
@@ -2016,7 +2078,7 @@ def testing_mode1():
 	meditation_goal(1)
 	lg = ['th','en','zh','ja','ko']
 	lgx = random.choice(lg)
-	walk = [0,1,2,4,5,6,7,8,9,10,11,12,13,14,16,17,18]
+	walk = [0,1,2,4,5,6,7,8,9,10,11,12,13,14,16,17,18,19]
 	i = random.randint(1,3)
 	for x in range(i):
 		random.shuffle(walk)
@@ -2049,6 +2111,29 @@ def testing_mode1():
 	bell('1')
 	clear_q()
 	return None
+
+def sitting_meditation(vol='6000'):
+	m = random.randint(1,3)
+	if m == 1:
+		play_mp3('../sound/bhadhdhe-phakhue.mp3',650)
+	elif m == 2:
+		play_mp3('../dataen/chanting/heart-sutra.mp3',660)
+	elif m == 3:
+		play_mp3('../datath/basic_chanting/paticca.mp3',810)
+
+	m = random.randint(1,3)
+	if m == 1:
+		music_meditation(15,'off',vol)
+	elif m == 2:
+		jungle_meditation(15,'off',vol)
+	elif m == 3:
+		om_meditation(15,'off',vol)
+
+	bell('1')
+	delay(15)
+	bell('1')
+	delay(15)
+	bell('3')
 
 def testing_mode3():
 	adjust_volume()
@@ -2101,9 +2186,9 @@ def testing_mode4():
 	play_mp3('../datath/chanting/Bhadhdherattakadha.mp3',137)
 	cheerful_payutto2(1,vol)
 	bell('1')
+	jungle_meditation(10,'off',vol)
 	om_meditation(10,'off',vol)
 	thunder_meditation(10,'off',vol)
-	jungle_meditation(10,'off',vol)
 	bell('3')
 	tibetan_metta_chanting(vol)
 
@@ -2157,9 +2242,7 @@ def testing_mode7():
 	else:
 		pass
 	fast_buddho('off',10,'6000')
-	remind_breathing(5,'6000','th')
-	alpha_wave(55)
-	bell('1')
+	sitting_meditation()
 	now = datetime.today().strftime('%H %M')
 	tn = now.split()
 	mn = (22-int(tn[0]))*60 - int(tn[1])
@@ -2175,17 +2258,14 @@ def testing_10():
 	what_time()
 	testing_mode1()
 	fast_buddho('off',10,'6000')
-	remind_breathing(5,'6000','th')
-	alpha_wave(55)
-	bell('1')
-	ledc("off")
+	sitting_meditation()
 	now = datetime.today().strftime('%H %M')
 	tn = now.split()
 	mn = (22-int(tn[0]))*60 - int(tn[1])
 	basic_chanting(mn,'6000')
 	delay(240)
 	fast_buddho('off',5,'6000')
-	n = [1,3,4,5]
+	n = [1,3,4,5,7]
 	random.shuffle(n)
 	morning_practice('off','6000',n[0])
 	return None
@@ -2195,9 +2275,7 @@ def testing_mode9():
 	what_time()
 	testing_mode1()
 	fast_buddho('off',10,'6000')
-	remind_breathing(5,'6000','th2')
-	alpha_wave(55)
-	bell('1')
+	sitting_meditation()
 	now = datetime.today().strftime('%H %M')
 	tn = now.split()
 	mn = (22-int(tn[0]))*60 - int(tn[1])
@@ -2221,7 +2299,11 @@ def meditation_7():
 	bell('1')
 	delay(4)
 	before_sit()
-	sitting_sound_with_alarm(m)
+	m = random.randint(1,2)
+	if m == 1:
+		play_mp3_folder('../mars/guqin')
+	else:
+		play_mp3_folder()
 	bell('3')
 	return None
 	
@@ -2290,9 +2372,9 @@ def meditation_1():
 		bell('1')
 		delay(10)
 	else:
+		jungle_meditation(10,'off','6000')
 		thunder_meditation(10,'off','6000')
 		raining_meditation(10,'off','6000')
-		jungle_meditation(10,'off','6000')
 		music_meditation(10,'off','4000')
 
 	bell('3')
@@ -2479,7 +2561,7 @@ def music_meditation(t=0,c='d',vol="6000"):
 
 def morning_practice(c='off',vol="6000",mode=1):
 	ledc(c)
-	walk = [0,1,2,4,5,9,16,17]
+	walk = [0,1,4,5,9,16,17]
 	i = random.randint(1,3)
 	for x in range(i):
 		random.shuffle(walk)
@@ -2500,7 +2582,7 @@ def morning_practice(c='off',vol="6000",mode=1):
 	ledc('off')
 	if mode == 1:
 		cheerful_payutto2(1,vol)
-		alpha_wave(15)
+		jungle_meditation(15,c,vol)
 		bell('1',vol)
 		remind_breathing2(1)
 		alpha_wave(15)
@@ -2519,20 +2601,23 @@ def morning_practice(c='off',vol="6000",mode=1):
 		bell('1',vol)
 	elif mode == 3:
 		cheerful_payutto2(1,vol)
-		thunder_meditation(30,c,vol)
+		jungle_meditation(15,c,vol)
+		thunder_meditation(15,c,vol)
 		remind_breathing2(1)
 		blessed_one(30,vol)
 		bell('1',vol)
 		#tibetan_metta_chanting(vol)
 	elif mode == 4:
-		om_meditation(30,c,'6000')
+		jungle_meditation(15,c,vol)
+		om_meditation(15,c,'6000')
 		remind_breathing2(1)
 		blessed_one(30,vol)
 		bell('1',vol)
 		#tibetan_metta_chanting(vol)
 	elif mode == 5:
 		cheerful_payutto2(1,vol)
-		alpha_wave(30)
+		jungle_meditation(15,c,vol)
+		alpha_wave(15)
 		remind_breathing2(1)
 		play_mp3("../datath/basic_chanting/pahung.mp3",1800,vol)
 		bell('1',vol)
@@ -2541,8 +2626,9 @@ def morning_practice(c='off',vol="6000",mode=1):
 		play_mp3("../datath/basic_chanting/pahung.mp3",1800,vol)
 		blessed_one(30,vol)
 		bell('1',vol)
-		#tibetan_metta_chanting(vol)
-	
+	elif mode == 7:
+		play_mp3_folder()
+		bell('1',vol)
 	# cool down
 	# tibetan_metta_chanting(vol)
 	morning_merit(vol)
@@ -2649,7 +2735,8 @@ try:
 			print('#' * 80)
 			# print(args.samplerate)
 			# print(args.device)
-			#metta_chanting_thai()
+			# sitting_meditation()
+			# morning_practice()
 
 			os.system('espeak -s 130 -v "english-us" "Nothing is worth insisting on"')
 			os.system('mpg123 -q -f 6000 ../voices/hello.mp3')
@@ -3016,7 +3103,7 @@ try:
 								speak("1 hour")
 								meditation_5()
 							elif "seven" in words:
-								speak("1 hour")
+								speak("1 hour classical music sitting")
 								meditation_7()
 							elif "six" in words:
 								speak("4 hours with cheerful clip")
@@ -3112,6 +3199,9 @@ try:
 
 						elif "buddha" in words and "one" in words:
 							read_buddha_story()
+
+						elif "buddha" in words and "two" in words:
+							buddha_80()
 							
 						elif "zen" in words and "story" in words:
 							nn = sequence[n]
@@ -3185,9 +3275,10 @@ try:
 
 						elif "radio" in words:
 							if "play" in words or "start" in words:
-								play_radio()
+								# play_radio()
+								play_radio_mp3()
 							else:
-								speak("Do you want to play online tibetan radio ?")
+								speak("Do you want to play online radio ?")
 								cmd = "radio"
 								verify = True
 								focus  = True
