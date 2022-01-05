@@ -1671,13 +1671,28 @@ def play_radio(vol='10000'):
 	else:
 		speak("sorry no internet connection") 
 
+# pip3 install --upgrade youtube-dl or
+# python3 -m pip install -U yt-dlp
+def play_youtube():
+	m = random.randint(1,2)
+	if m == 1:
+		plist = 'https://www.youtube.com/playlist?list=PLWPh4CKxHuQ91lL9Nme_utg5qH4F4KTOg'
+		#Buddhadasa
+	elif m == 2:
+		plist = 'https://www.youtube.com/playlist?list=PLFUPwJBonRX0CzKn3jRROtQDQ7UAQFRrK'
+		#Payutto
+	cmd = "yt-dlp -f 139 --playlist-random -o - " + plist + " | cvlc -"
+	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
+	press_for_stop('d',proc) 
+
+
 # http://www.thammapedia.com/listen/
 def play_radio_mp3(vol='10000'):
 	killPlayer()                                    
 	if have_internet():
 		m = random.randint(1,5)
 		if m == 1:
-			url = 'http://www.thammapedia.com/listen/bdds/mp3/'
+			url = 'http://www.thammapedia.com/listen/bdds/mp3'
 		elif m == 2:
 			url = 'http://www.thammapedia.com/listen/char/mp3'
 		elif m == 3:
@@ -2123,7 +2138,7 @@ def sitting_meditation(vol='6000'):
 
 	m = random.randint(1,3)
 	if m == 1:
-		music_meditation(15,'off',vol)
+		play_mp3_folder('../sound/birds',vol,30)
 	elif m == 2:
 		jungle_meditation(15,'off',vol)
 	elif m == 3:
@@ -3277,6 +3292,8 @@ try:
 							if "play" in words or "start" in words:
 								# play_radio()
 								play_radio_mp3()
+							elif "english" in words:
+								play_youtube()
 							else:
 								speak("Do you want to play online radio ?")
 								cmd = "radio"
@@ -3548,7 +3565,8 @@ try:
 									
 									elif cmd != "":
 										if cmd == "radio":
-											play_radio()
+											# play_radio()
+											play_radio_mp3()
 											cmd = ""
 											verify = False
 											focus = False
