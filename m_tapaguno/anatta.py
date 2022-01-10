@@ -1681,7 +1681,7 @@ def play_youtube():
 	elif m == 2:
 		plist = 'https://www.youtube.com/playlist?list=PLFUPwJBonRX0CzKn3jRROtQDQ7UAQFRrK'
 		#Payutto
-	cmd = "yt-dlp -f 139 --playlist-random -o - " + plist + " | cvlc -"
+	cmd = "youtube-dl -f 139 --playlist-random -o - " + plist + " | cvlc -"
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc) 
 
@@ -2140,14 +2140,12 @@ def sitting_meditation(vol='6000'):
 	if m == 1:
 		play_mp3_folder('../sound/birds',vol,30)
 	elif m == 2:
-		jungle_meditation(15,'off',vol)
+		jungle_meditation(30,'off',vol)
 	elif m == 3:
-		om_meditation(15,'off',vol)
-
-	bell('1')
-	delay(15)
-	bell('1')
-	delay(15)
+		bell('1')
+		delay(15)
+		bell('1')
+		delay(15)
 	bell('3')
 
 def testing_mode3():

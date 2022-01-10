@@ -21,11 +21,15 @@ You may have to install the following packages
 
 - https://www.raspberrypi.org/documentation/remote-access/web-server/nginx.md  (for raspberry pi os), change root documents to ~/anatta2
 - unzip  tripitakaofflineV07.zip
-- for other languages please visit https://github.com/suttacentral
+- for other languages please visit https://github.com/suttacentral or https://github.com/digitalpalireader/digitalpalireader
 
 For Virtualbox + VirtualBox Extension Pack
 - https://www.virtualbox.org/wiki/Downloads
 - https://ubuntu-mate.org/download/
+
+For Thai language
+- https://github.com/mozilla/DeepSpeech-examples/tree/r0.9/mic_vad_streaming
+- https://itml.cl.indiana.edu/models/th/
 
 How to run
 - copy folder m_tapaguno to m_yourname
