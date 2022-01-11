@@ -1,7 +1,7 @@
-THANK YOU VERY MUCH TO MR. Peter Malkin FOR GIVING ME THE VOICEKIT AND CORAL DEV BOARD
+THANK YOU VERY MUCH TO MR. Peter Malkin FOR GIVING ME THE VOICEKIT AND CORAL DEV BOARD ( MONKS PROPERTY )
 
 
-THANK YOU VERY MUCH TO MR SUTHEE @ https://www.techtalkthai.com/ FOR GIVING THE ASUS ZENBOOK DUO LAPTOP ( FOR MONKS PROPERTY )
+THANK YOU VERY MUCH TO MR SUTHEE @ https://www.techtalkthai.com/ FOR GIVING THE ASUS ZENBOOK DUO LAPTOP ( MONKS PROPERTY )
 
 
 Anatta Meditation Voice For rasberry pi os / ubuntu
@@ -27,7 +27,7 @@ For Virtualbox + VirtualBox Extension Pack
 - https://www.virtualbox.org/wiki/Downloads
 - https://ubuntu-mate.org/download/
 
-For Thai language
+For offline Thai voice recognition
 - https://github.com/mozilla/DeepSpeech-examples/tree/r0.9/mic_vad_streaming
 - https://itml.cl.indiana.edu/models/th/
 
@@ -35,7 +35,7 @@ How to run
 - copy folder m_tapaguno to m_yourname
 - cd m_yourname
 - python3 anatta.py
-- note. need webcam for motion detect for terminating some functions , check the webcam by runing python3 mdetect.py
+- note. need webcam for motion detect for terminating some functions , may test the webcam first by using python3 mdetect.py
 
 How to use ( for example )
 - say "english chanting" to play english Chanting
