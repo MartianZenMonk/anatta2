@@ -16,6 +16,7 @@ You may have to install the following packages
 - pip3 install vosk
 - pip3 install opencv-python
 - pip3 install pyttsx3
+- pip3 install pydub
 - sudo apt  install espeak  (and espeak-ng if you like )
 - sudo apt  install mpg123
 - sudo apt  install vorbis-tools (ogg123 - if you want to use ogg)
@@ -25,6 +26,7 @@ You may have to install the following packages
 - unzip  tripitakaofflineV07.zip
 - sudo systemctl restart nginx
 - for other languages please visit https://github.com/suttacentral or https://github.com/digitalpalireader/digitalpalireader
+- python3 -m pip install -U yt-dlp , for pi zero to fix "Illegal instruction" ,  pip3 uninstall pycryptodomex ( use yt-dlp to play youtube playlist, can use youtube-dl too)
 
 For Virtualbox + VirtualBox Extension Pack
 - https://www.virtualbox.org/wiki/Downloads
