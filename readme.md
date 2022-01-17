@@ -12,15 +12,18 @@ git clone https://github.com/MartianZenMonk/anatta2
 - then you can use git pull for updating
 
 You may have to install the following packages
+- sudo apt update
 - pip3 install vosk
 - pip3 install opencv-python
 - pip3 install pyttsx3
 - sudo apt  install espeak  (and espeak-ng if you like )
 - sudo apt  install mpg123
-- sudo apt  install vorbis-tools (ogg123 - option)
+- sudo apt  install vorbis-tools (ogg123 - if you want to use ogg)
 
-- https://www.raspberrypi.org/documentation/remote-access/web-server/nginx.md  (for raspberry pi os), change root documents to ~/anatta2
+- sudo apt install nginx
+- sudo nano /etc/nginx/sites-enabled/default , change root documents to /home/pi/anatta2
 - unzip  tripitakaofflineV07.zip
+- sudo systemctl restart nginx
 - for other languages please visit https://github.com/suttacentral or https://github.com/digitalpalireader/digitalpalireader
 
 For Virtualbox + VirtualBox Extension Pack
