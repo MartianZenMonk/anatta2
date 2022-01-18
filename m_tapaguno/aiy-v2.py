@@ -416,7 +416,7 @@ def get_help():
 
 
 def shutdown():
-	os.system("mpg123 -f 1000 ../thaivoices/dead.mp3")
+	os.system("mpg123 -f 1000 ../voices/dead.mp3")
 	espeak("The system is shutting down, wait until the green light in the box turn off, bye bye",'10')
 	board.led.state = Led.OFF
 	os.system("sudo shutdown now")
@@ -510,20 +510,21 @@ def motion_detect(proc):
 	return None
 
 from pydub import AudioSegment
+from pydub.playback import play
 
-def speakThai(text,tp='wav',vol='2000'):
+def speakThai(text,tp='wav',vol='1000',dB=20):
 
 	thsound = AudioSegment.empty()
 	stext = ""
 	if tp == 'wav':
 		for tx in text:
-			stext = "../thaivoices/thai/" + tx + ".wav"
+			stext = "../voices/th/" + tx + ".wav"
 			print(stext)
 			thsound += AudioSegment.from_wav(stext)
-		os.system("aplay " + thsound)
+		play(thsound-dB)
 	else:
 		for tx in text:
-			stext = "../thaivoices/thai/" + tx + ".mp3"
+			stext = "../voices/th/" + tx + ".mp3"
 			thsound += AudioSegment.from_mp3(stext)
 		os.system('mpg123 -f ' + vol + ' ' + thsound)
 
@@ -538,47 +539,59 @@ def enwords(text):
 def thwords(text):
 	stext = ""
 	for i in range(len(text)):
-		stext += " ../thaivoices/thwords/" + text[i] + ".mp3"
+		stext += " ../voices/th/" + text[i] + ".mp3"
+	return stext
+
+def mythaiwords(text):
+	stext = ""
+	for i in range(len(text)):
+		stext += " voices/mp3/th/" + text[i] + ".mp3"
+	return stext
+
+def mythaiwordswav(text):
+	stext = ""
+	for i in range(len(text)):
+		stext += " voices/wav/th/" + text[i] + ".wav"
 	return stext
 
 
 def thaiwords(text):
 	stext = ""
 	for i in range(len(text)):
-		stext += " ../thaivoices/thai/" + text[i] + ".mp3"
+		stext += " ../voices/th/" + text[i] + ".mp3"
 	return stext
 
 def thaiwordswav(text):
 	stext = ""
 	for i in range(len(text)):
-		stext += " ../thaivoices/thai/" + text[i] + ".wav"
+		stext += " ../voices/th/" + text[i] + ".wav"
 	return stext
 
 
 def zhwords(text):
 	stext = ""
 	for i in range(len(text)):
-		stext += " ../thaivoices/chinese/" + text[i] + ".mp3"
+		stext += " ../voices/zh/" + text[i] + ".mp3"
 	return stext
 
 
 def jawords(text):
 	stext = ""
 	for i in range(len(text)):
-		stext += " ../thaivoices/japanese/" + text[i] + ".mp3"
+		stext += " ../voices/ja/" + text[i] + ".mp3"
 	return stext
 
 def kowords(text):
 	stext = ""
 	for i in range(len(text)):
-		stext += " ../thaivoices/korean/" + text[i] + ".mp3"
+		stext += " ../voices/ko/" + text[i] + ".mp3"
 	return stext
 
 
 def engwords(text):
 	stext = ""
 	for i in range(len(text)):
-		stext += " ../thaivoices/english/" + text[i] + ".mp3"
+		stext += " ../voices/en/" + text[i] + ".mp3"
 	return stext
 
 def mp3_words(text,lg='th'):
@@ -589,7 +602,7 @@ def mp3_words(text,lg='th'):
 
 
 def runtime_vocabulary():
-	with open('vocabulary.csv', newline='') as f:
+	with open('../csv/vocabulary.csv', newline='') as f:
 		reader = csv.reader(f)
 		data = list(reader)
 
@@ -603,14 +616,14 @@ def runtime_vocabulary():
 def save_vocabulary(w):
 	wlist = []
 	wlist.append(w)
-	writer = csv.writer(open("vocabulary.csv", "a"))
+	writer = csv.writer(open("../csv/vocabulary.csv", "a"))
 	writer.writerow(thislist)
 
 
 def buddha_day():
 	today = dt.datetime.now()
 	year  = today.strftime("%Y")
-	with open(year + '.csv', newline='') as f:
+	with open('../csv/'+ year + '.csv', newline='') as f:
 		reader = csv.reader(f)
 		data = list(reader)
 
@@ -628,7 +641,7 @@ def buddha_day():
 	
 	bdaytext = ""
 	for i in range(len(x)-1):
-	  bdaytext += " ../thaivoices/thwords/" + x[i] + ".mp3"
+	  bdaytext += " ../voices/th/" + x[i] + ".mp3"
 
 	if have_internet():
 		today = dt.datetime.now()
@@ -643,7 +656,7 @@ def buddha_day():
 		text = t.split(',')
 		stext = ""
 		for i in range(len(text)):
-				stext += " ../thaivoices/thwords/" + text[i] + ".mp3"
+				stext += " ../voices/th/" + text[i] + ".mp3"
 		os.system("mpg123 -q -f 2100 "+stext)
 
 	y = list(str(holyday))
@@ -660,7 +673,7 @@ def buddha_day():
 	text = t.split(',')
 	stext = ""
 	for i in range(len(text)):
-			stext += " ../thaivoices/thwords/" + text[i] + ".mp3" 
+			stext += " ../voices/th/" + text[i] + ".mp3" 
 	os.system("mpg123 -q -f 2100 "+stext) 
 	os.system("mpg123 -q -f 2100 "+bdaytext) 
 	del data
@@ -672,15 +685,16 @@ def buddha_day():
 	return None
 
 
+
 def fast_buddho(c='off', t=30, vol='2000'):
 
 	ledc(c)
 
 	if t==0:
-		proc = subprocess.Popen(["mpg123","-d","3","-f",vol,"-q","--loop","-1","../thaivoices/buddho.mp3"])
+		proc = subprocess.Popen(["mpg123","-d","3","-f",vol,"-q","--loop","-1","../voices/buddho.mp3"])
 		press_for_stop(c,proc)
 	else:
-		proc = subprocess.Popen(["mpg123","-d","3","-f",vol,"-q","--loop","-1","../thaivoices/buddho.mp3"])
+		proc = subprocess.Popen(["mpg123","-d","3","-f",vol,"-q","--loop","-1","../voices/buddho.mp3"])
 		delay(t)
 		proc.kill()
 		clear_q()
@@ -836,7 +850,7 @@ def cheerful_mantra_th1(c='off', t=30, vol='2000'):
 def pure_alpha(c='yy'):
 	ledc(c)
 	speak("pure alpha sound, push button for stop")
-	os.system("mpg123 -f 1000 ../thaivoices/right_concentation.mp3")
+	os.system("mpg123 -f 1000 ../voices/right_concentation.mp3")
 	proc = subprocess.Popen(["mpg123","-q","--loop","-1","../mars/pureAlpha1hr.mp3"])
 	press_for_stop(c,proc)
 	return None
@@ -1030,7 +1044,7 @@ def remind_relax(t=30,vol='500'):
 def loop_sati(t=30,vol='500'):
 	bell('3',vol)
 	os.system('mpg123 -f ' + vol + ' -loop -1 ')
-	proc = subprocess.Popen(["mpg123","-f",vol,"-q","--loop","-1","../thaivoices/sati-cut.mp3"])
+	proc = subprocess.Popen(["mpg123","-f",vol,"-q","--loop","-1","../voices/sati-cut.mp3"])
 	delay(t)
 	proc.kill()
 	bell('1',vol)
@@ -1039,7 +1053,7 @@ def loop_sati(t=30,vol='500'):
 
 
 def wise_one(c='off',vol="500"):
-	proc = subprocess.Popen(["mpg123","-d","3","-f",vol,"-q","--loop","-1","../thaivoices/buddho.mp3"])
+	proc = subprocess.Popen(["mpg123","-d","3","-f",vol,"-q","--loop","-1","../voices/buddho.mp3"])
 	press_for_stop(c,proc)
 	return None
 
@@ -1129,10 +1143,10 @@ def slow_buddho2(c='',t=30,vol='1000'):
 	ledc(c)
 
 	if t==0:
-		proc = subprocess.Popen(["mpg123","-f",vol,"-q","--loop","-1","../thaivoices/buddho1.mp3"])
+		proc = subprocess.Popen(["mpg123","-f",vol,"-q","--loop","-1","../voices/buddho1.mp3"])
 		press_for_stop(c,proc)
 	else:
-		proc = subprocess.Popen(["mpg123","-f",vol,"-q","--loop","-1","../thaivoices/buddho1.mp3"])
+		proc = subprocess.Popen(["mpg123","-f",vol,"-q","--loop","-1","../voices/buddho1.mp3"])
 		delay(t)
 		proc.kill()
 	
@@ -1292,15 +1306,15 @@ def read_sutta(d):
 
 def meditation_goal(g=1,vol='2000'):
 	if g == 1:
-		text = " ../thaivoices/dukkha.mp3 ../thaivoices/goal.mp3"
+		text = " ../voices/dukkha.mp3 ../voices/goal.mp3"
 	elif g == 2:
-		text = " ../thaivoices/howtopractice.mp3"
+		text = " ../voices/howtopractice.mp3"
 	elif g == 3:
-		text = " ../thaivoices/natureTruth3.mp3"
+		text = " ../voices/natureTruth3.mp3"
 	elif g == 4:
-		text = " ../thaivoices/circle_of_dukkha_thai.mp3"
+		text = " ../voices/circle_of_dukkha_thai.mp3"
 	elif g == 5:
-		text = " ../thaivoices/yoniso_thai.mp3"
+		text = " ../voices/yoniso_thai.mp3"
 
 	os.system("mpg123 -q -f " + vol + text)
 
@@ -1310,22 +1324,22 @@ def before_walk(l="th",vol="2000"):
 		st = "percipient of what lies in front & behind, set a distance to meditate walking back & forth, your senses inwardly immersed, your mind not straying outwards"
 		espeak(t,vol)
 	else:
-		st = " ../thaivoices/before_walking.mp3"
+		st = " ../voices/before_walking.mp3"
 		os.system("mpg123 -q -f "+ vol + st)       
 
 
 def before_sit(l="th1",vol="2000"):
 	if l == 'th1':
-		st = " ../thaivoices/at_the_present.mp3"
+		st = " ../voices/at_the_present.mp3"
 	else:
-		st = " --loop 3 ../thaivoices/cheerful_breathing.mp3"
+		st = " --loop 3 ../voices/cheerful_breathing.mp3"
 
 	os.system("mpg123 -q -f "+ vol + st)
 	relax_thai(vol)
 
 
 def be_happy(vol='1000'):
-	st = " --loop 3 ../thaivoices/happy.mp3"
+	st = " --loop 3 ../voices/happy.mp3"
 	os.system("mpg123 -q -f "+ vol + st)
 
 
@@ -1355,7 +1369,7 @@ def walking_reward():
 
 def remind_sati():
 	speak("Do not forget to mind your breathing, mind your body movement and mind your mind.")
-	text = " ../thaivoices/sati.mp3"
+	text = " ../voices/sati.mp3"
 	os.system("mpg123 -q -f 2000 "+text)
 
 
@@ -1367,18 +1381,18 @@ def remind_sati_bikkhu():
 			when urinating and defecating; when walking, standing, sitting, sleeping, waking, speaking, and keeping silent.
 			"""
 	speak(entext)
-	text = " ../thaivoices/sati_bikkhu.mp3"
+	text = " ../voices/sati_bikkhu.mp3"
 	os.system("mpg123 -q -f 2000 "+text)
 
 
 def remind_right_sati():
 	speak("Ardent, fully aware, and mindful, after removing avarice and sorrow regarding the world.")
-	text = " ../thaivoices/right_sati.mp3"
+	text = " ../voices/right_sati.mp3"
 	os.system("mpg123 -q -f 2000 "+text)
 
 
 def remind_dead():
-	text = " ../thaivoices/dead.mp3"
+	text = " ../voices/dead.mp3"
 	os.system("mpg123 -q -f 2000 "+text)
 
 
@@ -1387,7 +1401,7 @@ def mixed_mode(c='',t=10,n=0,vol='1000'):
 		pass
 	else:
 		# remind_b4walking(vol,'th')
-		st = " ../thaivoices/before_walking.mp3"
+		st = " ../voices/before_walking.mp3"
 		os.system("mpg123 -q -f "+ vol + st) 
 
 	if n == 1:
@@ -1436,7 +1450,7 @@ def mixed_mode2(c='',t=10,n=0,vol='1000'):
 		pass
 	else:
 		# remind_b4walking(vol,'th')
-		st = " ../thaivoices/before_walking.mp3"
+		st = " ../voices/before_walking.mp3"
 		os.system("mpg123 -q -f "+ vol + st) 
 
 # slow 1-4, fast 5-9, normal 10 -
@@ -1523,7 +1537,7 @@ def play_my_dhamma(fp="../mars/dhamma",v='1',vol='2000'):
 	gc.collect() 
 	return None
 
-def play_dhamma_samadhi(fp="../datath/sutta",t=60):
+def play_dhamma_samadhi(fp="../datath/sutta",t=90):
 	files= get_new_dhamma_files(fp)
 	cmd = "cvlc -Z --gain 0.5 --rate=1.75 " + files
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
@@ -1644,7 +1658,7 @@ def what_day():
 	text = t.split(',')
 	stext = ""
 	for i in range(len(text)):
-			stext += " ../thaivoices/thwords/" + text[i] + ".mp3"
+			stext += " ../voices/thwords/" + text[i] + ".mp3"
 	os.system("mpg123 -q -f 2100 "+stext)
 	del t
 	del text
@@ -1691,7 +1705,7 @@ def play_daily_dependent_origination_thai():
 
 def play_buddha_thinking_thai():
 	killPlayer()
-	os.system("mpg123 -f 2000 -q ../thaivoices/yoniso_thai.mp3")
+	os.system("mpg123 -f 2000 -q ../voices/yoniso_thai.mp3")
 	speak("Thai Buddhadham Yonisomanasikan")
 	proc = subprocess.Popen(["mpg123","-f","2000","../datath/buddhadham/yoniso.mp3"])
 	press_for_stop('g',proc)
@@ -1852,7 +1866,7 @@ def buddha_dhamma():
 def play_dhamma():
 	killPlayer()   
 	#speakThai(['ฟัง','ธรรม','ค่ะ'])
-	play_mp3("../thaivoices/pay-attention.mp3",15)
+	play_mp3("../voices/pay-attention.mp3",15)
 	proc = subprocess.Popen(["mpg123","-f","1500","-C","-z","--list","THdhamma4all.txt"], stdin=master)
 	leds.update(Leds.rgb_on(Color.YELLOW))
 	board.button.wait_for_press()
@@ -1951,31 +1965,31 @@ def counting_walk(t=15,fast=False,l='th',vol='2000'):
 		tx_list = tx.split(' ')
 
 	elif l == 'zh':
-		os.system('mpg123 -q -f ' + vol + ' ../thaivoices/chinese_walk.mp3')
+		os.system('mpg123 -q -f ' + vol + ' ../voices/chinese_walk.mp3')
 		t1 = 0
 		tx = zhwords(['1','2','3','4','5','6','7','8','9','10'])
 		tx_list = tx.split(' ')
 
 	elif l == 'ja':
-		os.system('mpg123 -q -f ' + vol + ' ../thaivoices/japanese/japanese_walk.mp3')
+		os.system('mpg123 -q -f ' + vol + ' ../voices/japanese/japanese_walk.mp3')
 		t1 = 0
 		tx = jawords(['1','2','3','4','5','6','7','8','9','10'])
 		tx_list = tx.split(' ')
 
 	elif l == 'ko':
-		os.system('mpg123 -q -f ' + vol + ' ../thaivoices/korean/b4walk.mp3')
+		os.system('mpg123 -q -f ' + vol + ' ../voices/korean/b4walk.mp3')
 		t1 = 0
 		tx = kowords(['1','2','3','4','5','6','7','8','9','10'])
 		tx_list = tx.split(' ')
 
 	elif l == 'wav':
-		os.system('mpg123 -q ../thaivoices/before_walking.mp3')
+		os.system('mpg123 -q ../voices/before_walking.mp3')
 		t1 = 0.5
 		tx = thaiwordswav(['1','2','3','4','5','6','7','8','9','10'])
 		tx_list = tx.split(' ')
 
 	else:
-		os.system('mpg123 -q -f ' + vol + ' ../thaivoices/before_walking.mp3')
+		os.system('mpg123 -q -f ' + vol + ' ../voices/before_walking.mp3')
 		t1 = 0.25
 		tx = thaiwords(['1','2','3','4','5','6','7','8','9','10'])
 		tx_list = tx.split(' ')
@@ -2025,11 +2039,11 @@ def kanaanub(t=15,fast=False,l='th',vol='10'):
 		t1 = 0
 		tx_list = ['0','1','2','3','4','5','6','7','8','9','10']
 	elif l == 'zh':
-		os.system('mpg123 -q -f 1000 ../thaivoices/chinese_walk.mp3')
+		os.system('mpg123 -q -f 1000 ../voices/chinese_walk.mp3')
 		t1 = 0
 		tx_list = ['Ling','Yi','Er','San','Si','Wu','Liu','Qi','Ba','Jiu','Shi']       
 	else:
-		os.system('mpg123 -q -f 1000 ../thaivoices/before_walking.mp3')
+		os.system('mpg123 -q -f 1000 ../voices/before_walking.mp3')
 		t1 = 0
 		tx_list = ['soon','noong','song','sam','see','ha','hok','jed','pad','kao','sib']
 
@@ -2412,6 +2426,21 @@ def testing_10():
 	random.shuffle(n)
 	morning_practice('off','400',n[0])
 	return None
+
+#For BuddhaDay
+def testing_mode9():
+	what_time()
+	testing_mode1()
+	fast_buddho('off',10,'500')
+	sitting_meditation()
+	now = datetime.today().strftime('%H %M')
+	tn = now.split()
+	mn = (22-int(tn[0]))*60 - int(tn[1])
+	basic_chanting(mn,'300')
+	delay(240)
+	fast_buddho('off',5,'500')
+	morning_practice2('off','300')
+	return None
 	
 def testing_mode6():
 	what_time()
@@ -2427,27 +2456,6 @@ def testing_mode6():
 	os.system("sudo shutdown now")
 	return None
 	
-#For BuddhaDay
-def testing_mode9():
-	what_time()
-	testing_mode1()
-	fast_buddho('off',10,'500')
-	remind_breathing(5,'500','th2')
-	alpha_wave(55)
-	bell('1')
-	now = datetime.today().strftime('%H %M')
-	tn = now.split()
-	mn = (22-int(tn[0]))*60 - int(tn[1])
-	basic_chanting(mn,'300')
-	alpha_wave(240)
-	fast_buddho('off',5,'500')
-	n = [2,6]
-	random.shuffle(n)
-	morning_practice('off','200',n[0])
-	# os.system("sudo shutdown now")
-	return None
-		
-
 def meditation_7():
 	m = random.randint(1,3)
 	meditation_goal(1)
@@ -2806,26 +2814,74 @@ def morning_practice(c='off',vol="500",mode=1):
 	play_mp3("../sound/metta.mp3",114,vol)
 	i = random.randint(1,3)
 	if i == 1 :
-		play_dhamma_with_alarm(30,10,'../mars/blessingmp3',vol)
-		chinese_chanting(30)
+		play_dhamma_with_alarm(30,10,'../mars/blessingmp3',vol)	
 	elif i == 2:
 		basic_chanting(30,vol)
-		thai_chanting(1800,vol)
 	elif i == 3:
 		thai_chanting(1800,vol)
-		basic_chanting(30,vol)
 
 	play_mp3("../datath/chanting/8.mp3",1010,vol)
 	# play_sutra('1000',20)
 	now = datetime.today().strftime('%H %M')
 	tn = now.split()
-	mn = (6-int(tn[0]))*60 - int(tn[1]) - 5
+	mn = (6-int(tn[0]))*60 - int(tn[1]) - 6
 	blessed_one(mn,vol)
 	play_mp3("../sound/namo.mp3",161,vol)
 	remind_walking2(5,vol,0)
 	# chinese_chanting(mn)
 	ledc('off')
 	os.system("sudo shutdown now")
+	return None
+
+
+def morning_practice2(c='off',vol="500",mode=1):
+	ledc(c)
+	walk = [0,1,4,5,9,10,15,16,17]
+	i = random.randint(1,3)
+	for x in range(i):
+		random.shuffle(walk)
+	# warm up
+	t = random.randint(2,6)
+	mixed_mode('off',t,13,vol)
+	mixed_mode('off',10-t,14,vol)
+	for i in range(1,6):
+		mixed_mode('off',t,walk[i],vol)
+		mixed_mode('off',10-t,14,vol)
+	#delay(5)
+	fast_buddho(c,5,vol)
+	relax_thai(vol)
+	#bell('1',vol)
+	# start
+	ledc('off')
+	play_mp3("../sound/namo.mp3",161,vol)
+	play_dhamma_samadhi()
+	
+	play_mp3('../mars/rbut.mp3',127,'600')
+	morning_merit(vol)
+	play_mp3("../sound/metta.mp3",114,vol)
+	i = random.randint(1,3)
+	if i == 1 :
+		play_dhamma_with_alarm(30,10,'../mars/blessingmp3',vol)	
+	elif i == 2:
+		basic_chanting(30,vol)
+	elif i == 3:
+		thai_chanting(1800,vol)
+
+	play_mp3("../datath/chanting/8.mp3",1010,vol)
+	# play_sutra('1000',20)
+	now = datetime.today().strftime('%H %M')
+	tn = now.split()
+	mn = (6-int(tn[0]))*60 - int(tn[1]) - 6
+	blessed_one(mn,vol)
+	play_mp3("../sound/namo.mp3",161,vol)
+	remind_walking2(5,vol,0)
+	# chinese_chanting(mn)
+	ledc('off')
+	delay(45)
+	thai_chanting(900,'1000')
+	play_mp3_folder('../mars/blessingmp3','2000',30)
+	delay(60)
+	play_dhamma()
 	return None
 
 
@@ -2965,7 +3021,7 @@ args = parser.parse_args(remaining)
 
 try:
 	if args.model is None:
-		args.model = "model"
+		args.model = "../model"
 	if not os.path.exists(args.model):
 		print ("Please download a model for your language from https://alphacephei.com/vosk/models")
 		print ("and unpack as 'model' in the current folder.")
@@ -2989,15 +3045,15 @@ try:
 			print('#' * 80)
 			#TESTER
 			
-			# tx = ["รู้","ลม","ยาว","รู้","ลม","สั้น"]
-			# speakThai(tx)
+			tx = ["รู้","ลม","ยาว","รู้","ลม","สั้น"]
+			speakThai(tx)
 
 			buddha_day()
 			# sitting_meditation()
 			# play_dhamma_samadhi()
 
 			os.system('espeak -s 130 -a 4 -v "english-us" "Nothing is worth insisting on"')
-			os.system('mpg123 -q -f 400 ../thaivoices/hello.mp3')
+			os.system('mpg123 -q -f 400 ../voices/hello.mp3')
 			
 			# new runtime vocabulary
 			new_vocab = runtime_vocabulary()
@@ -3054,7 +3110,7 @@ try:
 			i = random.randint(1,5)
 			meditation_goal(i,'500')
 			time.sleep(1)
-			os.system('mpg123 -q -f 400 ../thaivoices/samesame.mp3')
+			os.system('mpg123 -q -f 400 ../voices/samesame.mp3')
 			# espeak('hi,there! my name is anat ta, please call my name if you want to start','5')
 			time.sleep(1)
 			with q.mutex:

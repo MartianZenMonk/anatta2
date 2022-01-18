@@ -4,7 +4,7 @@ THANK YOU VERY MUCH TO MR. Peter Malkin FOR GIVING ME THE VOICEKIT AND CORAL DEV
 THANK YOU VERY MUCH TO MR SUTHEE @ https://www.techtalkthai.com/ FOR GIVING THE ASUS ZENBOOK DUO LAPTOP ( MONKS PROPERTY )
 
 
-Anatta Meditation Voice For rasberry pi os / ubuntu
+Anatta Meditation Voice For rasberry pi os / ubuntu , and may good for pi zero 2 w too
 
 
 git clone https://github.com/MartianZenMonk/anatta2
@@ -13,8 +13,14 @@ git clone https://github.com/MartianZenMonk/anatta2
 
 You may have to install the following packages
 - sudo apt update
-- pip3 install vosk
+- pip3 install sounddevice
+- pip3 install vosk (for pi zero, apt-get install libgfortran3 )
 - pip3 install opencv-python
+- opencv for pi zero
+- sudo apt-get install python3-opencv
+- sudo nano /etc/dphys-swapfile #CONF_SWAPSIZE=100 , CONF_SWAPSIZE=2048
+- or https://qengineering.eu/install-opencv-lite-on-raspberry-pi.html , https://pimylifeup.com/raspberry-pi-webcam-server/
+- ...
 - pip3 install pyttsx3
 - pip3 install pydub
 - sudo apt  install espeak  (and espeak-ng if you like )

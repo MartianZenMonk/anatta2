@@ -19,7 +19,7 @@ while True:
 
     delta=cv2.absdiff(baseline_image,gray_frame)
     threshold=cv2.threshold(delta, 30, 255, cv2.THRESH_BINARY)[1]
-    (contours,_)=cv2.findContours(threshold,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    (_,contours,_)=cv2.findContours(threshold,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
     for contour in contours:
         if cv2.contourArea(contour) < 10000:
