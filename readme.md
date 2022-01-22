@@ -4,7 +4,7 @@ THANK YOU VERY MUCH TO MR. Peter Malkin FOR GIVING ME THE VOICEKIT AND CORAL DEV
 THANK YOU VERY MUCH TO MR SUTHEE @ https://www.techtalkthai.com/ FOR GIVING THE ASUS ZENBOOK DUO LAPTOP ( MONKS PROPERTY )
 
 
-Anatta Meditation Voice For rasberry pi os / ubuntu , and may good for pi zero 2 w too https://github.com/google/aiyprojects-raspbian/releases
+Anatta Meditation Voice For Linux / ubuntu , and may good for pi zero 2 w too https://github.com/google/aiyprojects-raspbian/releases
 
 
 git clone https://github.com/MartianZenMonk/anatta2

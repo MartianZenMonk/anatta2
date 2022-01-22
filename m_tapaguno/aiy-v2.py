@@ -2422,9 +2422,9 @@ def testing_10():
 	basic_chanting(mn,'300')
 	delay(240)
 	fast_buddho('off',5,'500')
-	n = [1,3,4,5,7]
-	random.shuffle(n)
-	morning_practice('off','400',n[0])
+	n = [1,2,3,4,5,6,7,3,3,2,4,5]
+	random.choice(n)
+	morning_practice('off','400',random.choice(n))
 	return None
 
 #For BuddhaDay
@@ -2751,65 +2751,80 @@ def monk_rules(c='g'):
 
 def morning_practice(c='off',vol="500",mode=1):
 	ledc(c)
-	walk = [0,1,4,5,9,10,15,16,17]
-	i = random.randint(1,3)
-	for x in range(i):
-		random.shuffle(walk)
-	# warm up
-	t = random.randint(2,6)
-	mixed_mode('off',t,13,vol)
-	mixed_mode('off',10-t,14,vol)
-	for i in range(1,6):
-		mixed_mode('off',t,walk[i],vol)
+	bell('1',vol)
+	ch = [0,1,1]
+	i = random.choice(ch)
+	if i == 0:
+		walk = [0,1,4,5,9,10,15,16,17]
+		i = random.randint(1,3)
+		for x in range(i):
+			random.shuffle(walk)
+		# warm up
+		t = random.randint(2,6)
+		mixed_mode('off',t,13,vol)
 		mixed_mode('off',10-t,14,vol)
+		for i in range(1,5):
+			mixed_mode('off',t,walk[i],vol)
+			mixed_mode('off',10-t,14,vol)
+	elif i == 1:
+		fast_buddho(c,50,vol)
 	#delay(5)
+	bell('1',vol)
 	fast_buddho(c,5,vol)
 	relax_thai(vol)
 	#bell('1',vol)
 	# start
 	ledc('off')
 	play_mp3("../sound/namo.mp3",161,vol)
-	play_dhamma_samadhi()
-	# if mode == 1:
-	# 	remind_breathing(1,vol,'th')
-	# 	alpha_wave(15)
-	# 	bell('1',vol)
-	# 	alpha_wave(15)
-	# 	bell('1',vol)
-	# 	alpha_wave(15)
-	# 	bell('1',vol)
-	# 	alpha_wave(15)
-	# 	bell('1',vol)
-	# 	#tibetan_metta_chanting(vol)
-	# elif mode == 2:
-	# 	play_mp3("../sound/528Hz.mp3",900,'1000')
-	# 	metta_chanting_thai(vol,900)
-	# 	blessed_one(20,vol)
-	# 	bell('1',vol)
-	# elif mode == 3:
-	# 	remind_breathing(1,vol,'th')
-	# 	play_mp3("../sound/rain.mp3",3000,'1000')
-	# 	bell('1',vol)
-	# 	#tibetan_metta_chanting(vol)
-	# elif mode == 4:
-	# 	play_mp3("../sound/432Hz.mp3",3000,'1000')
-	# 	# play_mp3_folder('../sound/birds','2000',50)
-	# 	bell('1',vol)
-	# 	#tibetan_metta_chanting(vol)
-	# elif mode == 5:
-	# 	play_mp3_folder('../sound/guqin','1000',50)
-	# 	bell('1',vol)
-	# elif mode == 6:
-	# 	remind_breathing(1,vol,'th')
-	# 	play_mp3("../mars/pahung.mp3",1800,vol)
-	# 	blessed_one(20,vol)
-	# 	bell('1',vol)
-	# else:
-	# 	sitting_meditation()
+	# play_dhamma_samadhi()
+	if mode == 1:
+		remind_breathing(1,vol,'th')
+		alpha_wave(15)
+		bell('1',vol)
+		alpha_wave(15)
+		bell('1',vol)
+		alpha_wave(15)
+		bell('1',vol)
+		alpha_wave(15)
+		bell('1',vol)
+		alpha_wave(15)
+		bell('1',vol)
+		alpha_wave(15)
+		bell('1',vol)
 		#tibetan_metta_chanting(vol)
+	elif mode == 2:
+		play_mp3("../sound/528Hz.mp3",5400,'1000')
+		bell('1',vol)
+	elif mode == 3:
+		play_dhamma_samadhi()
+	elif mode == 4:
+		play_mp3("../sound/432Hz.mp3",5400,'1000')
+		bell('1',vol)
+	elif mode == 5:
+		play_mp3_folder('../sound/guqin','1000',90)
+		bell('1',vol)
+	elif mode == 6:
+		remind_breathing(1,vol,'th')
+		play_mp3("../mars/pahung.mp3",1800,vol)
+		blessed_one(60,vol)
+		bell('1',vol)
+	else:
+		bell('1',vol)
+		delay(15)
+		bell('1',vol)
+		delay(15)
+		bell('1',vol)
+		delay(15)
+		bell('1',vol)
+		delay(15)
+		bell('1',vol)
+		delay(15)
+		bell('1',vol)
+		delay(15)
+		bell('1',vol)
 	
 	# cool down
-	play_mp3('../mars/monk/rbut.mp3',127,'600')
+	play_mp3('../mars/rbut.mp3',127,'600')
 	morning_merit(vol)
 	play_mp3("../sound/metta.mp3",114,vol)
 	i = random.randint(1,3)
@@ -3338,7 +3353,7 @@ try:
 										bot = False
 										speak("ok, call my name when you need help, bye bye!")
 									elif "restart" in words:
-										speak("restart the service, please wait")
+										speak("reboot the system, please wait")
 										os.system("sudo reboot")
 										# os.system("sudo systemctl restart myscript.service")
 										break
@@ -4085,7 +4100,7 @@ try:
 													verify = False
 													focus = False
 												elif cmd == "dhamma":
-													play_dhamma()
+													play_my_dhamma("../datath/dhamma")
 													cmd = ""
 													verify = False
 													focus = False
