@@ -4,7 +4,7 @@ THANK YOU VERY MUCH TO MR. Peter Malkin FOR GIVING ME THE VOICEKIT AND CORAL DEV
 THANK YOU VERY MUCH TO MR SUTHEE @ https://www.techtalkthai.com/ FOR GIVING THE ASUS ZENBOOK DUO LAPTOP ( MONKS PROPERTY )
 
 
-Anatta Meditation Voice For rasberry pi os / ubuntu , and may good for pi zero 2 w too
+Anatta Meditation Voice For rasberry pi os / ubuntu , and may good for pi zero 2 w too https://github.com/google/aiyprojects-raspbian/releases
 
 
 git clone https://github.com/MartianZenMonk/anatta2
@@ -13,8 +13,9 @@ git clone https://github.com/MartianZenMonk/anatta2
 
 You may have to install the following packages
 - sudo apt update
+- sudo apt upgrade
 - pip3 install sounddevice
-- pip3 install vosk (for pi zero, apt-get install libgfortran3 )
+- pip3 install vosk (for pi zero, sudo )
 - pip3 install opencv-python
 - opencv for pi zero
 - sudo apt-get install python3-opencv
@@ -28,11 +29,13 @@ You may have to install the following packages
 - sudo apt  install vorbis-tools (ogg123 - if you want to use ogg)
 
 - sudo apt install nginx
-- sudo nano /etc/nginx/sites-enabled/default , change root documents to /home/pi/anatta2
+- sudo nano /etc/nginx/sites-enabled/default , for pi zero -> change root documents to /home/pi/anatta2/web
 - unzip  tripitakaofflineV07.zip
 - sudo systemctl restart nginx
 - for other languages please visit https://github.com/suttacentral or https://github.com/digitalpalireader/digitalpalireader
 - python3 -m pip install -U yt-dlp , for pi zero to fix "Illegal instruction" ,  pip3 uninstall pycryptodomex ( use yt-dlp to play youtube playlist, can use youtube-dl too)
+- https://learn.sparkfun.com/tutorials/how-to-run-a-raspberry-pi-program-on-startup/all 
+- or sudo nano /etc/xdg/lxsession/LXDE-pi/autostart -> add to the end -> @python3/home/pi/anatta2/m_yourname/xxx.py
 
 For Virtualbox + VirtualBox Extension Pack
 - https://www.virtualbox.org/wiki/Downloads

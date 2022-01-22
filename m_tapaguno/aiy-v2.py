@@ -1830,13 +1830,13 @@ def play_youtube():
 	elif m == 2:
 		plist = 'https://www.youtube.com/playlist?list=PLFUPwJBonRX0CzKn3jRROtQDQ7UAQFRrK'
 		#Payutto
-	cmd = "yt-dlp -f 139 --playlist-random -o - " + plist + " | cvlc -"
+	cmd = "yt-dlp -f 139 --playlist-random -o - " + plist + " | cvlc --rate 1.50 --gain 0.3 -"
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc) 
 
 def play_my_playlist():
 	plist = 'https://www.youtube.com/playlist?list=PLUh8U5np7D-7npviWVcHXBXXjESOTZPbW'
-	cmd = "yt-dlp -f 139 --playlist-random -o - " + plist + " | cvlc --rate 1.50 --gain 0.6 -"
+	cmd = "yt-dlp -f 139 --playlist-random -o - " + plist + " | cvlc --rate 1.50 --gain 0.3 -"
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc) 
 
@@ -2310,11 +2310,11 @@ def sitting_meditation(vol='2000'):
 	elif m == 2:
 		play_mp3('../dataen/chanting/heart-sutra.mp3',660)
 	elif m == 3:
-		play_mp3('../datath/basic_chanting/paticca.mp3',810)
+		play_mp3('../datath/chanting/paticca.mp3',810)
 	elif m == 4:
 		play_mp3('../sound/cha-med.mp3',632)
 	elif m == 5:
-		play_mp3('../datath/basic_chanting/Girimananda-sutra.mp3',2683)
+		play_mp3('../datath/chanting/Girimananda-sutra.mp3',2683)
 	elif m == 6:
 		play_mp3('../sound/namo.mp3',483)
 
@@ -2809,7 +2809,7 @@ def morning_practice(c='off',vol="500",mode=1):
 		#tibetan_metta_chanting(vol)
 	
 	# cool down
-	play_mp3('../mars/rbut.mp3',127,'600')
+	play_mp3('../mars/monk/rbut.mp3',127,'600')
 	morning_merit(vol)
 	play_mp3("../sound/metta.mp3",114,vol)
 	i = random.randint(1,3)
@@ -2856,7 +2856,7 @@ def morning_practice2(c='off',vol="500",mode=1):
 	play_mp3("../sound/namo.mp3",161,vol)
 	play_dhamma_samadhi()
 	
-	play_mp3('../mars/rbut.mp3',127,'600')
+	play_mp3('../mars/monk/rbut.mp3',127,'600')
 	morning_merit(vol)
 	play_mp3("../sound/metta.mp3",114,vol)
 	i = random.randint(1,3)
@@ -3043,10 +3043,11 @@ try:
 			print('#' * 80)
 			print('Press Ctrl+C to stop playing')
 			print('#' * 80)
+
 			#TESTER
 			
-			tx = ["รู้","ลม","ยาว","รู้","ลม","สั้น"]
-			speakThai(tx)
+			# tx = ["รู้","ลม","ยาว","รู้","ลม","สั้น"]
+			# speakThai(tx)
 
 			buddha_day()
 			# sitting_meditation()
@@ -3338,7 +3339,8 @@ try:
 										speak("ok, call my name when you need help, bye bye!")
 									elif "restart" in words:
 										speak("restart the service, please wait")
-										os.system("sudo systemctl restart myscript.service")
+										os.system("sudo reboot")
+										# os.system("sudo systemctl restart myscript.service")
 										break
 									elif "shutdown" in words:
 										shutdown()
@@ -3805,11 +3807,14 @@ try:
 									if "buddha" in words:
 										buddha_dhamma()
 									elif "play" in words:
-										play_dhamma()
+										play_my_dhamma("../datath/dhamma")
+										# play_dhamma()
 									elif "nine" in words:
-										play_my_dhamma("../mars/yanasangvorn",'2')
+										pass
+										# play_my_dhamma("../mars/yanasangvorn",'2')
 									elif "one" in words:
-										play_my_dhamma("../mars/dhamma1")
+										pass
+										# play_my_dhamma("../mars/dhamma1")
 									elif "two" in words:
 										play_my_dhamma_vlc()
 									elif "three" in words:
