@@ -29,13 +29,14 @@ You may have to install the following packages
 - sudo apt  install vorbis-tools (ogg123 - if you want to use ogg)
 
 - sudo apt install nginx
-- sudo nano /etc/nginx/sites-enabled/default , for pi zero -> change root documents to /home/pi/anatta2/web
-- unzip  tripitakaofflineV07.zip
+- sudo nano /etc/nginx/sites-enabled/default , for pi zero -> change root documents to /home/pi/anatta2
+- unzip  tripitakaofflineV07.zip in folder web
 - sudo systemctl restart nginx
 - for other languages please visit https://github.com/suttacentral or https://github.com/digitalpalireader/digitalpalireader
 - python3 -m pip install -U yt-dlp , for pi zero to fix "Illegal instruction" ,  pip3 uninstall pycryptodomex ( use yt-dlp to play youtube playlist, can use youtube-dl too)
-- https://learn.sparkfun.com/tutorials/how-to-run-a-raspberry-pi-program-on-startup/all 
-- or sudo nano /etc/xdg/lxsession/LXDE-pi/autostart -> add to the end -> @python3/home/pi/anatta2/m_yourname/xxx.py
+- For autostart ( sudo raspi-config - auto login)
+- or sudo nano /etc/xdg/lxsession/LXDE-pi/autostart -> add to the end -> @bash /home/pi/anatta2/anatta2.sh
+- sudo chmod +x /home/pi/anatta2/anatta2.sh
 
 For Virtualbox + VirtualBox Extension Pack
 - https://www.virtualbox.org/wiki/Downloads
