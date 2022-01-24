@@ -363,12 +363,13 @@ def pkill_proc_name(name=''):
 	return None
 
 
-def delay(t):
+def delay(t,c='off'):
+	ledc(c)
 	board.button.wait_for_press(60*t)
 	return None
 
 
-def press_for_stop(c='',proc=0,t=0):
+def press_for_stop(c='off',proc=0,t=0):
 	ledc(c)
 	if t == 0 :
 		board.button.wait_for_press()
@@ -851,12 +852,12 @@ def pure_alpha(c='yy'):
 	ledc(c)
 	speak("pure alpha sound, push button for stop")
 	os.system("mpg123 -f 1000 ../voices/right_concentation.mp3")
-	proc = subprocess.Popen(["mpg123","-q","--loop","-1","../mars/pureAlpha1hr.mp3"])
+	proc = subprocess.Popen(["mpg123","-q","--loop","-1","../sound/pureAlpha2.mp3"])
 	press_for_stop(c,proc)
 	return None
 
 def alpha_wave(t):
-	proc = subprocess.Popen(["mpg123","-q","--loop","-1","../sound/pureAlpha.mp3"])
+	proc = subprocess.Popen(["mpg123","-q","--loop","-1","../sound/pureAlpha2.mp3"])
 	delay(t)
 	proc.kill()
 	clear_q()
@@ -977,7 +978,7 @@ def remind_walking2(t=30,vol='500',n=0):
 	elif n == 4:
 		text  = [["มี"],["สติ"],["ไม่"],["คิด"],["หนอ"],["ไม่"],["คิด"],["หนอ"],["พุท"],["โธ"],["พุท"],["โธ"]]
 	elif n == 5:
-		text  = [["ยกย่างเหยียบ"],["ยกย่างเหยียบ"]]
+		text  = [["ยกย่างเหยียบ1"],["ยกย่างเหยียบ1"]]
 		tt = 0
 	elif n == 6:
 		text  = [["รู้"],["เท้า"],["เคลื่อน"],["ไหว"],["ไม่"],["ส่ง"],["ใจ"],["ออก"],["นอก"]]
@@ -1497,7 +1498,7 @@ def mixed_mode2(c='',t=10,n=0,vol='1000'):
 	return None
 
 
-def get_new_dhamma_files(fp="../mars/dhamma"):
+def get_new_dhamma_files(fp="../datath/dhamma"):
 	new_files = []
 	for file in os.listdir(fp):
 		if file.endswith(".mp3") or file.endswith(".m4a"):
@@ -1512,7 +1513,7 @@ def get_new_dhamma_files(fp="../mars/dhamma"):
 	return newfiles
 
 
-def play_my_dhamma(fp="../mars/dhamma",v='1',vol='2000'):
+def play_my_dhamma(fp="../datath/dhamma",v='1',vol='2000'):
 	files= get_new_dhamma_files(fp)
 	cmd = "mpg123 -C -d " + v + " -f " + vol + " " + files
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
@@ -1539,19 +1540,19 @@ def play_my_dhamma(fp="../mars/dhamma",v='1',vol='2000'):
 
 def play_dhamma_samadhi(fp="../datath/sutta",t=90):
 	files= get_new_dhamma_files(fp)
-	cmd = "cvlc -Z --gain 0.5 --rate=1.75 " + files
+	cmd = "cvlc -Z --gain 0.2 --rate=1.75 " + files
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc,t*60)  
 	del files
 	gc.collect() 
 	return None
 	
-def play_my_dhamma_vlc(fp="../mars/dhamma"):
+def play_vlc_folder(fp="../datath/dhamma"):
 	files= get_new_dhamma_files(fp)
-	cmd = "cvlc --loop --rate=1.50 "+files
+	cmd = "cvlc --loop --rate=1.50 --gain 0.2 "+files
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc)   
-	cmd = "cvlc --loop --rate=2.00 "+files
+	cmd = "cvlc --loop --rate=1.75 --gain 0.2 "+files
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc) 
 	del files
@@ -1559,16 +1560,16 @@ def play_my_dhamma_vlc(fp="../mars/dhamma"):
 	return None
 
 def play_vlc_file(fp="../mars/muttothai.m4a"):
-	cmd = "cvlc --loop --rate=1.50 "+ fp
+	cmd = "cvlc --loop --rate=1.50 --gain 0.2 "+ fp
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc)   
-	cmd = "cvlc --loop --rate=2.00 "+ fp
+	cmd = "cvlc --loop --rate=1.75 --gain 0.2 "+ fp
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc)   
 	return None
 	
    
-def play_dhamma_with_alarm(t=60,ts=15,fp="../mars/dhamma2",vol='1000',b=True):
+def play_dhamma_with_alarm(t=60,ts=15,fp="../datath/dhamma",vol='1000',b=True):
 	files= get_new_dhamma_files(fp)
 	cmd = "mpg123 -C -Z -f " + vol + " " + files
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
@@ -1597,7 +1598,7 @@ def play_dhamma_with_alarm(t=60,ts=15,fp="../mars/dhamma2",vol='1000',b=True):
 	return None
 	  
 	
-def play_mp3_with_alarm(t=60,ts=15,f="../mars/paticca.mp3",vol='1000',b=False):
+def play_mp3_with_alarm(t=60,ts=15,f="../datath/chanting/paticca.mp3",vol='1000',b=False):
 	cmd = "mpg123 -C -Z -f " + vol + " " + f
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	color = ['o','d','b','g']
@@ -1623,7 +1624,7 @@ def play_mp3_with_alarm(t=60,ts=15,f="../mars/paticca.mp3",vol='1000',b=False):
 	return None
 
 
-def play_mp3_folder(fp="../sound/birds",vol='6000',t=60):
+def play_mp3_folder(fp="../sound/sutta",vol='1000',t=60):
 	files= get_new_dhamma_files(fp)
 	cmd = "mpg123 -C -z -f " + vol + " " + files
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
@@ -1673,27 +1674,22 @@ def play_mp3(path,sec=0,vol='1000',c='off'):
 	
 	
 def blessed_one(t=0,vol='1000'):
-	play_mp3('../mars/paticca.mp3',t*60,vol,'d')
+	play_mp3('../datath/chanting/paticca.mp3',t*60,vol,'d')
 	
 	
 def basic_chanting(t=0,vol='1000',c='off'):
 	killPlayer() 
-	command = "mpg123 -q -Z -f " + vol + " ../mars/pahung.mp3 ../mars/7tamnan.mp3 ../mars/7kampee.mp3 ../mars/matika.mp3"
+	command = "mpg123 -q -Z -f " + vol + " ../mars/basic_chanting/pahung.mp3 ../mars/basic_chanting/7tamnan.mp3 ../mars/basic_chanting/7kampee.mp3 ../mars/matika.mp3"
 	proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
 	press_for_stop(c,proc,60*t) 
 	
 def variety_chanting(t=0,vol='1000',c='off'):
-	killPlayer() 
-	command = "mpg123 -q -Z -f " + vol + " ../mars/Tibetan_prayer.mp3 ../mars/heart-sutra-jp.mp3 ../mars/heart-sutra-tibetan.mp3 ../mars/Tibet-heart-sutra.mp3 ../mars/heart-sutra-zh.mp3"
-	proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
-	press_for_stop(c,proc,60*t) 
+	pass
 	
 	
 def chinese_chanting(t=0,vol='1000',c='off'):
 	killPlayer() 
-	command = "mpg123 -q -Z -f " + vol + " ../mars/kuan-im-taisue.mp3 ../mars/Mantra_of_Avalokiteshvara.mp3 ../mars/Avalokiteshvara.mp3 ../mars/heart-sutra-zh.mp3 ../mars/avalo-thai.mp3"
-	proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
-	press_for_stop(c,proc,60*t) 
+	play_mp3_folder("../mars/chinese_chanting",vol,t) 
 	
 
 def play_daily_dependent_origination_thai():
@@ -1751,7 +1747,7 @@ def play_eight_fold_path_chanting_english():
 def play_8_fold_path_clip():
 	killPlayer() 
 	try:
-		command = "export DISPLAY=:0.0; vlc -f --loop --video-on-top ../mars/8.mp4"
+		command = "export DISPLAY=:0.0; vlc -f --loop --video-on-top ../mp4/8.mp4"
 		proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
 		press_for_stop('d',proc)      
 	except:
@@ -1761,24 +1757,22 @@ def play_8_fold_path_clip():
 def play_dependent_origination_clip():
 	killPlayer() 
 	try:
-		command = "export DISPLAY=:0.0; vlc -f --loop --video-on-top ../mars/11.mp4"
+		command = "export DISPLAY=:0.0; vlc -f --loop --video-on-top ../mp4/11.mp4"
 		proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
 		press_for_stop('d',proc)      
 	except:
 		speak("sorry can not play video clip")
 
 
-def english_chating():
+def english_chating(t=0,vol="1500"):
 	killPlayer()  
 	speak("English chanting")
-	subprocess.run(["mpg123","-f","1500","-C","--list","chanting.txt"])
+	play_mp3_folder("../dataen/chanting",vol,t)
 
 
 def thai_chanting(t=0,vol="1500"):
 	killPlayer()   
-	speak("Thai chanting")
-	proc = subprocess.Popen(["mpg123","-f",vol,"-C","-Z","--list","THchanting.txt"], stdin=master)
-	press_for_stop('off',proc,t)
+	play_mp3_folder("../datath/chanting",vol,t)
 
 
 def play_radio(vol='2000'):
@@ -1795,7 +1789,7 @@ def play_radio(vol='2000'):
 def play_radio_mp3(vol='8000'):
 	killPlayer()                                    
 	if have_internet():
-		m = random.randint(1,5)
+		m = random.randint(1,6)
 		if m == 1:
 			url = 'http://www.thammapedia.com/listen/bdds/mp3'
 		elif m == 2:
@@ -1806,6 +1800,8 @@ def play_radio_mp3(vol='8000'):
 			url = 'http://www.thammapedia.com/listen/plean/mp3'
 		elif m == 5:
 			url = 'http://www.thammapedia.com/listen/bua/mp3'
+		elif m == 6:
+			url = 'http://www.thammapedia.com/listen/riean/mp3/'
 
 		ext = 'mp3'
 
@@ -1830,13 +1826,13 @@ def play_youtube():
 	elif m == 2:
 		plist = 'https://www.youtube.com/playlist?list=PLFUPwJBonRX0CzKn3jRROtQDQ7UAQFRrK'
 		#Payutto
-	cmd = "yt-dlp -f 139 --playlist-random -o - " + plist + " | cvlc --rate 1.50 --gain 0.3 -"
+	cmd = "yt-dlp -f 139 --playlist-random -o - " + plist + " | cvlc --rate 1.50 --gain 0.2 -"
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc) 
 
 def play_my_playlist():
 	plist = 'https://www.youtube.com/playlist?list=PLUh8U5np7D-7npviWVcHXBXXjESOTZPbW'
-	cmd = "yt-dlp -f 139 --playlist-random -o - " + plist + " | cvlc --rate 1.50 --gain 0.3 -"
+	cmd = "yt-dlp -f 139 --playlist-random -o - " + plist + " | cvlc --rate 1.50 --gain 0.2 -"
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc) 
 
@@ -1859,15 +1855,16 @@ def meditation_time():
 def buddha_dhamma():
 	killPlayer()    
 	speak("Buddha dhamma")
-	proc = subprocess.Popen(["mpg123","-f","1500","-q","-z","--list","THbuddhadham.txt"]) 
-	press_for_stop('b',proc)
+	play_vlc_folder("../mars/buddhaDhamma")
 
 
-def play_dhamma():
+def play_dhamma(fp='../datath/dhamma'):
 	killPlayer()   
 	#speakThai(['ฟัง','ธรรม','ค่ะ'])
 	play_mp3("../voices/pay-attention.mp3",15)
-	proc = subprocess.Popen(["mpg123","-f","1500","-C","-z","--list","THdhamma4all.txt"], stdin=master)
+	files= get_new_dhamma_files(fp)
+	cmd = "mpg123 -C -z -f " + vol + " " + files
+	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	leds.update(Leds.rgb_on(Color.YELLOW))
 	board.button.wait_for_press()
 	os.write(slave, b'f')
@@ -1877,9 +1874,11 @@ def play_dhamma():
 	press_for_stop('g',proc)
 
 
-def play_sutra(vol="1000",t=0):
+def play_sutra(fp='../datath/sutta',vol="1000",t=0):
 	killPlayer()    
-	proc2 = subprocess.Popen(["mpg123","-f",vol,"-C","-z","--list","sutra.txt"], stdin=master)
+	files= get_new_dhamma_files(fp)
+	cmd = "mpg123 -C -z -f " + vol + " " + files
+	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc2,60*t)
 
 
@@ -1887,19 +1886,12 @@ def play_buddha_story():
 	speak("play buddha story")
 	killPlayer()                
 	try:
-		command = "export DISPLAY=:0.0; vlc -f --stop-time 453 --play-and-exit buddha-story.mp4"
+		command = "export DISPLAY=:0.0; vlc -f --stop-time 453 --play-and-exit ../mp4/buddha-story.mp4"
 		proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
 		press_for_stop('d',proc,455)
 		killPlayer() 
 	except:
 		speak("sorry can not play video clip")
-
-
-def play_blessing():
-	command = "cvlc -f --loop --video-on-top ../mars/blessing/blessing.xspf"
-	proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
-	press_for_stop('d',proc)
-	killPlayer() 
 
 
 def walking_meditation_count(c='oo'):
@@ -1965,19 +1957,19 @@ def counting_walk(t=15,fast=False,l='th',vol='2000'):
 		tx_list = tx.split(' ')
 
 	elif l == 'zh':
-		os.system('mpg123 -q -f ' + vol + ' ../voices/chinese_walk.mp3')
+		os.system('mpg123 -q -f ' + vol + ' ../voices/zh/chinese_walk.mp3')
 		t1 = 0
 		tx = zhwords(['1','2','3','4','5','6','7','8','9','10'])
 		tx_list = tx.split(' ')
 
 	elif l == 'ja':
-		os.system('mpg123 -q -f ' + vol + ' ../voices/japanese/japanese_walk.mp3')
+		os.system('mpg123 -q -f ' + vol + ' ../voices/ja/japanese_walk.mp3')
 		t1 = 0
 		tx = jawords(['1','2','3','4','5','6','7','8','9','10'])
 		tx_list = tx.split(' ')
 
 	elif l == 'ko':
-		os.system('mpg123 -q -f ' + vol + ' ../voices/korean/b4walk.mp3')
+		os.system('mpg123 -q -f ' + vol + ' ../voices/ko/b4walk.mp3')
 		t1 = 0
 		tx = kowords(['1','2','3','4','5','6','7','8','9','10'])
 		tx_list = tx.split(' ')
@@ -2039,7 +2031,7 @@ def kanaanub(t=15,fast=False,l='th',vol='10'):
 		t1 = 0
 		tx_list = ['0','1','2','3','4','5','6','7','8','9','10']
 	elif l == 'zh':
-		os.system('mpg123 -q -f 1000 ../voices/chinese_walk.mp3')
+		os.system('mpg123 -q -f 1000 ../voices/zh/chinese_walk.mp3')
 		t1 = 0
 		tx_list = ['Ling','Yi','Er','San','Si','Wu','Liu','Qi','Ba','Jiu','Shi']       
 	else:
@@ -2190,7 +2182,7 @@ def play_tripataka_chapter(p):
 def pali_chanting():
 	killPlayer()  
 	speak("Pali grammar chanting")
-	proc = subprocess.Popen(["mpg123","-f","3000","../mars/pali.mp3"])
+	proc = subprocess.Popen(["mpg123","-f","3000","../mars/monk/pali.mp3"])
 	press_for_stop('d',proc)
 
 def morning_merit(vol="1000"):
@@ -2200,17 +2192,17 @@ def morning_merit(vol="1000"):
 	
 def tibetan_metta_chanting(vol="1000"):
 	killPlayer()  
-	proc = subprocess.Popen(["mpg123","-f",vol,"../mars/tibetanmetta.mp3"])
+	proc = subprocess.Popen(["mpg123","-f",vol,"../mars/chinese_chanting/tibetanmetta.mp3"])
 	press_for_stop('d',proc,545)
 	
 def metta_chanting(vol="1000"):
 	killPlayer()  
-	proc = subprocess.Popen(["mpg123","-f",vol,"--loop","-1","../mars/metta-sutta-chanting.mp3"])
+	proc = subprocess.Popen(["mpg123","-f",vol,"--loop","-1","../mars/basic_chanting/metta-sutta-chanting.mp3"])
 	press_for_stop('d',proc,1800)
 	
 def metta_chanting_thai(vol="1000",t=1800):
 	killPlayer()  
-	proc = subprocess.Popen(["mpg123","-f",vol,"-Z","../mars/metta-sutta.mp3","../mars/metta-sutta-chanting.mp3"])
+	proc = subprocess.Popen(["mpg123","-f",vol,"-Z","../mars/basic_chanting/metta-sutta.mp3","../mars/basic_chanting/metta-sutta-chanting.mp3"])
 	press_for_stop('d',proc,t)
 
 def hdmi_display(s='on'):
@@ -2223,22 +2215,14 @@ def hdmi_display(s='on'):
 	
 	
 def sitting_sound_with_alarm(m,t=60,ts=15,vol='1000',b=True):
-	if m == 1:
-		fs = "../mars/pureAlpha1hr.mp3"
-		play_mp3_with_alarm(t,ts,fs,vol,b)
-	elif m == 2:
-		fs = " ../mars/kuan-im-taisue.mp3 ../mars/Mantra_of_Avalokiteshvara.mp3 ../mars/Avalokiteshvara.mp3"
-		play_mp3_with_alarm(t,ts,fs,vol,b)
-	elif m == 3:
-		fs = " ../mars/heart-sutra-jp.mp3 ../mars/heart-sutra-zh.mp3 ../dataen/chanting/heart-sutra.mp3 ../mars/heartSutta-thai.mp3"
-		play_mp3_with_alarm(t,ts,fs,vol,b)
-		
+	fs = "../sound/pureAlpha2.mp3"
+			
 
 # sitting 1 hr
 def testing_mode2():
 	killPlayer()
 	bell('3') 
-	cheerful  = [['../sound/BloomingFlowers.mp4','154'],['../sound/flowers-blooming.mp4','192'],['../sound/timelapse/flowers.mp4','120']]
+	cheerful  = [['../mp4/BloomingFlowers.mp4','154'],['../mp4/flowers-blooming.mp4','192'],['../mp4/timelapse/flowers.mp4','120']]
 	i = random.randint(0,2)              
 	try:
 		command = "cvlc -f --loop --stop-time " + cheerful[i][1] + " --video-on-top " + cheerful[i][0]
@@ -2419,11 +2403,19 @@ def testing_10():
 	now = datetime.today().strftime('%H %M')
 	tn = now.split()
 	mn = (22-int(tn[0]))*60 - int(tn[1])
-	basic_chanting(mn,'300')
+	m = random.randint(0,3) 
+	if m == 0:
+		play_mp3('../sound/528Hz.mp3',mn*60)
+	elif m == 1:
+		fast_buddho('off',mn,'400')
+	elif m == 2:
+		play_mp3('../sound/432Hz.mp3',mn*60)
+	elif m == 3:
+		om_meditation(mn)
+	ledc('off')
 	delay(240)
 	fast_buddho('off',5,'500')
-	n = [1,2,3,4,5,6,7,3,3,2,4,5]
-	random.choice(n)
+	n = [1,2,3,4,5,6,7,8,3,3,2,4,5,7]
 	morning_practice('off','400',random.choice(n))
 	return None
 
@@ -2439,7 +2431,7 @@ def testing_mode9():
 	basic_chanting(mn,'300')
 	delay(240)
 	fast_buddho('off',5,'500')
-	morning_practice2('off','300')
+	morning_practice2('off','400')
 	return None
 	
 def testing_mode6():
@@ -2659,7 +2651,7 @@ def the_water():
 	speak("water droplet at 2500 fps for visual meditation")
 	killPlayer()                
 	try:
-		command = "cvlc -f --loop --video-on-top ../mars/water-droplets.mp4"
+		command = "cvlc -f --loop --video-on-top ../mp4/water-droplets.mp4"
 		proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
 		press_for_stop('d',proc)
 		killPlayer() 
@@ -2670,7 +2662,7 @@ def the_water():
 def the_brain():
 	killPlayer()                
 	try:
-		command = "cvlc -f --loop --video-on-top ../sound/timelapse/nerve.mp4"
+		command = "cvlc -f --loop --video-on-top ../mp4/nerve.mp4"
 		proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
 		press_for_stop('d',proc)
 		killPlayer() 
@@ -2680,28 +2672,13 @@ def the_brain():
 
 
 def the_universe(i=7,title='the space video clip'):
-	speak("play " + title)
-	killPlayer()                
-	cheerful  = ['../mars/universe2.mp4','../mars/moon.mp4','../mars/mars10000.mp4','--start-time 18 --stop-time 450 ../sound/timelapse/sun.mp4']
-	cheerful += ['--gain 0 ../sound/timelapse/from-iss.mp4','--gain 0 --start-time 30 --stop-time 630 ../sound/timelapse/universe.mp4','--gain 0 ../mars/universe.mp4','../sound/moon.mp4']
-	if i > 6:
-		i = random.randint(0,7)
-	else:
-		pass         
-	try:
-		command = "cvlc -f --video-on-top --play-and-exit " + cheerful[i]
-		proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
-		press_for_stop('d',proc)
-		killPlayer() 
-	except:
-		speak("sorry can not play video clip")
-	return None
+	pass
 
 
 def cheer_up(i=4):
 	speak("play cheerful video clip")
 	killPlayer()               
-	cheerful  = ['--stop-time 120 ../sound/timelapse/flowers.mp4','--start-time 8 --stop-time 208 ../sound/timelapse/cacti.mp4','../sound/timelapse/nerve.mp4']
+	cheerful  = ['--stop-time 120 ../mp4/timelapse/flowers.mp4','--start-time 8 --stop-time 208 ../mp4/timelapse/cacti.mp4','../mp4/timelapse/nerve.mp4']
 	# cheerful += ['--start-time 10 --stop-time 205 ../sound/timelapse/Bug-Eating-Plants.mp4','../sound/timelapse/nerve.mp4']
 	if i > 3:
 		i = random.randint(0,2)
@@ -2718,7 +2695,7 @@ def cheer_up(i=4):
 
 
 def cheerful_animals():
-	animals = ['--gain 0 ../sound/animals/panda1.mp4']
+	animals = ['--gain 0 ../mp4/animals/panda1.mp4']
 	try:
 		command = "cvlc -f --video-on-top --play-and-exit " + animals[0]
 		proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
@@ -2744,7 +2721,7 @@ def music_meditation(t=0,c='d',vol="1000"):
 
 def monk_rules(c='g'):
 	ledc(c)
-	proc = subprocess.Popen(["mpg123","-f","2000","-q","../mars/patimok.mp3"])
+	proc = subprocess.Popen(["mpg123","-f","2000","-q","../mars/monk/patimok.mp3"])
 	press_for_stop(c,proc)
 	return None
 
@@ -2767,7 +2744,9 @@ def morning_practice(c='off',vol="500",mode=1):
 			mixed_mode('off',t,walk[i],vol)
 			mixed_mode('off',10-t,14,vol)
 	elif i == 1:
-		fast_buddho(c,50,vol)
+		mixed_mode('off',5,14,vol)
+		fast_buddho(c,40,vol)
+		mixed_mode('off',5,14,vol)
 	#delay(5)
 	bell('1',vol)
 	fast_buddho(c,5,vol)
@@ -2801,13 +2780,15 @@ def morning_practice(c='off',vol="500",mode=1):
 		play_mp3("../sound/432Hz.mp3",5400,'1000')
 		bell('1',vol)
 	elif mode == 5:
-		play_mp3_folder('../sound/guqin','1000',90)
+		play_mp3_folder('../mars/guqin','1000',90)
 		bell('1',vol)
 	elif mode == 6:
 		remind_breathing(1,vol,'th')
-		play_mp3("../mars/pahung.mp3",1800,vol)
+		play_mp3("../mars/basic_chanting/pahung.mp3",1800,vol)
 		blessed_one(60,vol)
 		bell('1',vol)
+	elif mode == 7:
+		play_dhamma_samadhi("../mars/luangpoorian")
 	else:
 		bell('1',vol)
 		delay(15)
@@ -2824,7 +2805,7 @@ def morning_practice(c='off',vol="500",mode=1):
 		bell('1',vol)
 	
 	# cool down
-	play_mp3('../mars/rbut.mp3',127,'600')
+	play_mp3('../mars/monk/rbut.mp3',127,'600')
 	morning_merit(vol)
 	play_mp3("../sound/metta.mp3",114,vol)
 	i = random.randint(1,3)
@@ -3221,47 +3202,21 @@ try:
 										wise_one()
 
 								if "morning" in words and "meditation" in words:
-									play_dhamma_samadhi()
-									# morning_practice()
-
-								# if "walk" in words:
-								# 	if "one" in words:
-								# 		x = [1,3,4,5]
-								# 		random.shuffle(x)
-								# 		if x[0] == 1:
-								# 			espeak("morning practice 1, alpha sound",'5')
-								# 			morning_practice('off','300',1)
-								# 		elif x[0] == 3:
-								# 			espeak("morning practice 3, thunder",'5')
-								# 			morning_practice('off','300',3)
-								# 		elif x[0] == 4:
-								# 			espeak("morning practice 4, tibetan music",'5')
-								# 			morning_practice('off','300',4)
-								# 		elif x[0] == 5:
-								# 			espeak("morning practice 5, par hoong",'5')
-								# 			morning_practice('off','300',5)						
-								# 	elif "two" in words:
-								# 		espeak("morning practice 2, metta",'5')
-								# 		morning_practice('off','300',2)
-								# 	elif "six" in words:	
-								# 		espeak("morning practice 6, par hoong and metta",'5')
-								# 		morning_practice('off','300',6)
-																		
+									sitting_meditation()
+									# play_dhamma_samadhi()
+									# morning_practice('off','400',7)
+																	
 								elif "blessing" in words:
 									if "one" in words:
 										blessed_one()
 									elif "two" in words or "sutra" in words:
 										play_sutra()
-									elif "three" in words:
-										play_blessing()
 									elif "four" in words:
 										basic_chanting(0)
-									elif "five" in words:
-										variety_chanting(0)
 									elif "six" in words:
 										play_mp3_with_alarm()
 									else:
-										speak("1 paticca chanting, 2 Sutra, 3 play blessing, 4 basic chanting, 5 variety")
+										speak("1 paticca chanting, 2 Sutra, 4 basic chanting, 6 play dhamma")
 										clear_q()
 										
 								elif "morse" in words and "code" in words:
@@ -3625,19 +3580,23 @@ try:
 
 								elif "buddha" in words and "one" in words:
 									speak("Buddha History")
-									play_my_dhamma_vlc("../mars/one")
+									play_vlc_folder("../mars/one")
 
 								elif "buddha" in words and "two" in words:
-									speak("Buddha History")
-									play_dhamma_samadhi('../mars/45',0)
+									speak("45 years of Buddha")
+									play_vlc_folder('../mars/45')
+
+								elif "buddha" in words and "three" in words:
+									speak("Buddha tales")
+									play_vlc_folder('../mars/gold')
 
 								elif "four" in words and "truth" in words:
 									speak("4 noble truth")
-									play_my_dhamma_vlc("../mars/4nt")
+									play_vlc_folder("../mars/4nt")
 
 								elif "twelve" in words and "causes" in words:
 									speak("Dependent Origination")
-									play_my_dhamma_vlc("../mars/12paticca")
+									play_vlc_folder("../mars/12paticca")
 
 								elif "one" in words and "monk" in words:
 									speak("muttothai")
@@ -4029,16 +3988,16 @@ try:
 								# aplay -L
 								elif "speaker" in words:
 									if "up" in words:
-										call(["amixer","-D","sysdefault","sset","Speaker","100%"])
+										call(["amixer","-q","-M","sset","Master","100%"])
 										espeak("set volume to 100%",'10')
 									elif "down" in words:
-										call(["amixer","-D","sysdefault","sset","Speaker","40%"])
+										call(["amixer","-q","-M","sset","Master","50%"])
 										espeak("set volume to 40%",'100')
 									elif "sixty" in words:
-										call(["amixer","-D","sysdefault","sset","Speaker","60%"])
+										call(["amixer","-q","-M","sset","Master","60%"])
 										espeak("set volume to 60%",'30')
 									elif "eighty" in words:
-										call(["amixer","-D","sysdefault","sset","Speaker","80%"])
+										call(["amixer","-q","-M","sset","Master","80%"])
 										espeak("set volume to 80%",'20')
 
 								elif "ip" in words and "address" in words:
