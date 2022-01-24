@@ -64,8 +64,7 @@ How to use ( for example )
 
 
 Let's be meditation tools maker and join our facebook group : https://free.facebook.com/groups/393633318920656/
-
-![templex04](https://user-images.githubusercontent.com/79086623/146861353-9088641e-78f4-4b87-86ee-827bcb0939ac.png)
+![03](https://user-images.githubusercontent.com/79086623/150627197-d1541115-fe01-461f-b695-7025bbf84889.png)
 
 Meditation tool  สำหรับ ผู้เริ่มต้นฝึกปฏิบัติ จะเน้นช่วยให้เกิดฉันทะ อยากฝึกปฏิบัติอย่างต่อเนื่อง และ ช่วยเน้นการฝึก เจริญ สติ พระท่านว่า สติ ยิ่งมีมากยิ่งดี เพราะเป็น ตัวช่วยให้เกิด สัมมาสมาธิ ได้ง่าย และ ช่วยในการทำวิปัสสนา เป้าหมายการภาวนาของมือใหม่ในเบื้องต้น คือ มีสติไว ใจสงบ
 
