@@ -38,6 +38,30 @@ You may have to install the following packages
 - or sudo nano /etc/xdg/lxsession/LXDE-pi/autostart -> add to the end -> @bash /home/pi/anatta2/anatta2.sh
 - sudo chmod +x /home/pi/anatta2/anatta2.sh
 
+# Overclocking pi zero W
+# https://forums.raspberrypi.com/viewtopic.php?t=249071
+
+- watch -n 2 vcgencmd measure_temp
+- watch "vcgencmd measure_volts core && vcgencmd measure_clock arm"
+
+-I did a few hundred benchmark tests over the course of the week, on 2 different Raspberry Pi zero W units.
+-Both graphics and CPU/io stress tests, for stability and performance.
+
+-I would recommend the following settings, using nano in /boot/config.txt, as a mild overclock that still significantly boosts performance, but won't break warranty nor needs extra cooling (a passive heat sink is recommended though).
+-Do:
+
+-sudo nano /boot/config.txt
+
+-arm_freq=1085
+-#arm_freq=1095 for my other unit with heatsink
+-gpu_freq=530
+-#gpu_freq=550 for the unit with a heatsink.
+-over_voltage=2
+-core_freq=515
+-sdram_freq=533
+-over_voltage_sdram=1
+
+
 For Virtualbox + VirtualBox Extension Pack
 - https://www.virtualbox.org/wiki/Downloads
 - https://ubuntu-mate.org/download/
@@ -64,7 +88,8 @@ How to use ( for example )
 
 
 Let's be meditation tools maker and join our facebook group : https://free.facebook.com/groups/393633318920656/
-![03](https://user-images.githubusercontent.com/79086623/150627197-d1541115-fe01-461f-b695-7025bbf84889.png)
+
+![templex04](https://user-images.githubusercontent.com/79086623/146861353-9088641e-78f4-4b87-86ee-827bcb0939ac.png)
 
 Meditation tool  สำหรับ ผู้เริ่มต้นฝึกปฏิบัติ จะเน้นช่วยให้เกิดฉันทะ อยากฝึกปฏิบัติอย่างต่อเนื่อง และ ช่วยเน้นการฝึก เจริญ สติ พระท่านว่า สติ ยิ่งมีมากยิ่งดี เพราะเป็น ตัวช่วยให้เกิด สัมมาสมาธิ ได้ง่าย และ ช่วยในการทำวิปัสสนา เป้าหมายการภาวนาของมือใหม่ในเบื้องต้น คือ มีสติไว ใจสงบ
 

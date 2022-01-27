@@ -707,6 +707,15 @@ def bell(l='3',vol='500'):
 	subprocess.run(["mpg123","-q","-f",vol,"--loop",l,"../dataen/bell.mp3"])
 	return None
 
+def adjust_volume():
+	now = datetime.today().strftime('%H %M')
+	tn = now.split()
+			
+	if int(tn[0]) > 18 or int(tn[0]) < 6:
+		call(["amixer","-q","-M","sset","Master","50%"])
+	else:
+		call(["amixer","-q","-M","sset","Master","80%"])
+
 
 def relax_thai(vol="500"):
 
@@ -722,7 +731,7 @@ def relax_thai(vol="500"):
 
 
 def relax_walk(t=5,vol='1000'):
-	call(["amixer","-D","sysdefault","sset","Speaker","40%"])
+	call(["amixer","-q","-M","sset","Master","40%"])
 	text  = ["พุท","โธ","พุท","โธ","เหยียบ","เหยียบ","รู้","ลม","หาย","ใจ","รู้","กาย","เคลื่อน","ไหว","รู้","ใจ","นึก","คิด","มี","จิต","เบิก","บาน"]
 	text += ["พุท","โธ","พุท","โธ","เหยียบ","เหยียบ","ถอน","ความ","พอ","ใจ","และ","ความ","ไม่","พอ","ใจ","ใน","ใจ","ออก","เสีย","ได้"]
 	text += ["พุท","โธ","พุท","โธ","เหยียบ","เหยียบ","จิต","เบิก","บาน","หาย","ใจ","เข้า","จิต","โล่ง","เบา","หาย","ใจ","ออก"]
@@ -753,12 +762,12 @@ def relax_walk(t=5,vol='1000'):
 	del tx_list
 	gc.collect()
 	clear_q()
-	call(["amixer","-D","sysdefault","sset","Speaker","100%"])
+	call(["amixer","-q","-M","sset","Master","90%"])
 	return None
 
 
 def anapanasati_walk(ts=5):
-	call(["amixer","-D","sysdefault","sset","Speaker","40%"])
+	call(["amixer","-q","-M","sset","Master","40%"])
 	t  = 'พุท โธ พุท โธ เหยียบ เหยียบ รู้ ลม ยาว รู้ ลม สั้น รู้ กาย ทั้ง ปวง ทํา กาย ลม ให้ ประ ณีต '
 	t += 'พุท โธ พุท โธ เหยียบ เหยียบ รู้ ปี ติ รู้ สุข รู้ เว ทะ นา ทํา เว ทะ นา ให้ ระ งับ '
 	t += 'พุท โธ พุท โธ เหยียบ เหยียบ รู้ พร้อม ซึ่ง จิต ทํา ให้ จิต บัน เทิง ทํา จิต ให้ ตั้ง มั่น ทํา จิต ให้ ปล่อย ' 
@@ -788,12 +797,12 @@ def anapanasati_walk(ts=5):
 	del tx_list
 	gc.collect()
 	clear_q()
-	call(["amixer","-D","sysdefault","sset","Speaker","100%"])
+	call(["amixer","-q","-M","sset","Master","80%"])
 	return None
 
 
 def musk_walk(ts=5):
-	call(["amixer","-D","sysdefault","sset","Speaker","40%"])
+	call(["amixer","-q","-M","sset","Master","40%"])
 	t  = 'พุท โธ พุท โธ เหยียบ เหยียบ ความ เห็น ชอบ สัม มา ทิฏ ฏิ ความ รู้ ใน ทุกข์ ความ รู้ ใน เหตุ ให้ เกิด ทุกข์ ความ รู้ ใน ความ ดับ แห่ง ทุกข์ ความ รู้ ใน ทาง ดำ เนิน ให้ ถึง ความ ดับ แห่ง ทุกข์ '
 	t += 'พุท โธ พุท โธ เหยียบ เหยียบ ความ ดำริ ชอบ สัม มา สัง กัป โป ดำริ ใน การ ออก จาก กาม ดำริ ใน การ ไม่ มุ่ง ร้าย ดำริ ใน การ ไม่ เบียด เบียน '
 	t += 'พุท โธ พุท โธ เหยียบ เหยียบ การ พูด จา ชอบ สัม มา วา จา เว้น จาก การ พูด ไม่ จริง เว้น จาก การ พูด ส่อ เสียด เว้น จาก การ พูด หยาบ เว้น จาก การ พูด เพ้อ เจ้อ '
@@ -829,7 +838,7 @@ def musk_walk(ts=5):
 	del tx_list
 	gc.collect()
 	clear_q()
-	call(["amixer","-D","sysdefault","sset","Speaker","100%"])
+	call(["amixer","-q","-M","sset","Master","80%"])
 	return None
 
 def cheerful_mantra_th1(c='off', t=30, vol='2000'):
@@ -1539,8 +1548,9 @@ def play_my_dhamma(fp="../datath/dhamma",v='1',vol='2000'):
 	return None
 
 def play_dhamma_samadhi(fp="../datath/sutta",t=90):
+	adjust_volume()
 	files= get_new_dhamma_files(fp)
-	cmd = "cvlc -Z --gain 0.2 --rate=1.75 " + files
+	cmd = "cvlc -Z --gain 0.1 --rate=2.00 " + files
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc,t*60)  
 	del files
@@ -1548,8 +1558,9 @@ def play_dhamma_samadhi(fp="../datath/sutta",t=90):
 	return None
 	
 def play_vlc_folder(fp="../datath/dhamma"):
+	adjust_volume()
 	files= get_new_dhamma_files(fp)
-	cmd = "cvlc --loop --rate=1.50 --gain 0.2 "+files
+	cmd = "cvlc --loop --rate=1.50 --gain 0.1 "+files
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc)   
 	cmd = "cvlc --loop --rate=1.75 --gain 0.2 "+files
@@ -1560,6 +1571,7 @@ def play_vlc_folder(fp="../datath/dhamma"):
 	return None
 
 def play_vlc_file(fp="../mars/muttothai.m4a"):
+	adjust_volume()
 	cmd = "cvlc --loop --rate=1.50 --gain 0.2 "+ fp
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc)   
@@ -1879,7 +1891,7 @@ def play_sutra(fp='../datath/sutta',vol="1000",t=0):
 	files= get_new_dhamma_files(fp)
 	cmd = "mpg123 -C -z -f " + vol + " " + files
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
-	press_for_stop('d',proc2,60*t)
+	press_for_stop('d',proc,60*t)
 
 
 def play_buddha_story():
@@ -2288,7 +2300,7 @@ def testing_mode1():
 	return None
 
 def sitting_meditation(vol='2000'):
-	m = random.randint(1,6)
+	m = random.randint(1,7)
 	if m == 1:
 		play_mp3('../sound/bhadhdhe-phakhue.mp3',650)
 	elif m == 2:
@@ -2301,6 +2313,8 @@ def sitting_meditation(vol='2000'):
 		play_mp3('../datath/chanting/Girimananda-sutra.mp3',2683)
 	elif m == 6:
 		play_mp3('../sound/namo.mp3',483)
+	elif m == 7:
+		play_mp3('../datath/chanting/anapanasati-cut.mp3',657)
 
 	m = random.randint(1,4)
 	if m == 1:
@@ -2428,7 +2442,7 @@ def testing_mode9():
 	now = datetime.today().strftime('%H %M')
 	tn = now.split()
 	mn = (22-int(tn[0]))*60 - int(tn[1])
-	basic_chanting(mn,'300')
+	basic_chanting(mn,'400')
 	delay(240)
 	fast_buddho('off',5,'500')
 	morning_practice2('off','400')
@@ -2814,8 +2828,8 @@ def morning_practice(c='off',vol="500",mode=1):
 	elif i == 2:
 		basic_chanting(30,vol)
 	elif i == 3:
-		thai_chanting(1800,vol)
-
+		thai_chanting(30,vol)
+	vol = '1000'
 	play_mp3("../datath/chanting/8.mp3",1010,vol)
 	# play_sutra('1000',20)
 	now = datetime.today().strftime('%H %M')
@@ -2861,8 +2875,8 @@ def morning_practice2(c='off',vol="500",mode=1):
 	elif i == 2:
 		basic_chanting(30,vol)
 	elif i == 3:
-		thai_chanting(1800,vol)
-
+		thai_chanting(30,vol)
+	vol = '1000'
 	play_mp3("../datath/chanting/8.mp3",1010,vol)
 	# play_sutra('1000',20)
 	now = datetime.today().strftime('%H %M')
@@ -2874,7 +2888,7 @@ def morning_practice2(c='off',vol="500",mode=1):
 	# chinese_chanting(mn)
 	ledc('off')
 	delay(45)
-	thai_chanting(900,'1000')
+	thai_chanting(15,'1000')
 	play_mp3_folder('../mars/blessingmp3','2000',30)
 	delay(60)
 	play_dhamma()
@@ -3044,7 +3058,7 @@ try:
 			
 			# tx = ["รู้","ลม","ยาว","รู้","ลม","สั้น"]
 			# speakThai(tx)
-
+			adjust_volume()
 			buddha_day()
 			# sitting_meditation()
 			# play_dhamma_samadhi()
@@ -3059,7 +3073,7 @@ try:
 			vrun += 'one two three four five six seven eight nine ten zero twelve fifteen twenty thirty forty fifty sixty seventy eighty ninety computer '
 			vrun += 'a alfa b bravo c charlie d delta e echo f foxtrot g golf h hotel i india j juliet k kilo l lima m mike n november o oscar p papa '
 			vrun += 'q quebec r romeo s sierra t tango u uniform v victor w whiskey x ray y yankee z zulu letter repeat space spelling speaker noble '
-			vrun += 'walk walking mode search translate service cancel restart save anat ta sitting music raining thunder jungle tibetan heart brain '
+			vrun += 'walk walking mode search translate service cancel restart reboot save anat ta sitting music raining thunder jungle tibetan heart brain '
 			vrun += 'red green blue yellow alpha breathing pure monk rule speech morning evening practice web server sound my math next new causes singing bowl '
 			vrun += 'ohm variety basic chinese blessed blessing the sun blooming flower clip quit my display testing water morse code good bye chapter pali japanese chinese '
 			vrun += 'korean sixteen seventeen eighteen nineteen plants seed carbon food cell universe your name cheerful silent quiet wooden forest '
@@ -3211,6 +3225,8 @@ try:
 										blessed_one()
 									elif "two" in words or "sutra" in words:
 										play_sutra()
+									elif "three" in words:
+										play_vlc_folder("../mars/luangpoorian")
 									elif "four" in words:
 										basic_chanting(0)
 									elif "six" in words:
@@ -3307,7 +3323,7 @@ try:
 										killPlayer()
 										bot = False
 										speak("ok, call my name when you need help, bye bye!")
-									elif "restart" in words:
+									elif "restart" in words or "reboot" in words:
 										speak("reboot the system, please wait")
 										os.system("sudo reboot")
 										# os.system("sudo systemctl restart myscript.service")
@@ -3790,7 +3806,7 @@ try:
 										pass
 										# play_my_dhamma("../mars/dhamma1")
 									elif "two" in words:
-										play_my_dhamma_vlc()
+										pass
 									elif "three" in words:
 										play_dhamma_with_alarm(180,15,'../datath/dhamma')
 									elif "four" in words:
