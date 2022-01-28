@@ -39,27 +39,20 @@ You may have to install the following packages
 - sudo chmod +x /home/pi/anatta2/anatta2.sh
 
 # Overclocking pi zero W
-# https://forums.raspberrypi.com/viewtopic.php?t=249071
+- https://forums.raspberrypi.com/viewtopic.php?t=249071
 
 - watch -n 2 vcgencmd measure_temp
 - watch "vcgencmd measure_volts core && vcgencmd measure_clock arm"
+- sudo nano /boot/config.txt
 
--I did a few hundred benchmark tests over the course of the week, on 2 different Raspberry Pi zero W units.
--Both graphics and CPU/io stress tests, for stability and performance.
-
--I would recommend the following settings, using nano in /boot/config.txt, as a mild overclock that still significantly boosts performance, but won't break warranty nor needs extra cooling (a passive heat sink is recommended though).
--Do:
-
--sudo nano /boot/config.txt
-
--arm_freq=1085
--#arm_freq=1095 for my other unit with heatsink
--gpu_freq=530
--#gpu_freq=550 for the unit with a heatsink.
--over_voltage=2
--core_freq=515
--sdram_freq=533
--over_voltage_sdram=1
+- arm_freq=1085
+- #arm_freq=1095 for my other unit with heatsink
+- gpu_freq=530
+- #gpu_freq=550 for the unit with a heatsink.
+- over_voltage=2
+- core_freq=515
+- sdram_freq=533
+- over_voltage_sdram=1
 
 
 For Virtualbox + VirtualBox Extension Pack
