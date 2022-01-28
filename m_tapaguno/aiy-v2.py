@@ -1557,15 +1557,15 @@ def play_dhamma_samadhi(fp="../datath/sutta",t=90):
 	gc.collect() 
 	return None
 	
-def play_vlc_folder(fp="../datath/dhamma"):
+def play_vlc_folder(fp="../datath/dhamma",t=0):
 	adjust_volume()
 	files= get_new_dhamma_files(fp)
 	cmd = "cvlc --loop --rate=1.50 --gain 0.1 "+files
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
-	press_for_stop('d',proc)   
+	press_for_stop('d',proc,t*60)   
 	cmd = "cvlc --loop --rate=1.75 --gain 0.2 "+files
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
-	press_for_stop('d',proc) 
+	press_for_stop('d',proc,t*60) 
 	del files
 	gc.collect() 
 	return None
@@ -2108,7 +2108,7 @@ def wooden_gong_sound(t=0,vol='2000',c='off'):
 
 
 
-def raining_meditation(t=0,c='d',vol="1000"):
+def raining_meditation(t=0,c='d',vol="2000"):
 	ledc(c)
 	if t == 0:
 		proc = subprocess.Popen(["mpg123","-f",vol,"-q","--loop","-1","../sound/rainymood.mp3"])
@@ -2121,7 +2121,7 @@ def raining_meditation(t=0,c='d',vol="1000"):
 	return None
 
 
-def thunder_meditation(t=0,c='d',vol="1000"):
+def thunder_meditation(t=0,c='d',vol="2000"):
 	ledc(c)
 	if t == 0:
 		proc = subprocess.Popen(["mpg123","-f",vol,"-q","--loop","-1","../sound/thunderstorm.mp3"])
@@ -2134,7 +2134,7 @@ def thunder_meditation(t=0,c='d',vol="1000"):
 	return None
 
 
-def jungle_meditation(t=0,c='d',vol="1000"):
+def jungle_meditation(t=0,c='d',vol="2000"):
 	ledc(c)
 	if t == 0:
 		proc = subprocess.Popen(["mpg123","-f",vol,"-q","--loop","-1","../sound/jungle.mp3"])
@@ -2147,7 +2147,7 @@ def jungle_meditation(t=0,c='d',vol="1000"):
 	return None
 
 
-def tibetan_meditation(t=0,c='d',vol="1000"):
+def tibetan_meditation(t=0,c='d',vol="2000"):
 	ledc(c)
 	if t == 0:
 		proc = subprocess.Popen(["mpg123","-f",vol,"-q","--loop","-1","../sound/tibetan.mp3"])
@@ -2160,7 +2160,7 @@ def tibetan_meditation(t=0,c='d',vol="1000"):
 	return None
 
 
-def om_meditation(t=0,c='d',vol="1000"):
+def om_meditation(t=0,c='d',vol="2000"):
 	ledc(c)
 	if t == 0:
 		proc = subprocess.Popen(["mpg123","-f",vol,"-q","--loop","-1","../sound/OM417Hz.mp3"])
@@ -2300,31 +2300,40 @@ def testing_mode1():
 	return None
 
 def sitting_meditation(vol='2000'):
-	m = random.randint(1,7)
+	play_mp3('../sound/namo.mp3',161)
+	m = random.randint(1,5)
 	if m == 1:
-		play_mp3('../sound/bhadhdhe-phakhue.mp3',650)
+		play_mp3('../sound/bhadhdhe-phakhue.mp3',137)
 	elif m == 2:
-		play_mp3('../dataen/chanting/heart-sutra.mp3',660)
+		play_mp3('../dataen/chanting/heart-sutra.mp3',326)
 	elif m == 3:
-		play_mp3('../datath/chanting/paticca.mp3',810)
+		play_mp3('../datath/chanting/paticca.mp3',162)
 	elif m == 4:
-		play_mp3('../sound/cha-med.mp3',632)
-	elif m == 5:
-		play_mp3('../datath/chanting/Girimananda-sutra.mp3',2683)
-	elif m == 6:
-		play_mp3('../sound/namo.mp3',483)
-	elif m == 7:
 		play_mp3('../datath/chanting/anapanasati-cut.mp3',657)
+	elif m == 5:
+		play_mp3('../datath/chanting/8.mp3',1010)
 
-	m = random.randint(1,4)
+	m = random.randint(1,3)
+	if m == 1:
+		play_dhamma_samadhi("../mars/luangpoorian",60)
+	elif m == 2:
+		play_dhamma_samadhi("../mars/lpp",60)
+	elif m == 3:
+		play_dhamma_samadhi("../mars/bdd-3536",60)
+	elif m == 4:
+		play_mp3_folder("../datath/sutta",60)
+
+	m = random.randint(1,5)
 	if m == 1:
 		play_mp3('../sound/528Hz.mp3',1800)
-		# play_mp3_folder('../sound/birds',vol,30)
 	elif m == 2:
 		play_mp3('../sound/432Hz.mp3',1800)
 	elif m == 3:
 		om_meditation(30)
-	elif m == 4:
+	elif mode == 4:
+		play_mp3_folder('../mars/guqin','1000',30)
+		bell('1',vol)
+	elif m == 5:
 		bell('1')
 		delay(15)
 		bell('1')
@@ -2768,55 +2777,56 @@ def morning_practice(c='off',vol="500",mode=1):
 	#bell('1',vol)
 	# start
 	ledc('off')
-	play_mp3("../sound/namo.mp3",161,vol)
-	# play_dhamma_samadhi()
-	if mode == 1:
-		remind_breathing(1,vol,'th')
-		alpha_wave(15)
-		bell('1',vol)
-		alpha_wave(15)
-		bell('1',vol)
-		alpha_wave(15)
-		bell('1',vol)
-		alpha_wave(15)
-		bell('1',vol)
-		alpha_wave(15)
-		bell('1',vol)
-		alpha_wave(15)
-		bell('1',vol)
-		#tibetan_metta_chanting(vol)
-	elif mode == 2:
-		play_mp3("../sound/528Hz.mp3",5400,'1000')
-		bell('1',vol)
-	elif mode == 3:
-		play_dhamma_samadhi()
-	elif mode == 4:
-		play_mp3("../sound/432Hz.mp3",5400,'1000')
-		bell('1',vol)
-	elif mode == 5:
-		play_mp3_folder('../mars/guqin','1000',90)
-		bell('1',vol)
-	elif mode == 6:
-		remind_breathing(1,vol,'th')
-		play_mp3("../mars/basic_chanting/pahung.mp3",1800,vol)
-		blessed_one(60,vol)
-		bell('1',vol)
-	elif mode == 7:
-		play_dhamma_samadhi("../mars/luangpoorian")
-	else:
-		bell('1',vol)
-		delay(15)
-		bell('1',vol)
-		delay(15)
-		bell('1',vol)
-		delay(15)
-		bell('1',vol)
-		delay(15)
-		bell('1',vol)
-		delay(15)
-		bell('1',vol)
-		delay(15)
-		bell('1',vol)
+	sitting_meditation()
+	# play_mp3("../sound/namo.mp3",161,vol)
+	# # play_dhamma_samadhi()
+	# if mode == 1:
+	# 	remind_breathing(1,vol,'th')
+	# 	alpha_wave(15)
+	# 	bell('1',vol)
+	# 	alpha_wave(15)
+	# 	bell('1',vol)
+	# 	alpha_wave(15)
+	# 	bell('1',vol)
+	# 	alpha_wave(15)
+	# 	bell('1',vol)
+	# 	alpha_wave(15)
+	# 	bell('1',vol)
+	# 	alpha_wave(15)
+	# 	bell('1',vol)
+	# 	#tibetan_metta_chanting(vol)
+	# elif mode == 2:
+	# 	play_mp3("../sound/528Hz.mp3",5400,'1000')
+	# 	bell('1',vol)
+	# elif mode == 3:
+	# 	play_dhamma_samadhi()
+	# elif mode == 4:
+	# 	play_mp3("../sound/432Hz.mp3",5400,'1000')
+	# 	bell('1',vol)
+	# elif mode == 5:
+	# 	play_mp3_folder('../mars/guqin','1000',90)
+	# 	bell('1',vol)
+	# elif mode == 6:
+	# 	remind_breathing(1,vol,'th')
+	# 	play_mp3("../mars/basic_chanting/pahung.mp3",1800,vol)
+	# 	blessed_one(60,vol)
+	# 	bell('1',vol)
+	# elif mode == 7:
+	# 	play_dhamma_samadhi("../mars/luangpoorian")
+	# else:
+	# 	bell('1',vol)
+	# 	delay(15)
+	# 	bell('1',vol)
+	# 	delay(15)
+	# 	bell('1',vol)
+	# 	delay(15)
+	# 	bell('1',vol)
+	# 	delay(15)
+	# 	bell('1',vol)
+	# 	delay(15)
+	# 	bell('1',vol)
+	# 	delay(15)
+	# 	bell('1',vol)
 	
 	# cool down
 	play_mp3('../mars/monk/rbut.mp3',127,'600')
@@ -3312,7 +3322,7 @@ try:
 										speak("Repeat mode off")
 
 								elif "anat" in words and "ta" in words or "computer" in words:
-									if len(words) == 2:
+									if len(words) == 1:
 										speak("yes!")
 									elif "play" in words:
 										if "dhamma" in words:
