@@ -44,16 +44,28 @@ You may have to install the following packages
 - watch -n 2 vcgencmd measure_temp
 - watch "vcgencmd measure_volts core && vcgencmd measure_clock arm"
 - sudo nano /boot/config.txt
+'''
+arm_freq=1085
+#arm_freq=1095 for my other unit with heatsink
+gpu_freq=530
+#gpu_freq=550 for the unit with a heatsink.
+over_voltage=2
+core_freq=515
+sdram_freq=533
+over_voltage_sdram=1
+'''
 
-- arm_freq=1085
-- #arm_freq=1095 for my other unit with heatsink
-- gpu_freq=530
-- #gpu_freq=550 for the unit with a heatsink.
-- over_voltage=2
-- core_freq=515
-- sdram_freq=533
-- over_voltage_sdram=1
+- https://thetribuneworld.com/2019/05/16/how-to-overclock-raspberry-pi-zero/
 
+### 10% overclock
+'''
+arm_freq = 1100
+over_voltage = 8
+sdram_freq = 500
+sdram_over_voltage = 2
+force_turbo = 1
+boot_delay = 1
+'''
 
 For Virtualbox + VirtualBox Extension Pack
 - https://www.virtualbox.org/wiki/Downloads
