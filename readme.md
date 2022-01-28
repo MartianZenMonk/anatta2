@@ -57,7 +57,7 @@ over_voltage_sdram=1
 
 - https://thetribuneworld.com/2019/05/16/how-to-overclock-raspberry-pi-zero/
 
-### 10% overclock
+### 10% overclock - ok with motion detect function
 '''
 arm_freq = 1100
 over_voltage = 8
