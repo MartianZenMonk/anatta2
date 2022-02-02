@@ -1879,10 +1879,27 @@ def play_youtube():
 	press_for_stop('d',proc) 
 
 def play_my_playlist():
-	plist = 'https://www.youtube.com/playlist?list=PLUh8U5np7D-7npviWVcHXBXXjESOTZPbW'
+	adjust_volume()
+	m = random.randint(1,4)
+	if m == 1:
+		speak("Dukkha, suffering, incapable of satisfying, painful")
+		plist = 'https://www.youtube.com/playlist?list=PLamD6Dg8nlBT-ugSj7EMBvAY5TRP7P-kI'
+		
+	elif m == 2:
+		speak("Samudaya, origin, arising of this dukkha")
+		plist = 'https://www.youtube.com/playlist?list=PLamD6Dg8nlBR-RpzgZXSUlnM-s8KvwB8q'
+		
+	elif m == 3:
+		speak("Nirodha, cessation, ending of this dukkha")
+		plist = 'https://www.youtube.com/playlist?list=PLamD6Dg8nlBTKSF1s6Xp4l9tueaJ_UtNo'
+		
+	elif m == 4:
+		speak("Marga, path, Noble Eightfold Path is the path leading to renouncement of tanha and cessation of dukkha")
+		plist = 'https://www.youtube.com/playlist?list=PLamD6Dg8nlBSRuwJ2Y9kKqX6Vo6tc0QT_'
+		
 	cmd = "yt-dlp -f 139 --playlist-random -o - " + plist + " | cvlc --rate 1.50 --gain 0.2 -"
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
-	press_for_stop('d',proc) 
+	press_for_stop('d',proc)  
 
 def meditation_time():
 	killPlayer()   
@@ -2406,7 +2423,7 @@ def testing_mode4():
 	what_time()
 	now = datetime.today().strftime('%H %M')
 	tn = now.split()
-	if 16 < int(tn[0]) and int(tn[0]) < 18:
+	if int(tn[0]) == 17:
 		testing_mode1()
 		fast_buddho('off',10,'500')
 		remind_breathing(5,'500','th2')
