@@ -741,8 +741,8 @@ def adjust_volume():
 def relax_thai(vol="600"):
 
 	text  = ["ทำ","ตัว","ผ่อน","คลาย","หาย","ใจ","ยาว","ยาว","คลาย","ความ","กังวล","ตั้ง","จิต","มั่น","รู้","ลม","หาย","ใจ"]
-	text += ["เข้า","ออก","สั้น","ยาว","หยาบ","ละเอียด","เกิด","ดับ","ไม่","เที่ยง","หนอ","แล"]
-	# text += ["ไม่","มี","ทุกข์","ไม่","มี","สุข","มี","แต่","ความ","ที่","สติ","เป็น","ธรรมชาติ","บริสุทธิ์","เพราะ","อุเบกขา","แล้ว","แล","อยู่"]
+	text += ["เข้า","ออก","สั้น","ยาว","หยาบ","ละเอียด","เกิด","ดับ","ไม่","เที่ยง","หนอ"]
+	# text += ["แล","ไม่","มี","ทุกข์","ไม่","มี","สุข","มี","แต่","ความ","ที่","สติ","เป็น","ธรรมชาติ","บริสุทธิ์","เพราะ","อุเบกขา","แล้ว","แล","อยู่"]
 	stext = thwords(text)
 	# print(stext)
 	os.system("mpg123 -q -f " + vol + " " + stext)
@@ -752,7 +752,7 @@ def relax_thai(vol="600"):
 
 
 def relax_walk(t=5,vol='1000'):
-	call(["amixer","-q","-M","sset","Master","40%"])
+	call(["amixer","-q","-M","sset","Master","60%"])
 	text  = ["พุท","โธ","พุท","โธ","เหยียบ","เหยียบ","รู้","ลม","หาย","ใจ","รู้","กาย","เคลื่อน","ไหว","รู้","ใจ","นึก","คิด","มี","จิต","เบิก","บาน"]
 	text += ["พุท","โธ","พุท","โธ","เหยียบ","เหยียบ","ถอน","ความ","พอ","ใจ","และ","ความ","ไม่","พอ","ใจ","ใน","ใจ","ออก","เสีย","ได้"]
 	text += ["พุท","โธ","พุท","โธ","เหยียบ","เหยียบ","จิต","เบิก","บาน","หาย","ใจ","เข้า","จิต","โล่ง","เบา","หาย","ใจ","ออก"]
@@ -788,7 +788,7 @@ def relax_walk(t=5,vol='1000'):
 
 
 def anapanasati_walk(ts=5):
-	call(["amixer","-q","-M","sset","Master","40%"])
+	call(["amixer","-q","-M","sset","Master","60%"])
 	t  = 'พุท โธ พุท โธ เหยียบ เหยียบ รู้ ลม ยาว รู้ ลม สั้น รู้ กาย ทั้ง ปวง ทํา กาย ลม ให้ ประ ณีต '
 	t += 'พุท โธ พุท โธ เหยียบ เหยียบ รู้ ปี ติ รู้ สุข รู้ เว ทะ นา ทํา เว ทะ นา ให้ ระ งับ '
 	t += 'พุท โธ พุท โธ เหยียบ เหยียบ รู้ พร้อม ซึ่ง จิต ทํา ให้ จิต บัน เทิง ทํา จิต ให้ ตั้ง มั่น ทํา จิต ให้ ปล่อย ' 
@@ -823,7 +823,7 @@ def anapanasati_walk(ts=5):
 
 
 def musk_walk(ts=5):
-	call(["amixer","-q","-M","sset","Master","40%"])
+	call(["amixer","-q","-M","sset","Master","60%"])
 	t  = 'พุท โธ พุท โธ เหยียบ เหยียบ ความ เห็น ชอบ สัม มา ทิฏ ฏิ ความ รู้ ใน ทุกข์ ความ รู้ ใน เหตุ ให้ เกิด ทุกข์ ความ รู้ ใน ความ ดับ แห่ง ทุกข์ ความ รู้ ใน ทาง ดำ เนิน ให้ ถึง ความ ดับ แห่ง ทุกข์ '
 	t += 'พุท โธ พุท โธ เหยียบ เหยียบ ความ ดำริ ชอบ สัม มา สัง กัป โป ดำริ ใน การ ออก จาก กาม ดำริ ใน การ ไม่ มุ่ง ร้าย ดำริ ใน การ ไม่ เบียด เบียน '
 	t += 'พุท โธ พุท โธ เหยียบ เหยียบ การ พูด จา ชอบ สัม มา วา จา เว้น จาก การ พูด ไม่ จริง เว้น จาก การ พูด ส่อ เสียด เว้น จาก การ พูด หยาบ เว้น จาก การ พูด เพ้อ เจ้อ '
@@ -1611,9 +1611,9 @@ def play_vlc_file2(fp="../mars/muttothai.m4a",t=0):
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('d',proc,t*60)  
 
-def play_vlc_file3(fp="../sound/bowl1.m4a"):
+def play_vlc_file3(fp="../sound/bowl1.m4a",rate='1.00'):
 	adjust_volume()
-	cmd = "cvlc --play-and-exit --gain 0.2 "+ fp
+	cmd = "cvlc --play-and-exit --gain 0.15 --rate " + rate + " " + fp
 	subprocess.run(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	
    
@@ -1715,7 +1715,7 @@ def what_day():
 	gc.collect()
 	
 
-def play_mp3(path,sec=0,vol='1000',c='off'):
+def play_mp3(path,sec=0,vol='1500',c='off'):
 	killPlayer()  
 	proc = subprocess.Popen(["mpg123","-f",vol,"--loop","-1",path])
 	press_for_stop(c,proc,sec)
@@ -2406,20 +2406,24 @@ def testing_mode4():
 	what_time()
 	now = datetime.today().strftime('%H %M')
 	tn = now.split()
-	mn = (22-int(tn[0]))*60 - int(tn[1])
-	if 16 < int(tn[0]):
+	if 16 < int(tn[0]) and int(tn[0]) < 18:
 		testing_mode1()
 		fast_buddho('off',10,'500')
 		remind_breathing(5,'500','th2')
 		alpha_wave(55)
 		bell('1')
 		ledc("off")
+		now = datetime.today().strftime('%H %M')
+		tn = now.split()
+		mn = (22-int(tn[0]))*60 - int(tn[1])
 		basic_chanting(mn,'300')
 		delay(240)
 		fast_buddho('off',5,'500')
 		n = [1,3,4,5]
 		random.shuffle(n)
 		morning_practice3('off','200',n[0])
+	elif int(tn[0]) > 17:
+		testing_mode7()
 	else:
 		speak("sorry too early")
 	return None
@@ -2434,6 +2438,8 @@ def testing_mode5():
 
 def testing_mode7():
 	what_time()
+	now = datetime.today().strftime('%H %M')
+	tn = now.split()
 	if 16 < int(tn[0]):
 		fast_buddho('off',10,'500')
 		remind_breathing(5,'500','th2')
@@ -2778,10 +2784,9 @@ def music_meditation(t=0,c='d',vol="1000"):
 	return None
 	
 
-def monk_rules(c='g'):
+def monk_rules(c='o'):
 	ledc(c)
-	proc = subprocess.Popen(["mpg123","-f","2000","-q","../mars/monk/patimok.mp3"])
-	press_for_stop(c,proc)
+	play_vlc_file3("../mars/monk/patimok.mp3",'2.00')
 	return None
 
 
@@ -2804,7 +2809,13 @@ def morning_practice(c='off',vol="500"):
 			mixed_mode('off',10-t,14,vol)
 	elif i == 1:
 		mixed_mode('off',5,14,vol)
-		fast_buddho(c,40,vol)
+		m = random.randint(1,3)
+		if m == 1:
+			fast_buddho(c,40,vol)
+		elif m == 2:
+			play_mp3('../sound/528Hz.mp3',2400)
+		elif m == 3:
+			play_mp3('../sound/432Hz.mp3',2400)
 		mixed_mode('off',5,14,vol)
 	#delay(5)
 	bell('1',vol)
@@ -2829,6 +2840,8 @@ def morning_practice(c='off',vol="500"):
 		om_meditation(30)
 	elif m == 4:
 		play_mp3_folder('../mars/guqin','1000',30)
+	elif m == 4:
+		play_mp3_folder('../mars/classical','1000',30)
 	elif m == 5:
 		bell('1')
 		delay(15)
@@ -2852,7 +2865,12 @@ def morning_practice(c='off',vol="500"):
 	play_mp3("../sound/namo.mp3",161,vol)
 	remind_walking2(10,vol,0)
 	ledc('off')
-	os.system("sudo shutdown now")
+	# os.system("sudo shutdown now")
+	delay(45)
+	thai_chanting(15,'1000')
+	play_mp3_folder('../mars/blessingmp3','2000',30)
+	delay(60)
+	buddha_dhamma()
 	return None
 
 
@@ -4094,7 +4112,7 @@ try:
 										espeak("set volume to 100%",'10')
 									elif "down" in words:
 										call(["amixer","-q","-M","sset","Master","50%"])
-										espeak("set volume to 40%",'100')
+										espeak("set volume to 60%",'100')
 									elif "sixty" in words:
 										call(["amixer","-q","-M","sset","Master","60%"])
 										espeak("set volume to 60%",'30')
