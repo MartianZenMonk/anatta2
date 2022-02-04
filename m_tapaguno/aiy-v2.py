@@ -1674,7 +1674,7 @@ def play_mp3_with_alarm(t=60,ts=15,f="../datath/chanting/paticca.mp3",vol='1000'
 
 def play_mp3_folder(fp="../datath/sutta",vol='1000',t=60):
 	files= get_new_dhamma_files(fp)
-	cmd = "mpg123 -C -z -f " + vol + " " + files
+	cmd = "mpg123 -C -Z -f " + vol + " " + files
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	press_for_stop('off',proc,t*60) 
 	killPlayer()    
@@ -1715,7 +1715,7 @@ def what_day():
 	gc.collect()
 	
 
-def play_mp3(path,sec=0,vol='1500',c='off'):
+def play_mp3(path,sec=0,vol='2000',c='off'):
 	killPlayer()  
 	proc = subprocess.Popen(["mpg123","-f",vol,"--loop","-1",path])
 	press_for_stop(c,proc,sec)
@@ -2513,7 +2513,7 @@ def testing_mode9():
 	basic_chanting(mn,'400')
 	delay(240)
 	fast_buddho('off',5,'500')
-	morning_practice2('off','500')
+	morning_practice('off','500')
 	return None
 	
 def testing_mode6():
@@ -2844,7 +2844,7 @@ def morning_practice(c='off',vol="500"):
 	sitting_meditation()
 		
 	# cool down
-	play_mp3('../mars/monk/rbut.mp3',127,'600')
+	play_mp3('../mars/monk/rbut.mp3',127,'1000')
 	morning_merit(vol)
 	play_mp3("../sound/metta.mp3",114,vol)
 
@@ -2884,62 +2884,11 @@ def morning_practice(c='off',vol="500"):
 	ledc('off')
 	# os.system("sudo shutdown now")
 	delay(45)
-	thai_chanting(15,'1000')
+	adjust_volume()
+	thai_chanting(15,'2000')
 	play_mp3_folder('../mars/blessingmp3','2000',30)
 	delay(60)
 	buddha_dhamma()
-	return None
-
-
-def morning_practice2(c='off',vol="500"):
-	ledc(c)
-	walk = [0,1,4,5,9,10,15,16,17]
-	i = random.randint(1,3)
-	for x in range(i):
-		random.shuffle(walk)
-	# warm up
-	t = random.randint(2,6)
-	mixed_mode('off',t,13,vol)
-	mixed_mode('off',10-t,14,vol)
-	for i in range(1,6):
-		mixed_mode('off',t,walk[i],vol)
-		mixed_mode('off',10-t,14,vol)
-	#delay(5)
-	fast_buddho(c,5,vol)
-	relax_thai(vol)
-	#bell('1',vol)
-	# start
-	ledc('off')
-	play_mp3("../sound/namo.mp3",161,vol)
-	play_dhamma_samadhi()
-	
-	play_mp3('../mars/monk/rbut.mp3',127,'600')
-	morning_merit(vol)
-	play_mp3("../sound/metta.mp3",114,vol)
-
-	vol = '1000'
-	play_mp3("../datath/chanting/8.mp3",1010,vol)
-	now = datetime.today().strftime('%H %M')
-	tn = now.split()
-	mn = (6-int(tn[0]))*60 - int(tn[1]) - 11
-
-	m = random.randint(1,3)
-	if m == 1 :
-		play_mp3_folder('../mars/blessingmp3',vol,mn)
-	elif m == 2:
-		basic_chanting(mn,vol)
-	elif m == 3:
-		thai_chanting(mn,vol)
-
-	play_mp3("../sound/namo.mp3",161,vol)
-	remind_walking2(10,vol,0)
-	ledc('off')
-	
-	delay(45)
-	thai_chanting(15,'1000')
-	play_mp3_folder('../mars/blessingmp3','2000',30)
-	delay(60)
-	play_dhamma()
 	return None
 
 
