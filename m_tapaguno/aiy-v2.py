@@ -387,7 +387,8 @@ def killPlayer():
 	return None
 
 def wait_for_vlc(proc=0,t=5):
-	print(proc)
+	# print(proc)
+	ledc('d')
 	delay(1)
 	vlc = True
 	while vlc:
@@ -396,7 +397,7 @@ def wait_for_vlc(proc=0,t=5):
 		else:
 			vlc = False
 	proc.kill()
-	print("Done!")
+	# print("Done!")
 
 def pkill_proc_name(name=''):
 	global proc_name
@@ -1703,9 +1704,9 @@ def play_dhamma_by_list_2(fp="../mars/payutto",cmd='dhamma_four',limit=10,uperli
 	del files
 	gc.collect()
 
-def play_dhamma_by_list_3(fp="../mars/4nt2",cmd='dhamma_dhamma',limit=10,uperlimit=300,gain='0.1',rate='1.50'):
+def play_dhamma_by_list_3(fp="../mars/4nt2",cmd='dhamma_dhamma',limit=10,uperlimit=300,gain='0.1',rate='1.50',n=1):
 	killPlayer()
-	files= get_dhamma_list(fp,1)
+	files= get_dhamma_list(fp,n)
 	for fx in files:
 		print(fx)
 		cmd = "cvlc --play-and-exit --global-key-play-pause p --global-key-vol-up u --global-key-vol-down d --global-key-jump+medium j  --global-key-stop s" + " --gain " + gain + " --rate " + rate + " " + fx
@@ -1721,16 +1722,16 @@ def play_dhamma_by_list_3(fp="../mars/4nt2",cmd='dhamma_dhamma',limit=10,uperlim
 	gc.collect()
 
 
-def play_dhamma_by_list_4(fp="../mars/4nt2",cmd='dhamma_dhamma',limit=10,uperlimit=300,gain='0.1',rate='1.75'):
+def play_dhamma_by_list_4(fp="../mars/4nt2",cmd='dhamma_dhamma',limit=10,uperlimit=300,gain='0.1',rate='1.50',n=0):
 	killPlayer()
-	files= get_dhamma_list(fp,0)
+	files= get_dhamma_list(fp,n)
 	for fx in files:
 		print(fx)
 		tfx = media_info(fx)
-		t = tfx / float(rate)
+		t = tfx / float(1000*rate)
 		cmd = "cvlc --play-and-exit --global-key-play-pause p --global-key-vol-up u --global-key-vol-down d --global-key-jump+medium j  --global-key-stop s" + " --gain " + gain + " --rate " + rate + " " + fx
-		subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
-		press_for_stop('g',proc,t)
+		proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
+		press_for_stop('g',proc,t+5)
 		speak('press button in 5 seconds for exit or wait to continue')
 		ledc('r')
 		t0 = time.time()
@@ -3478,11 +3479,15 @@ try:
 
 							# say "anat ta" to start
 							if not bot:
-								if z["text"] == "anat ta" or z["text"] == "computer":
+								if z["text"] == "anat ta":
+									bot = True
+									words = []
+									speak("what can i do for you?")
+									clear_q()
+								elif z["text"] == "computer":
 									bot = True
 									words = []
 									speak("yes no ok coca cola")
-									# os.system("sudo service motion stop")
 									clear_q()
 								elif z["text"] == "light on":
 									ledc('w')
@@ -4165,10 +4170,10 @@ try:
 									elif "six" in words:
 										play_dhamma_by_list("../mars/suttanta","dhamma_six",2,10)
 									elif "noble" in words:
-										play_dhamma_by_list("../mars/4nt2","dhamma_noble",10,300,'1.00')
+										play_dhamma_by_list("../mars/4nt2","dhamma_noble",5,300,'0.1','1.50')
 										# play_four_noble_truth_dhamma()
 									else:
-										play_dhamma_by_list_4()
+										play_dhamma_by_list_4("../mars/4nt2","dhamma_noble",5,300,'0.1','1.50',1)
 										# sitting_meditation(1,60)
 										# play_dhamma_by_list_2("../mars/payutto","dhamma_four")
 										# play_dhamma_by_list("../mars/4nt2","dhamma_noble")
