@@ -1728,7 +1728,7 @@ def play_dhamma_by_list_4(fp="../mars/4nt2",cmd='dhamma_dhamma',limit=10,uperlim
 	for fx in files:
 		print(fx)
 		tfx = media_info(fx)
-		t = tfx / float(1000*rate)
+		t = tfx / (1000*float(rate))
 		cmd = "cvlc --play-and-exit --global-key-play-pause p --global-key-vol-up u --global-key-vol-down d --global-key-jump+medium j  --global-key-stop s" + " --gain " + gain + " --rate " + rate + " " + fx
 		proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 		press_for_stop('g',proc,t+5)
@@ -2153,7 +2153,8 @@ def meditation_time():
 def buddha_dhamma():
 	killPlayer()    
 	speak("Buddha dhamma")
-	play_vlc_folder("../mars/buddhaDhamma")
+	play_dhamma_by_list_3("../mars/buddhaDhamma","buddha_dhamma",5,300,'0.1','1.50',1)
+	# play_vlc_folder("../mars/buddhaDhamma")
 
 
 def play_dhamma(vol='1000',fp='../datath/dhamma'):
@@ -2690,7 +2691,7 @@ def testing_10():
 	buddha_day()
 	testing_mode1()
 	fast_buddho('off',10,'500')
-	sitting_meditation(0,60,'1000')
+	sitting_meditation(0,60,'1500')
 	# now = datetime.today().strftime('%H %M')
 	# tn = now.split()
 	# mn = (22-int(tn[0]))*60 - int(tn[1])
