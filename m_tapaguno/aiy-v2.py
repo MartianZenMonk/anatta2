@@ -22,7 +22,8 @@ from datetime import datetime
 from aiy.board import Board, Led
 from aiy.leds import (Leds, Pattern, PrivacyLed, RgbLeds, Color)
 import threading
-import keyboard
+# import keyboard
+from pynput. keyboard import Key, Controller
 from pprint import pprint
 from pymediainfo import MediaInfo
 
@@ -1691,7 +1692,11 @@ def play_dhamma_by_list_2(fp="../mars/payutto",cmd='dhamma_four',limit=10,uperli
 	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 	board.button.wait_for_press()
 	try:
-		keyboard.press_and_release('f')
+		keyboard = Controller()
+		key = "f"
+		keyboard. press(key)
+		keyboard. release(key)
+		# keyboard.press_and_release('f')
 	except:
 		pass
 	press_for_stop('d',proc)   

@@ -6,6 +6,8 @@ THANK YOU VERY MUCH TO MR SUTHEE @ https://www.techtalkthai.com/ FOR GIVING THE 
 
 Anatta Meditation Voice For Linux / ubuntu , and may good for pi zero 2 w too https://github.com/google/aiyprojects-raspbian/releases
 
+- อธิบายเพิ่มเติม https://m.facebook.com/groups/890791731653111/permalink/1086366665428949
+
 
 git clone https://github.com/MartianZenMonk/anatta2
 
@@ -38,8 +40,8 @@ You may have to install the following packages
 - or sudo nano /etc/xdg/lxsession/LXDE-pi/autostart -> add to the end -> @bash /home/pi/anatta2/anatta2.sh
 - sudo chmod +x /home/pi/anatta2/anatta2.sh
 -
-- sudo pip3 install keyboard
--
+- sudo pip3 install keyboard or pip3 install pynput
+- sudo apt install sqlite3
 - pip3 install pymediainfo
 - sudo apt-get install -y libmediainfo-dev
 
