@@ -37,30 +37,40 @@ You may have to install the following packages
 - For autostart ( sudo raspi-config - auto login)
 - or sudo nano /etc/xdg/lxsession/LXDE-pi/autostart -> add to the end -> @bash /home/pi/anatta2/anatta2.sh
 - sudo chmod +x /home/pi/anatta2/anatta2.sh
+-
+- sudo pip3 install keyboard
+-
+- pip3 install pymediainfo
+- sudo apt-get install -y libmediainfo-dev
 
 # Overclocking pi zero W
-# https://forums.raspberrypi.com/viewtopic.php?t=249071
+- https://forums.raspberrypi.com/viewtopic.php?t=249071
 
 - watch -n 2 vcgencmd measure_temp
 - watch "vcgencmd measure_volts core && vcgencmd measure_clock arm"
+- sudo nano /boot/config.txt
+'''
+arm_freq=1085
+#arm_freq=1095 for my other unit with heatsink
+gpu_freq=530
+#gpu_freq=550 for the unit with a heatsink.
+over_voltage=2
+core_freq=515
+sdram_freq=533
+over_voltage_sdram=1
+'''
 
--I did a few hundred benchmark tests over the course of the week, on 2 different Raspberry Pi zero W units.
--Both graphics and CPU/io stress tests, for stability and performance.
+- https://thetribuneworld.com/2019/05/16/how-to-overclock-raspberry-pi-zero/
 
--I would recommend the following settings, using nano in /boot/config.txt, as a mild overclock that still significantly boosts performance, but won't break warranty nor needs extra cooling (a passive heat sink is recommended though).
--Do:
-
--sudo nano /boot/config.txt
-
--arm_freq=1085
--#arm_freq=1095 for my other unit with heatsink
--gpu_freq=530
--#gpu_freq=550 for the unit with a heatsink.
--over_voltage=2
--core_freq=515
--sdram_freq=533
--over_voltage_sdram=1
-
+### 10% overclock - ok with motion detect function
+'''
+arm_freq = 1100
+over_voltage = 8
+sdram_freq = 500
+sdram_over_voltage = 2
+force_turbo = 1
+boot_delay = 1
+'''
 
 For Virtualbox + VirtualBox Extension Pack
 - https://www.virtualbox.org/wiki/Downloads
@@ -69,6 +79,9 @@ For Virtualbox + VirtualBox Extension Pack
 For offline Thai voice recognition
 - https://github.com/mozilla/DeepSpeech-examples/tree/r0.9/mic_vad_streaming
 - https://itml.cl.indiana.edu/models/th/
+
+For Thai tts
+- you can try this project , https://github.com/PyThaiNLP/tts-thai
 
 How to run
 - copy folder m_tapaguno to m_yourname

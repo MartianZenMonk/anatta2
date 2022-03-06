@@ -1,7 +1,7 @@
 import numpy as np
 import cv2 as cv
 
-video = cv2.VideoCapture(0)
+video = cv.VideoCapture(0)
 
 while True:
 		# Reading frame(image) from video

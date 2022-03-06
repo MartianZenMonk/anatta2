@@ -1,5 +1,5 @@
 import cv2
-
+bk = False
 baseline_image=None
 status_list=[None,None]
 video=cv2.VideoCapture(0)
@@ -30,21 +30,22 @@ while True:
         print(str(w*h))
         cv2.rectangle(frame, (x, y), (x+w, y+h), (0,255,0), 1)
         status_list.append(status)
-	
+        if w*h > 220000:
+            bk = True
 
     #cv2.imshow("gray_frame Frame",gray_frame)
     #cv2.imshow("Delta Frame",delta)
     #cv2.imshow("Threshold Frame",threshold)
-    cv2.imshow("Color Frame",frame)
+    #cv2.imshow("Color Frame",frame)
+    if bk:
+            break
+    # key=cv2.waitKey(1)
 
-    key=cv2.waitKey(1)
-
-    if key==ord('q'):
-        break
+    # if key==ord('q'):
+    #     break
 
 
 #Clean up, Free memory
-engine.stop()
 video.release()
 cv2.destroyAllWindows
 
