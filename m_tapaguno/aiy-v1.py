@@ -3014,7 +3014,7 @@ def my_sun():
 	global proc_name
 	sun = ['sun1.gif','sun2.gif','sun3.gif','sun4.gif']
 	i = random.randint(0,3)
-	command = "export DISPLAY=:0.0; python3 testgif.py -f full -p ../web/images/"+sun[i]
+	command = "export DISPLAY=:0.0; python3 testgif.py -f full -p ../sound/"+sun[i]
 	proc = subprocess.Popen(command, shell=True)
 	proc_name = "testgif"
 	return proc_name
@@ -3023,7 +3023,7 @@ def my_stars():
 	global proc_name
 	sun = ['mars.gif','moon.gif','jupiter.gif','titan.gif']
 	i = random.randint(0,3)
-	command = "export DISPLAY=:0.0; python3 testgif.py -f full -p ../web/images/"+sun[i]
+	command = "export DISPLAY=:0.0; python3 testgif.py -f full -p ../sound/"+sun[i]
 	proc = subprocess.Popen(command, shell=True)
 	proc_name = "testgif"
 	return proc_name
@@ -3051,6 +3051,11 @@ def the_brain():
 	except:
 		speak("sorry can not play video clip")
 	return None
+
+
+def the_universe(i=7,title='the space video clip'):
+	pass
+
 
 def cheer_up(i=4):
 	speak("play cheerful video clip")
@@ -3099,8 +3104,7 @@ def music_meditation(t=0,c='d',vol="1000"):
 def monk_rules(c='o'):
 	ledc(c)
 	play_vlc_file_0("../mars/monk/patimok.mp3",'2.00')
-	play_vlc_file_0("../mars/monk/nava_vinai.mp3",'2.00')
-	play_vlc_file_0("../mars/monk/nava_dhamma.mp3",'2.00')
+	play_vlc_file_0("../mars/monk/newmonk.mp3",'2.00')
 	play_dhamma_by_list_4("../mars/monk/8",'0.1','1.50',0)
 	return None
 
@@ -3120,8 +3124,7 @@ def morning():
 		elif i == 3:
 			thai_chanting(mn,vol)
 		buddha_day()
-		# play_mp3("../sound/namo.mp3",161,vol)
-		play_vlc_file_0("../sound/theBuddha.m4a",'1.00')
+		play_mp3("../sound/namo.mp3",161,vol)
 		remind_walking2(3,vol,0)
 		remind_walking2(3,vol,5)
 		remind_walking2(3,vol,8)
@@ -3138,7 +3141,6 @@ def morning():
 def morning_dhamma():
 	#test
 	global mdm
-	play_vlc_file_0("../mars/monk/nava_vinai.mp3",'2.00')
 	a = buddha_day()
 	if a == 8:
 		b = random.randint(1,3)
@@ -3601,6 +3603,7 @@ try:
 			ch_name  = ['fast buddho mantra','breathing in and out mantra in Thai','alpha sound with alpha light']
 			ch_name += [' only alpha sound','only alpha light','relax and mindful mantra in Thai','Ohm sound','Meditation Music']
 			ch_name += ['Paticca Chanting','Raining sound','Quit']
+			uni = ['you are here','why the moon','Mars 10000 days','the sun','earth view from ISS','night sky','the universe']
 			time.sleep(1)
 			i = random.randint(1,4)
 			meditation_goal(i,'500')
@@ -3917,24 +3920,24 @@ try:
 									elif "one" in words:
 										speak("10 minutes walking and 30 minutes sitting")
 										meditation_1()
-									# elif "two" in words:
-									# 	speak("2 hours")
-									# 	meditation_2()
-									# elif "three" in words:
-									# 	speak("1 hours")
-									# 	meditation_3()
-									# elif "four" in words:
-									# 	speak("4 hours meditation")
-									# 	meditation_4()
-									# elif "five" in words:
-									# 	speak("1 hour")
-									# 	meditation_5()
-									# elif "seven" in words:
-									# 	speak("1 hour")
-									# 	meditation_7()
-									# elif "six" in words:
-									# 	speak("4 hours with cheerful clip")
-									# 	meditation_6()
+									elif "two" in words:
+										speak("2 hours")
+										meditation_2()
+									elif "three" in words:
+										speak("1 hours")
+										meditation_3()
+									elif "four" in words:
+										speak("4 hours meditation")
+										meditation_4()
+									elif "five" in words:
+										speak("1 hour")
+										meditation_5()
+									elif "seven" in words:
+										speak("1 hour")
+										meditation_7()
+									elif "six" in words:
+										speak("4 hours with cheerful clip")
+										meditation_6()
 										
 								elif "chinese" in words and "chanting" in words:
 									chinese_chanting(0)
@@ -3969,9 +3972,6 @@ try:
 									counting_walk(5,True,'en','2000')
 									walking_meditation_count()
 
-								elif "chinese" in words and "monk" in words:
-									play_dhamma_by_list_4('../mars/fahien','0.1','1.75',0)
-
 								elif "practice" in words:
 
 									if "walking" in words:
@@ -4005,11 +4005,52 @@ try:
 									# for martian monk only     
 									elif "morning" in words and "practice" in words:
 										morning_practice()
-										
+										# m = random.randint(0,7)
+										# morning_practice3('off',m,'500')
+										# if"one" in words:
+										# 	verify_words = 'Do you want to play pahoong chanting morning practice?'
+										# 	mn = 1
+										# elif "two" in words:
+										# 	verify_words = 'Do you want to play martika chanting morning practice?'
+										# 	mn = 2
+										# elif "three" in words:
+										# 	verify_words = 'Do you want to play 7 kumpee chanting morning practice?'
+										# 	mn = 3
+										# else:
+										# 	verify_words = 'Do you want to play morning practice?'
+										# 	mn = 0
+
+										# mp = True    
+										# verify = True
+										# focus  = True
 
 									elif "evening" in words and "practice" in words:
 										testing_mode7()
-										
+										# if "one" in words:
+										# 	verify_words = 'Do you want to play pahoong chanting in the morning?'
+										# 	mn = 1
+										# elif "two" in words:
+										# 	verify_words = 'Do you want to play martika chanting in the morning?'
+										# 	mn = 2
+										# elif "three" in words:
+										# 	verify_words = 'Do you want to play 7 kumpee chanting in the morning?'
+										# 	mn = 3
+										# elif "four" in words:
+										# 	verify_words = 'Do you want to play random chanting in the morning?'
+										# 	mn = 4
+										# elif "six" in words:
+										# 	verify_words = 'Do you want to play alpha sound in the evening?'
+										# 	mn = 6 
+										# else:
+										# 	verify_words = 'Do you want to play basic mode evening practice?'
+										# 	mn = 0
+
+										# ep = True
+										# verify = True
+										# focus  = True
+										# else:
+										# 	speak("what practice mode do you want ?")
+										# 	clear_q()
 
 								# for martian monk only 
 								elif "monk" in words and "rule" in words:
@@ -4269,11 +4310,11 @@ try:
 										play_vlc_by_list("../mars/bdd","dhamma_nine",5,0,'0.1','1.75')
 										# play_vlc_folder("../mars/bdd")
 									elif "one" in words:
-										play_dhamma_by_list_4("../mars/bdd-3536",'0.1','1.50',1)
+										play_vlc_folder("../mars/bdd-3536")
 									elif "two" in words:
-										play_dhamma_by_list_4("../mars/luangpoorian",'0.1','1.50',1)
+										play_vlc_folder("../mars/luangpoorian")
 									elif "three" in words:
-										play_dhamma_by_list_4("../mars/char",'0.1','1.50',1)
+										play_vlc_folder("../mars/lpp")
 									elif "four" in words:
 										play_vlc_by_list("../mars/payutto","dhamma_four_1",5,0)
 										# play_vlc_folder("../mars/payutto")
@@ -4286,7 +4327,14 @@ try:
 										# play_four_noble_truth_dhamma()
 									else:
 										play_dhamma_by_list_4("../mars/4nt2",'0.1','1.50',1)
-																			  
+										# sitting_meditation(1,60)
+										# play_dhamma_by_list_2("../mars/payutto","dhamma_four")
+										
+										# speak("Do you want to play dhamma ?")
+										# cmd = "dhamma"
+										# verify = True
+										# focus  = True
+									  
 								#PLAY
 								elif "light" in words and "on" in words:
 
@@ -4354,6 +4402,70 @@ try:
 								#TEST
 								elif "buddha" in words and "story" in words:
 									play_buddha_story()
+
+								elif "my" in words and "sun" in words:
+									espeak("open sun gif animation",'4')
+									sun = ['sun1.gif','sun2.gif']
+									i = random.randint(0,1)
+									command = "export DISPLAY=:0.0; python3 testgif.py -f full -p ../web/images/"+sun[i]
+									proc = subprocess.Popen(command, shell=True)
+									proc_name = "testgif"
+									proc_bool = True
+									# fast_buddho('d',0)
+
+								elif "the" in words:
+									if "sun" in words:
+										speak("the sun time lapse for fire meditation")
+										killPlayer()                
+										try:
+											command = "export DISPLAY=:0.0; vlc -f --loop --video-on-top ../mp4/sun.mp4"
+											proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
+											press_for_stop('d',proc)
+											killPlayer() 
+										except:
+											speak("sorry can not play video clip")
+
+									elif "water" in words:
+										the_water()
+									elif "buddha" in words:
+										play_buddha_story()
+									elif "star" in words:
+										my_stars()
+									elif "brain" in words:
+										the_brain()
+
+								elif "universe" in words:
+									mn = 0
+									if"one" in words:
+										verify_words = 'Do you want to play ' + uni[0] + '?'
+										mn = 1
+									elif "two" in words:
+										verify_words = 'Do you want to play ' + uni[1] + '?'
+										mn = 2
+									elif "three" in words:
+										verify_words = 'Do you want to play ' + uni[2] + '?'
+										mn = 3
+									elif "four" in words:
+										verify_words = 'Do you want to play ' + uni[3] + '?'
+										mn = 4
+									elif "five" in words:
+										verify_words = 'Do you want to play ' + uni[4] + '?'
+										mn = 5
+									elif "six" in words:
+										verify_words = 'Do you want to play ' + uni[5] + '?'
+										mn = 6
+									elif "seven" in words:
+										verify_words = 'Do you want to play ' + uni[6] + '?'
+										mn = 7
+									else:
+										the_universe()
+
+									if mn in range(1,8):
+										mn = mn - 1
+										un = True    
+										verify = True
+										focus  = True
+									clear_q()
 
 								elif "cheerful" in words and "clip" in words:
 									cheer_up()
@@ -4423,6 +4535,12 @@ try:
 									ip = get_ip()
 									speak(ip)
 
+								# elif "say" in words:
+								# 	listToStr = ' '.join(map(str, words))
+								# 	listToStr = listToStr.replace("say",'')
+								# 	speak("You said, " + listToStr)
+								# 	clear_q()
+
 								elif len(words) > 0:
 									listToStr = ' '.join(map(str, words))
 									espeak("words i heard , " + listToStr, '5')
@@ -4441,7 +4559,26 @@ try:
 											focus  = False
 											clear_q()
 										elif "yes" in words:
-											if cmd != "":
+											if mp:
+												if mn == 0:
+													morning_practice()
+												else:
+													morning_practice3('d',mn)
+												verify = False
+												mp = False
+												focus = False
+											elif ep:
+												evening_practice(d)
+												verify = False
+												ep = False
+												focus = False
+											elif un:
+												the_universe(mn,uni[mn])
+												un = False
+												verify = False
+												focus = False
+											
+											elif cmd != "":
 												if cmd == "radio":
 													play_radio()
 													cmd = ""
@@ -4462,6 +4599,8 @@ try:
 													cmd = ""
 													verify = False
 													focus = False
+
+
 										else:
 											espeak(verify_words,'5')
 											espeak("please answer yes or no",'5')
