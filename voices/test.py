@@ -1,12 +1,12 @@
 from gtts import gTTS 
 import os
 
-# text = ["ก่อน","จุ","บัน","สุข","ปัจ","ยก","ย่าง","ยกย่างเหยียบ"]
-
-# for tx in text:
-# 	print(tx)
-# 	speech = gTTS(text = tx,lang='th',slow = False)
-# 	speech.save("th/"+tx+".mp3")
+text = ['พุทธทาส','ปยุตโต','ญาณสังวร','เหรียญ','ชา']
+ #text = ["ก่อน","จุ","บัน","สุข","ปัจ","ยก","ย่าง","ยกย่างเหยียบ"]
+ for tx in text:
+ 	print(tx)
+ 	speech = gTTS(text = tx,lang='th',slow = False)
+ 	speech.save("thai/"+tx+".mp3")
 
 # text = ['右足で行く','左足が行く','台']
 
@@ -23,9 +23,9 @@ import os
 # 	speech.save("zh/"+tx+".mp3")
 
 
-text = ['오른발','왼발','서다']
+#text = ['오른발','왼발','서다']
 
-for tx in text:
-	print(tx)
-	speech = gTTS(text = tx,lang='ko',slow = False)
-	speech.save("ko/"+tx+".mp3")
+#for tx in text:
+#	print(tx)
+#	speech = gTTS(text = tx,lang='ko',slow = False)
+#	speech.save("ko/"+tx+".mp3")
