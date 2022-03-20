@@ -44,6 +44,11 @@ You may have to install the following packages
 - sudo apt install sqlite3
 - pip3 install pymediainfo
 - sudo apt-get install -y libmediainfo-dev
+-
+- sudo apt install python-gpiozero-doc
+- https://buildmedia.readthedocs.org/media/pdf/gpiozero/stable/gpiozero.pdf
+- 
+-
 
 # Overclocking pi zero W
 - https://forums.raspberrypi.com/viewtopic.php?t=249071

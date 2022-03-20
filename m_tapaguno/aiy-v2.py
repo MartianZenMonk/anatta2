@@ -4065,7 +4065,7 @@ try:
 									elif "day" in words:
 										what_day()
 									elif "your" in words and "name" in words:
-										speak("My name is Anat ta")
+										speak("My name is Anat ta but you can call me computer too")
 
 								elif "buddha" in words and "day" in words:
 									buddha_day()
@@ -4205,11 +4205,11 @@ try:
 								elif "sutra" in words:
 									if "play" in words or "start" in words:
 										play_sutra(30)
-									else:
-										speak("Do you want to play sutra?")
-										cmd = "sutra"
-										verify = True
-										focus  = True                              
+									# else:
+									# 	speak("Do you want to play sutra?")
+									# 	cmd = "sutra"
+									# 	verify = True
+									# 	focus  = True                              
 									
 								elif "mantra" in words:
 
@@ -4306,6 +4306,7 @@ try:
 										# play_dhamma()
 									elif "nine" in words:
 										speak("Buddhadasa Bikkhu")
+										speakThai_mp3(['หลวง','ปู่','พุทธทาส'])
 										play_vlc_by_list("../mars/bdd","dhamma_9",4,0,'0.1','1.75')
 										# play_vlc_by_list_all("../mars/bdd")
 									elif "one" in words:
@@ -4315,13 +4316,16 @@ try:
 											play_vlc_by_list_all("../mars/bdd-3536",'0.1','1.75',1)
 									elif "two" in words:
 										speak("Luang poo riean")
+										speakThai_mp3(['หลวง','ปู่','เหรียญ'])
 										play_vlc_by_list_all("../mars/luangpoorian",'0.1','1.50',1)
 									elif "three" in words:
 										# play_vlc_by_list_all("../mars/char",'0.1','1.50',1)
 										speak("Luang poo char")
+										speakThai_mp3(['หลวง','ปู่','ชา'])
 										play_vlc_by_list("../mars/char","dhamma_3",4,0)
 									elif "four" in words:
 										speak("Luang por Payutto")
+										speakThai_mp3(['หลวง','ปู่','ปยุตโต'])
 										play_vlc_by_list("../mars/payutto","dhamma_4",4,0)
 										# play_vlc_by_list_all("../mars/payutto")
 									elif "five" in words:
@@ -4330,9 +4334,11 @@ try:
 										play_vlc_by_list("../mars/suttanta","dhamma_6",2,0)
 									elif "seven" in words:
 										speak("Dhamma by Luang poo Panya")
+										speakThai_mp3(['หลวง','ปู่','ปัญญา'])
 										play_vlc_by_list("../mars/panya","dhamma_7",4,0)
 									elif "ten" in words:
 										speak("Dhamma spoke by Pope")
+										speakThai_mp3(['หลวง','ปู่','ญาณสังวร'])
 										play_vlc_by_list("../mars/pope","dhamma_10",4,0,'0.1','1.75')
 									elif "noble" in words:
 										play_vlc_by_list("../mars/4nt2","dhamma_noble",4,0,'0.1','1.50')
