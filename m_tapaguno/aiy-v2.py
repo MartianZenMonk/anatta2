@@ -1629,6 +1629,216 @@ def mixed_mode2(c='',t=10,n=0,vol='1000'):
 		delay(t)
 	return None
 
+
+# log : timestamp data1 data2 
+def lastlog(logpath='../mars/log/'):
+	last_logs = []
+	try:
+		infile = open(logpath+'log.txt','r')
+		for line in infile :
+			fx = line.strip().split()
+			last_logs.append(fx)
+		infile.close()
+	except:
+		pass
+	return last_logs
+
+
+def reclog(data,logpath='../mars/log/'):
+	try:
+		outfile = open(logpath+'log.txt','a')
+		outfile.write(str(data)+'\n')
+		outfile.close()
+		return 1
+	except:
+		return 0
+
+def dhamma_wisdom(t=0,fp='../mars/',gain='0.1',rate='1.75'):
+	files = [
+	['bdd','3023.mp3'],
+	['bdd','4002.mp3'],
+	['bdd','8027.mp3'],
+	['bdd','10009.mp3'],
+	['payutto','02_03.wma'],
+	['payutto','03_02.wma'],
+	['payutto','04_14.wma'],
+	['payutto','05_03.wma'],
+	['payutto','05_21.wma'],
+	['pyt','09_18.wma'],
+	['pyt','09_28.wma'],
+	['pyt','09_29.wma'],
+	['pyt','09_35.wma'],
+	['pyt','09_36.wma'],
+	['pyt','09_37.wma'],
+	['pyt','09_52.wma'],
+	['payutto','10_01.wma'],
+	['payutto','11_02.wma'],
+	['payutto','11_05.wma'],
+	['payutto','11_15.wma'],
+	['payutto','16_04.wma'],
+	['payutto','16_14.wma'],
+	['payutto','14_04.wma'],
+	['payutto','18_18.wma'],
+	['payutto','12_04.wma'],
+	['payutto','20_07.wma'],
+	['payutto','20_15.wma'],
+	['payutto','22_07.wma'],
+	['payutto','22_10.wma'],
+	['char','th_009.wma'],
+	['char','th_015.wma'],
+	['char','th_035.wma'],
+	['char','th_044.wma'],
+	['char','th_088.wma'],
+	['char','th_051a.wma'],
+	['panya','061.wma'],
+	['panya','108.wma'],
+	['panya','125.wma'],
+	['panya','156.wma'],
+	['panya','185.wma'],
+	['panya','196.wma'],
+	['panya','275.wma'],
+	['panya','279.wma'],
+	['panya','294.wma'],
+	['panya','309.wma'],
+	['panya','350.wma'],
+	['panya','377.wma'],
+	['panya','380.wma'],
+	['panya','389.wma'],
+	['panya','394.wma'],
+	['panya','413.wma'],
+	['panya','414.wma'],
+	['panya','432.wma'],
+	['panya','452.wma'],
+	['panya','453.wma'],
+	['panya','471.wma'],
+	['panya','494.wma'],
+	['bdd','6027.mp3'],
+	['bdd','6030.mp3'],
+	['bdd','12003.mp3'],
+	['payutto','09_42.wma'],
+	['payutto','09_43.wma'],
+	['payutto','09_44.wma'],
+	['payutto','13_20.wma'],
+	['payutto','13_21.wma'],
+	['bdds','3024.mp3'],
+	['bdds','8025.mp3'],
+	['payutto','02_08.wma'],
+	['payutto','02_09.wma'],
+	['payutto','04_12.wma'],
+	['pyt','09_13.wma'],
+	['pyt','09_32.wma'],
+	['pyt','09_33.wma'],
+	['pyt','09_45.wma'],
+	['char','th_043.wma'],
+	['bdd','3014.mp3'],
+	['payutto','09_15.wma'],
+	['payutto','09_31.wma'],
+	['payutto','09_32.wma'],
+	['payutto','09_39.wma'],
+	['payutto','15_17.wma'],
+	['payutto','14_01.wma'],
+	['payutto','14_05.wma'],
+	['payutto','20_02.wma'],
+	['char','th_052.wma'],
+	['char','th_079.wma'],
+	['panya','029.wma'],
+	['panya','211.wma'],
+	['panya','263.wma'],
+	['panya','357.wma'],
+	['panya','524.wma'],
+	['bdd','1011.mp3'],
+	['bdd','2015.mp3'],
+	['bdd','2016.mp3'],
+	['bdd','4019.mp3'],
+	['bdd','5004.mp3'],
+	['bdd','5014.mp3'],
+	['bdd','6009.mp3'],
+	['bdd','6028.mp3'],
+	['bdd','12020.mp3'],
+	['pyt','09_55.wma'],
+	['pyt','09_57.wma'],
+	['payutto','15_08.wma'],
+	['payutto','21_09.wma'],
+	['payutto','21_11.wma'],
+	['payutto','21_14.wma'],
+	['char','th_045.wma'],
+	['char','th_050.wma'],
+	['char','th_052.wma'],
+	['char','th_087.wma'],
+	['char','th_056a.wma'],
+	['panya','042.wma'],
+	['panya','097.wma'],
+	['panya','113.wma'],
+	['panya','117.wma'],
+	['panya','191.wma'],
+	['panya','232.wma'],
+	['panya','248.wma'],
+	['panya','250.wma'],
+	['panya','252.wma'],
+	['panya','256.wma'],
+	['panya','277.wma'],
+	['panya','344.wma'],
+	['panya','360.wma'],
+	['panya','388.wma'],
+	['panya','394.wma'],
+	['panya','399.wma'],
+	['panya','404.wma'],
+	['panya','416.wma'],
+	['panya','441.wma'],
+	['panya','462.wma'],
+	['panya','463.wma'],
+	['panya','480.wma'],
+	['panya','496.wma'],
+	['panya','500.wma'],
+	['panya','521.wma']
+	]
+	timeout = 0
+	if t > 0:
+		tlimit = time.time() + t*60
+		random.shuffle(files)
+	b = lastlog()
+	n = 0
+	for f in files:
+		c = True
+		if len(b) > 0:
+			for a in b:
+				if f[1] == a[2]:
+					c = False
+				else:
+					pass
+		if t == 0 and n == 4:
+			break
+		elif c:
+			n += 1
+			fx = fp + f[0] + '/' + f[1]
+			print(fx)
+			try:
+				tfx = media_info(fx)
+				tx = tfx / (1000*float(rate))
+				print(tx)
+				if t > 0:
+					t = tlimit - time.time()
+					if tx > t:
+						tx = t
+					print(t)
+				cmd = "cvlc --play-and-exit --global-key-vol-up u --global-key-vol-down d" + " --gain " + gain + " --rate " + rate + " " + fx
+				proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
+				press_for_stop(led_color,proc,tx)
+				data = str(time.time()) + " " + f[0] + " " + f[1]
+				reclog(data)
+			except:
+				speak('file not found')
+			# speak('press button in 5 seconds for exit or wait to continue')
+			ledc('r')
+			t0 = time.time()
+			board.button.wait_for_press(5) 
+			if time.time() - t0 < 5:
+				break
+			elif  t > 0 and time.time() > tlimit:
+				break
+			ledc('d')
+
+
 #return all files in series
 def get_new_dhamma_files(fp="../datath/dhamma",m=0):
 	new_files = []
@@ -2088,6 +2298,16 @@ def play_mp3_folder(fp="../datath/sutta",vol='1000',t=0):
 	return None
 	
 # Features
+def x_minutes(hr=22):
+	now = datetime.today().strftime('%H %M')
+	tn = now.split()
+	if h > int(tn[0]):
+		mn = (hr-int(tn[0]))*60 - int(tn[1]) 
+	else:
+		mn = -1
+	return mn
+
+
 def what_time():
 	today = datetime.today().strftime('%H %M')
 	speak("The time is " + today)
@@ -2341,8 +2561,8 @@ def buddha_dhamma():
 	play_vlc_by_list_all("../mars/buddhaDhamma",'0.1','1.50',1)
 
 
-def dhamma_dhamma(t=55):
-	dm = [['พุทธทาส','bdd','1.75'],['ปัญญา','panya','1.75'],['ชา','char','1.50'],['ปยุตโต','payutto','1.50']]	
+def dhamma_dhamma(t=60):
+	dm = [['พุทธทาส','bdd','2.00'],['ปัญญา','panya','1.75'],['ชา','char','1.50'],['ปยุตโต','payutto','1.50']]	
 	random.shuffle(dm)
 	text = ['ฟัง','ธรรม','ท่าน',dm[0][0]]
 	speakThai_mp3(text)
@@ -2793,7 +3013,8 @@ def sitting_meditation(n=0,t=60,vol='1000'):
 	play_vlc_file3(random.choice(bowls))
 	play_vlc_file("../sound/theBuddha.m4a",'1.00')
 	killPlayer()
-	dhamma_dhamma(t)
+	dhamma_wisdom(t)
+	# dhamma_dhamma(t)
 	# if a == 8 or a == 15:
 	# 	m = random.choices([8,6,7,9],[5,4,3,2])[0]
 	# else:
@@ -3189,7 +3410,7 @@ def morning():
 	tn = now.split()
 	if int(tn[0]) < 6:
 		mn = (6-int(tn[0]))*60 - int(tn[1]) - 11
-		i = random.choices([3,2,1],[30,20,10])[0]
+		i = random.choices([3,2,1],[5,3,1])[0]
 		if i == 1 :
 			play_mp3_folder('../mars/blessingmp3',vol,mn)
 		elif i == 2:
@@ -3200,7 +3421,7 @@ def morning():
 		play_mp3("../sound/namo.mp3",161,vol)
 		remind_walking2(3,vol,7)
 		remind_walking2(3,vol,5)
-		play_vlc_file("../mars/theBuddha2.m4a",'1.00')
+		play_vlc_file("../mars/phraratanatri.mp3",'1.00')
 		ledc('off')
 		# os.system("sudo shutdown now")
 		delay(40)
@@ -3208,10 +3429,15 @@ def morning():
 		play_vlc_file("../sound/theBuddha.m4a",'1.00')
 		thai_chanting(30,'2000')
 		play_mp3_folder('../mars/blessingmp3','2000',30)
-		delay(60)
+		i = random.randint(1,2)
+		if i == 1:
+			delay(60)
+		else:
+			blessed_one(60)
 	play_vlc_file("../mars/theBuddha3.m4a",'1.00')
 	# play_vlc_file("../sound/theBuddha.m4a",'1.00')
-	morning_dhamma()
+	# morning_dhamma()
+	dhamma_wisdom()
 	return None
 
 def morning_dhamma():
@@ -3252,7 +3478,7 @@ def morning_dhamma():
 		elif m == 7:
 			play_vlc_by_list_all("../mars/one",'0.1','1.50',1)
 		elif m == 8:
-			play_vlc_file("../mars/human-handbook",'1.50')
+			play_vlc_file("../mars/human-handbook.m4a",'1.50')
 	return None
 
 
@@ -3271,8 +3497,7 @@ def morning_practice(c='off',vol="500"):
 	else:
 		ledc(c)
 		bell('1',vol)
-		ch = [1,0,1,1]
-		i = random.choice(ch)
+		i = random.choices([0,1],[1,100])[0]
 		if i == 0:
 			walk = [0,1,4,5,9,10,15,16,17]
 			i = random.randint(1,3)
@@ -3310,7 +3535,8 @@ def morning_practice(c='off',vol="500"):
 	play_mp3('../mars/monk/rbut.mp3',127,'2000')
 	morning_merit(vol)
 	play_mp3("../sound/metta.mp3",114,vol)
-	dhamma_dhamma()
+	# dhamma_dhamma()
+	dhamma_wisdom(60)
 	morning()
 	return None
 
@@ -4336,7 +4562,7 @@ try:
 										play_my_dhamma("../datath/dhamma")
 										# play_dhamma()
 									elif "nine" in words:
-										speak("Buddhadasa Bikkhu")
+										speak("Dhamma 9, Buddhadasa Bikkhu")
 										speakThai_mp3(['หลวง','ปู่','พุทธทาส'])
 										play_vlc_by_list("../mars/bdd","dhamma_9",4,0,'0.1','1.75')
 										# play_vlc_by_list_all("../mars/bdd")
@@ -4346,16 +4572,16 @@ try:
 										if c:
 											play_vlc_by_list_all("../mars/bdd-3536",'0.1','1.75',1)
 									elif "two" in words:
-										speak("Luang poo riean")
+										speak("Dhamma 2, Luang poo riean")
 										speakThai_mp3(['หลวง','ปู่','เหรียญ'])
 										play_vlc_by_list_all("../mars/luangpoorian",'0.1','1.50',1)
 									elif "three" in words:
 										# play_vlc_by_list_all("../mars/char",'0.1','1.50',1)
-										speak("Luang poo char")
+										speak("Dhamma 3, Luang poo char")
 										speakThai_mp3(['หลวง','ปู่','ชา'])
 										play_vlc_by_list("../mars/char","dhamma_3",4,0)
 									elif "four" in words:
-										speak("Luang por Payutto")
+										speak("Dhamma 4, Luang por Payutto")
 										speakThai_mp3(['หลวง','ปู่','ปยุตโต'])
 										play_vlc_by_list("../mars/payutto","dhamma_4",4,0)
 										# play_vlc_by_list_all("../mars/payutto")
@@ -4364,18 +4590,20 @@ try:
 									elif "six" in words:
 										play_vlc_by_list("../mars/suttanta","dhamma_6",2,0)
 									elif "seven" in words:
-										# speak("Dhamma by Luang poo Panya")
+										speak("Dhamma 7, Luang poo Panya")
 										speakThai_mp3(['หลวง','ปู่','ปัญญา'])
 										play_vlc_by_list("../mars/panya","dhamma_7",4,0,'0.1','1.75')
 									elif "ten" in words:
-										speak("Dhamma spoke by Pope")
+										speak("Dhamma 10, spoke by Pope")
 										speakThai_mp3(['หลวง','ปู่','ญาณสังวร'])
 										play_vlc_by_list("../mars/pope","dhamma_10",4,0,'0.1','1.75')
 									elif "noble" in words:
 										play_vlc_by_list("../mars/4nt2","dhamma_noble",4,0,'0.1','1.50')
 										# play_four_noble_truth_dhamma()
 									elif "twelve" in words:
-										dhamma_dhamma()
+										speak("Dhamma 12")
+										dhamma_wisdom()
+										# dhamma_dhamma()
 										#TEST
 									# else:
 									# 	speak("Do you want to play 4 noble truth ?")
