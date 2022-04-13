@@ -692,7 +692,8 @@ def save_vocabulary(w):
 	wlist = []
 	wlist.append(w)
 	writer = csv.writer(open("../csv/vocabulary.csv", "a"))
-	writer.writerow(thislist)
+	writer.writerow(wlist)
+	# writer.close()
 
 
 def buddha_day():
@@ -2587,11 +2588,19 @@ def play_dhamma(vol='1000',fp='../datath/dhamma'):
 
 
 def play_sutra(t=0,vol='2000',fp='../datath/sutta'):
-	killPlayer()    
-	files= get_new_dhamma_files(fp)
-	cmd = "mpg123 -C -d 2 -Z -f " + vol + " " + files
-	proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
-	press_for_stop('d',proc,60*t)
+	killPlayer()
+	i = random.choices([1,2,3,4],[7,5,3,1])[0]
+	if i == 1:
+		files= get_new_dhamma_files(fp)
+		cmd = "mpg123 -C -d 2 -Z -f " + vol + " " + files
+		proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
+		press_for_stop('d',proc,60*t)
+	elif i == 2:
+		play_vlc_all_inTime("../mars/sutta",t,'1.50','0.1',0)
+	elif i == 3:
+		play_vlc_all_inTime("../mars/sutta2",t,'1.50','0.1',0)
+	elif i == 4:
+		play_vlc_all_inTime("../mars/sutta3",t,'1.50','0.1',0)
 
 
 def play_buddha_story():
@@ -3011,7 +3020,7 @@ def sitting_meditation(n=0,t=60,vol='1000'):
 	
 	bowls = ["../sound/bowl1.m4a","../sound/bowl2.m4a","../sound/bowl3.m4a","../sound/bowl4.m4a","../sound/bowl5.m4a"]
 	play_vlc_file3(random.choice(bowls))
-	play_vlc_file("../sound/theBuddha.m4a",'1.00')
+	play_vlc_file("../sound/rattana.mp3",'1.00')
 	killPlayer()
 	dhamma_wisdom(t)
 	# dhamma_dhamma(t)
@@ -3403,9 +3412,16 @@ def monk_rules(c='o'):
 
 def morning():
 	vol = '1000'
-	play_vlc_file("../sound/dukkha.mp3",'1.00')
-	# play_vlc_file("../datath/chanting/sungkharn.mp3",'1.00')
-	play_mp3_loop("../datath/chanting/sungkharn.mp3",'2','2000','1')
+	a = buddha_day()
+	if a == 8 or a == 15:
+		play_vlc_file("../sound/a-rahung.mp3",'1.00')
+		play_vlc_file("../sound/a-sungvech.mp3",'1.00')
+	else:
+		play_vlc_file("../datath/chanting/patimok-chanting.mp3",'1.00')
+		play_mp3_loop("../datath/chanting/sungkharn.mp3",'2','2000','1')
+		# play_vlc_file("../sound/dukkha.mp3",'1.00')
+		# play_vlc_file("../datath/chanting/sungkharn.mp3",'1.00')
+		
 	now = datetime.today().strftime('%H %M')
 	tn = now.split()
 	if int(tn[0]) < 6:
@@ -3417,8 +3433,9 @@ def morning():
 			basic_chanting(mn,vol)
 		elif i == 3:
 			thai_chanting(mn,vol)
-		buddha_day()
+		# buddha_day()
 		play_mp3("../sound/namo.mp3",161,vol)
+		bell('1',vol)
 		remind_walking2(3,vol,7)
 		remind_walking2(3,vol,5)
 		play_vlc_file("../mars/phraratanatri.mp3",'1.00')
@@ -3514,11 +3531,11 @@ def morning_practice(c='off',vol="500"):
 			mixed_mode('off',5,14,vol)
 			m = random.choices([1,2,3,4],[4,3,2,1])[0]
 			if m == 1:
-				fast_buddho_hiphop(c,40,vol)
+				play_mp3('../sound/528Hz.mp3',2400)
 			elif m == 2:
 				wooden_gong_sound(40)
 			elif m == 3:
-				play_mp3('../sound/528Hz.mp3',2400)
+				fast_buddho_hiphop(c,40,vol)
 			else:
 				play_mp3('../sound/432Hz.mp3',2400)
 			mixed_mode('off',5,14,vol)
@@ -3766,7 +3783,7 @@ def wait_for_answer(w='yes',sec=5):
 		if rec.AcceptWaveform(data):
 			w = rec.Result()
 			z = json.loads(w)
-			# print(z["text"])
+			print(z["text"])
 			words += z["text"].split()
 			if w in words:
 				check = True
@@ -3870,20 +3887,25 @@ try:
 			os.system('mpg123 -q -f 600 ../voices/samesame.mp3')
 
 			# new runtime vocabulary
-			new_vocab = runtime_vocabulary()
+			# new_vocab = runtime_vocabulary()
+			# vrun  = '["anat ta '
+			# vrun += 'a alfa b bravo c charlie d delta e echo f foxtrot g golf h hotel i india j juliet k kilo l lima m mike n november o oscar p papa '
+			# vrun += 'q quebec r romeo s sierra t tango u uniform v victor w whiskey x ray y yankee z zulu '
+			# vrun += new_vocab
+			# vrun += 'yes no ok coca cola"]'
+
 			vrun  = '["please zen story lord buddha buddhist buddhism what time day play help dhamma meditation english radio start light star list '
 			vrun += 'browse chanting mantra say speak stop volume turn on off exit shutdown now thai lyric ip address sutra up down breathing '
 			vrun += 'one two three four five six seven eight nine ten zero twelve fifteen twenty thirty forty fifty sixty seventy eighty ninety computer '
 			vrun += 'a alfa b bravo c charlie d delta e echo f foxtrot g golf h hotel i india j juliet k kilo l lima m mike n november o oscar p papa '
 			vrun += 'q quebec r romeo s sierra t tango u uniform v victor w whiskey x ray y yankee z zulu '
-			vrun += 'letter repeat space spelling speaker noble japanese chinese red green blue yellow '
+			vrun += 'letter repeat space spelling speaker noble japanese chinese red green blue yellow hello wisdom '
 			vrun += 'walk walking mode search translate service cancel restart reboot save anat ta sitting music raining thunder jungle tibetan heart brain '
 			vrun += 'alpha breathing pure monk rule speech morning evening practice web server sound my math next new causes singing bowl '
 			vrun += 'ohm variety basic chinese blessed blessing the sun blooming flower clip quit my display testing water morse code good bye chapter pali '
 			vrun += 'korean sixteen seventeen eighteen nineteen plants seed carbon food cell universe your name cheerful silent quiet wooden forest '
-			vrun += new_vocab
-			# vrun += ' how are you today what can i do for you ' #test
 			vrun += 'yes no ok coca cola stage fold path nature truth dependent origination webcam loop daily life wise thinking technique"]'
+			
 			
 			rec = vosk.KaldiRecognizer(model, args.samplerate,vrun)
 
@@ -3972,12 +3994,15 @@ try:
 									elif args.mode == 1:
 										thai_chanting()
 										bot = True
+										args.mode = 0
 									elif args.mode == 2:
 										play_dhamma()
 										bot = True
+										args.mode = 0
 									elif args.mode == 3:
 										my_day('1000',True)
 										bot = True
+										args.mode = 0
 									# answer = input_with_timeout("what's up?",3)
 									# if answer == 'c':
 									# 	thai_chanting()
@@ -4323,6 +4348,10 @@ try:
 										what_day()
 									elif "your" in words and "name" in words:
 										speak("My name is Anat ta but you can call me computer too")
+									elif "dhamma" in words:
+										speak("1 for Buddhadasa last 2 years, 2 for Luang poo riean, 3 for Luang poo char, 4 for Luang por Payutto")
+										speak("5 for Paticca, 6 for Suttanta, 7 for Luang por Panya, 9 for Buddhadasa, 10 for Pope, 12 for wisdom")
+										speak("noble for noble truth, buddha for Buddha Dhamma, play for other dhamma")
 
 								elif "buddha" in words and "day" in words:
 									buddha_day()
@@ -4574,7 +4603,8 @@ try:
 									elif "two" in words:
 										speak("Dhamma 2, Luang poo riean")
 										speakThai_mp3(['หลวง','ปู่','เหรียญ'])
-										play_vlc_by_list_all("../mars/luangpoorian",'0.1','1.50',1)
+										play_vlc_by_list("../mars/luangpoorian","dhamma_2",4,0)
+										# play_vlc_by_list_all("../mars/luangpoorian",'0.1','1.50',1)
 									elif "three" in words:
 										# play_vlc_by_list_all("../mars/char",'0.1','1.50',1)
 										speak("Dhamma 3, Luang poo char")
@@ -4600,16 +4630,9 @@ try:
 									elif "noble" in words:
 										play_vlc_by_list("../mars/4nt2","dhamma_noble",4,0,'0.1','1.50')
 										# play_four_noble_truth_dhamma()
-									elif "twelve" in words:
-										speak("Dhamma 12")
+									elif "twelve" in words or "wisdom" in words:
+										speak("Dhamma 12, Dhamma wisdom")
 										dhamma_wisdom()
-										# dhamma_dhamma()
-										#TEST
-									# else:
-									# 	speak("Do you want to play 4 noble truth ?")
-									# 	c = wait_for_answer('yes')
-									# 	if c:
-									# 		play_vlc_by_list_all("../mars/4nt2",'0.1','1.50',1)
 																			  
 								#PLAY
 								elif "light" in words and "on" in words:
