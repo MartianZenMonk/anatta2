@@ -1656,6 +1656,14 @@ def reclog(data,logpath='../mars/log/'):
 
 def dhamma_wisdom(t=0,fp='../mars/',gain='0.1',rate='1.75'):
 	files = [
+	['bdd','6027.mp3'],
+	['bdd','6030.mp3'],
+	['bdd','12003.mp3'],
+	['pyt','09_42.wma'],
+	['pyt','09_43.wma'],
+	['pyt','09_44.wma'],
+	['payutto','13_20.wma'],
+	['payutto','13_21.wma'],
 	['bdd','3023.mp3'],
 	['bdd','4002.mp3'],
 	['bdd','8027.mp3'],
@@ -1713,29 +1721,11 @@ def dhamma_wisdom(t=0,fp='../mars/',gain='0.1',rate='1.75'):
 	['panya','453.wma'],
 	['panya','471.wma'],
 	['panya','494.wma'],
-	['bdd','6027.mp3'],
-	['bdd','6030.mp3'],
-	['bdd','12003.mp3'],
-	['payutto','09_42.wma'],
-	['payutto','09_43.wma'],
-	['payutto','09_44.wma'],
-	['payutto','13_20.wma'],
-	['payutto','13_21.wma'],
-	['bdds','3024.mp3'],
-	['bdds','8025.mp3'],
-	['payutto','02_08.wma'],
-	['payutto','02_09.wma'],
-	['payutto','04_12.wma'],
-	['pyt','09_13.wma'],
-	['pyt','09_32.wma'],
-	['pyt','09_33.wma'],
-	['pyt','09_45.wma'],
-	['char','th_043.wma'],
 	['bdd','3014.mp3'],
-	['payutto','09_15.wma'],
-	['payutto','09_31.wma'],
-	['payutto','09_32.wma'],
-	['payutto','09_39.wma'],
+	['pyt','09_15.wma'],
+	['pyt','09_31.wma'],
+	['pyt','09_32.wma'],
+	['pyt','09_39.wma'],
 	['payutto','15_17.wma'],
 	['payutto','14_01.wma'],
 	['payutto','14_05.wma'],
@@ -1747,6 +1737,132 @@ def dhamma_wisdom(t=0,fp='../mars/',gain='0.1',rate='1.75'):
 	['panya','263.wma'],
 	['panya','357.wma'],
 	['panya','524.wma'],
+	['bdd','1015.mp3'],
+	['bdd','1016.mp3'],
+	['bdd','1023.mp3'],
+	['bdd','2008.mp3'],
+	['bdd','2011.mp3'],
+	['bdd','2012.mp3'],
+	['bdd','2024.mp3'],
+	['bdd','2030.mp3'],
+	['bdd','3018.mp3'],
+	['bdd','5021.mp3'],
+	['bdd','5024.mp3'],
+	['bdd','6001.mp3'],
+	['bdd','6002.mp3'],
+	['bdd','7022.mp3'],
+	['bdd','7030.mp3'],
+	['bdd','8002.mp3'],
+	['bdd','8010.mp3'],
+	['bdd','8021.mp3'],
+	['bdd','8022.mp3'],
+	['bdd','8023.mp3'],
+	['bdd','8024.mp3'],
+	['bdd','8025.mp3'],
+	['bdd','8029.mp3'],
+	['bdd','9001.mp3'],
+	['bdd','9003.mp3'],
+	['bdd','9004.mp3'],
+	['bdd','9007.mp3'],
+	['bdd','9008.mp3'],
+	['bdd','9010.mp3'],
+	['bdd','9012.mp3'],
+	['bdd','9018.mp3'],
+	['bdd','9020.mp3'],
+	['bdd','9028.mp3'],
+	['bdd','9030.mp3'],
+	['bdd','10002.mp3'],
+	['bdd','10029.mp3'],
+	['bdd','10030.mp3'],
+	['bdd','11001.mp3'],
+	['bdd','12022.mp3'],
+	['payutto','07_09.wma'],
+	['payutto','08_16.wma'],
+	['pyt','09_02.wma'],
+	['pyt','09_05.wma'],
+	['pyt','09_27.wma'],
+	['pyt','09_30.wma'],
+	['pyt','09_32.wma'],
+	['pyt','09_33.wma'],
+	['pyt','09_44.wma'],
+	['pyt','09_45.wma'],
+	['pyt','09_46.wma'],
+	['pyt','09_48.wma'],
+	['pyt','09_49.wma'],
+	['pyt','09_50.wma'],
+	['pyt','09_57.wma'],
+	['payutto','13_18.wma'],
+	['payutto','14_02.wma'],
+	['payutto','14_03.wma'],
+	['payutto','12_15.wma'],
+	['payutto','20_16.wma'],
+	['payutto','21_02.wma'],
+	['payutto','21_11.wma'],
+	['payutto','21_15.wma'],
+	['payutto','22_15.wma'],
+	['char','th_011.wma'],
+	['panya','024.wma'],
+	['panya','032.wma'],
+	['panya','039.wma'],
+	['panya','041.wma'],
+	['panya','085.wma'],
+	['panya','088.wma'],
+	['panya','089.wma'],
+	['panya','094.wma'],
+	['panya','115.wma'],
+	['panya','116.wma'],
+	['panya','117.wma'],
+	['panya','119.wma'],
+	['panya','126.wma'],
+	['panya','127.wma'],
+	['panya','130.wma'],
+	['panya','140.wma'],
+	['panya','169.wma'],
+	['panya','171.wma'],
+	['panya','182.wma'],
+	['panya','188.wma'],
+	['panya','192.wma'],
+	['panya','220.wma'],
+	['panya','224.wma'],
+	['panya','234.wma'],
+	['panya','249.wma'],
+	['panya','251.wma'],
+	['panya','257.wma'],
+	['panya','274.wma'],
+	['panya','278.wma'],
+	['panya','286.wma'],
+	['panya','293.wma'],
+	['panya','297.wma'],
+	['panya','313.wma'],
+	['panya','338.wma'],
+	['panya','341.wma'],
+	['panya','342.wma'],
+	['panya','374.wma'],
+	['panya','376.wma'],
+	['panya','379.wma'],
+	['panya','381.wma'],
+	['panya','389.wma'],
+	['panya','392.wma'],
+	['panya','396.wma'],
+	['panya','397.wma'],
+	['panya','404.wma'],
+	['panya','418.wma'],
+	['panya','433.wma'],
+	['panya','444.wma'],
+	['panya','473.wma'],
+	['panya','493.wma'],
+	['panya','500.wma'],
+	['panya','516.wma'],
+	['bdd','3024.mp3'],
+	['bdd','8025.mp3'],
+	['payutto','02_08.wma'],
+	['payutto','02_09.wma'],
+	['payutto','04_12.wma'],
+	['pyt','09_13.wma'],
+	['pyt','09_32.wma'],
+	['pyt','09_33.wma'],
+	['pyt','09_45.wma'],
+	['char','th_043.wma'],
 	['bdd','1011.mp3'],
 	['bdd','2015.mp3'],
 	['bdd','2016.mp3'],
@@ -1791,13 +1907,22 @@ def dhamma_wisdom(t=0,fp='../mars/',gain='0.1',rate='1.75'):
 	['panya','480.wma'],
 	['panya','496.wma'],
 	['panya','500.wma'],
-	['panya','521.wma']
+	['panya','521.wma'],
+	['bdd','1023.mp3'],
+	['bdd','3024.mp3'],
+	['bdd','6023.mp3'],
+	['bdd','8029.mp3'],
+	['bdd','10013.mp3'],
+	['bdd','10018.mp3'],
+	['bdd','11020.mp3']
 	]
 	timeout = 0
 	if t > 0:
 		tlimit = time.time() + t*60
 		random.shuffle(files)
 	b = lastlog()
+	fn = len(files)
+	i = 0
 	n = 0
 	for f in files:
 		c = True
@@ -1805,6 +1930,11 @@ def dhamma_wisdom(t=0,fp='../mars/',gain='0.1',rate='1.75'):
 			for a in b:
 				if f[1] == a[2]:
 					c = False
+					i += 1
+					if i == fn:
+						infile = open(logpath+'log.txt','w')
+						infile.close()
+						speak("just clear log file")
 				else:
 					pass
 		if t == 0 and n == 4:
@@ -2099,6 +2229,8 @@ def play_vlc_inTime(fp="../mars/4nt2",cmd='dhamma_4nt2',t=60,rate='1.50',gain='0
 
 def play_vlc_all_inTime(fp="../mars/4nt2",t=60,rate='1.50',gain='0.1',n=0):
 	killPlayer()
+	if t == 0:
+		t = 60
 	tlimit = time.time() + t*60
 	files= get_dhamma_list(fp,n)
 	if len(files) < 5:
@@ -2299,13 +2431,14 @@ def play_mp3_folder(fp="../datath/sutta",vol='1000',t=0):
 	return None
 	
 # Features
+# hr 1 - 24
 def x_minutes(hr=22):
 	now = datetime.today().strftime('%H %M')
 	tn = now.split()
-	if h > int(tn[0]):
-		mn = (hr-int(tn[0]))*60 - int(tn[1]) 
+	if hr > int(tn[0]):
+		mn = (hr-int(tn[0]))*60 - int(tn[1])
 	else:
-		mn = -1
+		mn = 0
 	return mn
 
 
@@ -3124,7 +3257,8 @@ def testing_10():
 	fast_buddho('off',10,'500')
 	sitting_meditation(0,60,'1500')
 	ledc('off')
-	delay(240)
+	mn = x_minutes(24) + 120
+	delay(mn)
 	fast_buddho('off',5,'500')
 	morning_practice('off','600')
 	return None
@@ -3134,7 +3268,8 @@ def testing_mode9():
 	what_time()
 	fast_buddho('off',5,'500')
 	sitting_meditation(0,60,'1000')
-	delay(240)
+	mn = x_minutes(24) + 120
+	delay(mn)
 	fast_buddho('off',5,'500')
 	morning_practice('off','500')
 	return None
@@ -3404,9 +3539,9 @@ def monk_rules(c='o'):
 	ledc(c)
 	play_mp3_loop("../mars/monk/patimok.mp3",'1','2000','2')
 	# play_vlc_file("../mars/monk/patimok.mp3",'2.00')
-	play_vlc_file("../mars/monk/nava_vinai.mp3",'2.00')
+	# play_vlc_file("../mars/monk/nava_vinai.mp3",'2.00')
 	play_vlc_file("../mars/monk/nava_dhamma.mp3",'2.00')
-	play_vlc_by_list_all("../mars/monk/8",'0.1','1.50',0)
+	play_vlc_by_list_all("../mars/monk/8",'0.1','1.75',0)
 	return None
 
 
@@ -3453,8 +3588,7 @@ def morning():
 			blessed_one(60)
 	play_vlc_file("../mars/theBuddha3.m4a",'1.00')
 	# play_vlc_file("../sound/theBuddha.m4a",'1.00')
-	# morning_dhamma()
-	dhamma_wisdom()
+	morning_dhamma()
 	return None
 
 def morning_dhamma():
@@ -3475,7 +3609,7 @@ def morning_dhamma():
 	else:
 		play_vlc_file("../mars/monk/nava_vinai.mp3",'2.00')
 		if len(mdm) == 0:
-			mdm = [1,2,3,4,5,6,7,8]
+			mdm = [1,2,3,4,5,6,7,8,9]
 		random.shuffle(mdm)
 		m = mdm[0]
 		mdm.pop(0)
@@ -3496,6 +3630,8 @@ def morning_dhamma():
 			play_vlc_by_list_all("../mars/one",'0.1','1.50',1)
 		elif m == 8:
 			play_vlc_file("../mars/human-handbook.m4a",'1.50')
+		else:
+			dhamma_wisdom()
 	return None
 
 
@@ -3506,7 +3642,7 @@ def morning_practice(c='off',vol="500"):
 		mn = 60 - int(tn[1]) - 5
 		m = random.randint(1,3)
 		if m == 1:
-			fast_buddho(c,mn,vol)
+			fast_buddho_hiphop(c,mn,vol)
 		elif m == 2:
 			play_mp3('../sound/528Hz.mp3',mn*60)
 		else:
@@ -3529,7 +3665,7 @@ def morning_practice(c='off',vol="500"):
 				mixed_mode('off',10-t,14,vol)
 		elif i == 1:
 			mixed_mode('off',5,14,vol)
-			m = random.choices([1,2,3,4],[4,3,2,1])[0]
+			m = random.choices([1,2,3,4],[4,4,2,1])[0]
 			if m == 1:
 				play_mp3('../sound/528Hz.mp3',2400)
 			elif m == 2:
@@ -3771,7 +3907,7 @@ def my_day(vol='500',st=False):
 			testing_mode7()
 	return None
 
-def wait_for_answer(w='yes',sec=5):
+def wait_for_answer(ans='yes',sec=5):
 	# print(q.qsize()) 
 	check = False
 	words = []
@@ -3783,10 +3919,12 @@ def wait_for_answer(w='yes',sec=5):
 		if rec.AcceptWaveform(data):
 			w = rec.Result()
 			z = json.loads(w)
-			print(z["text"])
+			# print(z["text"])
 			words += z["text"].split()
-			if w in words:
+			if ans in words:
 				check = True
+				# speak(ans)
+			# print(words)
 		else:
 			pass
 	ledc('off')
@@ -3899,7 +4037,7 @@ try:
 			vrun += 'one two three four five six seven eight nine ten zero twelve fifteen twenty thirty forty fifty sixty seventy eighty ninety computer '
 			vrun += 'a alfa b bravo c charlie d delta e echo f foxtrot g golf h hotel i india j juliet k kilo l lima m mike n november o oscar p papa '
 			vrun += 'q quebec r romeo s sierra t tango u uniform v victor w whiskey x ray y yankee z zulu '
-			vrun += 'letter repeat space spelling speaker noble japanese chinese red green blue yellow hello wisdom '
+			vrun += 'letter repeat space spelling speaker noble japanese chinese red green blue yellow hello wisdom continuous '
 			vrun += 'walk walking mode search translate service cancel restart reboot save anat ta sitting music raining thunder jungle tibetan heart brain '
 			vrun += 'alpha breathing pure monk rule speech morning evening practice web server sound my math next new causes singing bowl '
 			vrun += 'ohm variety basic chinese blessed blessing the sun blooming flower clip quit my display testing water morse code good bye chapter pali '
@@ -4193,6 +4331,10 @@ try:
 										om_meditation(t)
 									elif "wooden" in words:
 										wooden_gong_sound(t)
+
+								elif "wooden" in words and "heart" in words:
+									speak("wooden heart, heart wood from the bodhi tree")
+									play_vlc_by_list_all("../mars/heartwood",'0.1','1.75',0)
 
 								elif "alpha" in words:
 									if "sixty" in words:
@@ -4593,18 +4735,25 @@ try:
 									elif "nine" in words:
 										speak("Dhamma 9, Buddhadasa Bikkhu")
 										speakThai_mp3(['หลวง','ปู่','พุทธทาส'])
-										play_vlc_by_list("../mars/bdd","dhamma_9",4,0,'0.1','1.75')
+										if "continuous" in words:
+											speak("continuous")
+											play_vlc_by_list_all("../mars/bdd",'0.1','1.75',1)
+										else:
+											play_vlc_by_list("../mars/bdd","dhamma_9",4,0,'0.1','1.75')
 										# play_vlc_by_list_all("../mars/bdd")
 									elif "one" in words:
-										speak("Do you want to play Buddhadasa Bikkhu years 2535 2536 ?")
+										speak("Do you want to play Buddhadasa Bikkhu years 35 36 ?")
 										c = wait_for_answer('yes')
 										if c:
-											play_vlc_by_list_all("../mars/bdd-3536",'0.1','1.75',1)
+											play_vlc_by_list_all("../mars/bdd-3536",'0.1','1.50',1)
 									elif "two" in words:
 										speak("Dhamma 2, Luang poo riean")
 										speakThai_mp3(['หลวง','ปู่','เหรียญ'])
-										play_vlc_by_list("../mars/luangpoorian","dhamma_2",4,0)
-										# play_vlc_by_list_all("../mars/luangpoorian",'0.1','1.50',1)
+										if "continuous" in words:
+											speak("continuous")
+											play_vlc_by_list_all("../mars/luangpoorian",'0.1','1.50',1)
+										else:
+											play_vlc_by_list("../mars/luangpoorian","dhamma_2",4,0)
 									elif "three" in words:
 										# play_vlc_by_list_all("../mars/char",'0.1','1.50',1)
 										speak("Dhamma 3, Luang poo char")
@@ -4613,12 +4762,21 @@ try:
 									elif "four" in words:
 										speak("Dhamma 4, Luang por Payutto")
 										speakThai_mp3(['หลวง','ปู่','ปยุตโต'])
-										play_vlc_by_list("../mars/payutto","dhamma_4",4,0)
-										# play_vlc_by_list_all("../mars/payutto")
+										if "continuous" in words:
+											speak("continuous")
+											play_vlc_by_list_all("../mars/payutto")
+										else:
+											play_vlc_by_list("../mars/payutto","dhamma_4",4,0)
+										
 									elif "five" in words:
 										play_vlc_by_list_all("../mars/12paticca")
+										
 									elif "six" in words:
-										play_vlc_by_list("../mars/suttanta","dhamma_6",2,0)
+										if "continuous" in words:
+											speak("continuous")
+											play_vlc_by_list_all("../mars/suttanta",'0.1','1.75',1)
+										else:
+											play_vlc_by_list("../mars/suttanta","dhamma_6",2,0)
 									elif "seven" in words:
 										speak("Dhamma 7, Luang poo Panya")
 										speakThai_mp3(['หลวง','ปู่','ปัญญา'])
@@ -4630,9 +4788,24 @@ try:
 									elif "noble" in words:
 										play_vlc_by_list("../mars/4nt2","dhamma_noble",4,0,'0.1','1.50')
 										# play_four_noble_truth_dhamma()
-									elif "twelve" in words or "wisdom" in words:
-										speak("Dhamma 12, Dhamma wisdom")
+									elif "fifteen" in words:
+										speak("Dhamma 15, Phra Paisan Visalo")
+										play_vlc_by_list("../mars/paisan","dhamma_12",4,0,'0.1','1.50')
+									elif "wisdom" in words:
+										speak("Dhamma wisdom")
 										dhamma_wisdom()
+									elif "twelve" in words:
+										speak("Dhamma 12")
+										i = random.choices([0,1],[5,1])[0]
+										if i == 0:
+											play_vlc_inTime("../mars/suttanta","12",120)
+										elif i == 1:
+											play_vlc_inTime("../mars/gold","12",120)
+										i = random.choices([0,1],[5,1])[0]
+										if i == 0:
+											dhamma_wisdom(120)
+										elif i == 1:
+											play_vlc_inTime("../mars/buddhaDhamma","12",120)
 																			  
 								#PLAY
 								elif "light" in words and "on" in words:

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="th-TH">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=yes">
+    <title>Walking Meditation | Dukkha and the way to the end of Dukkha</title>
+    <meta name="description" content="โครงการอนัตตา | ทุกข์ และ การดับทุกข์">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="web/css/styles.css" rel="stylesheet" />
+    <style type="text/css">
+    body {
+    background: black;
+    }
+
+    .foot {
+        height: 300px;
+    }
+    /*DIGITAL CLOCK FONT*/
+    @font-face{
+     font-family:'digital-7';
+     src: url('../web/fonts/digital-7.ttf');
+    }
+    .box  {display: none;}
+    .clock {
+        color: #ff0000;
+        font-size: 35px;
+        font-family:'digital-7';
+        letter-spacing: 7px;
+        padding-top: 10px;
+    } 
+
+    .date {
+        color: #aa0000;
+    } 
+    </style>
+</head>
+ <body id="page-top">
+    <section class="bg-dark text-white mb-0" id="about">
+    <div>
+        <div class="row">
+            <div id="MyClockDisplay" class="col-lg-12 text-center clock" onload="showTime()"></div> 
+            <div id="TodayDate" class="col-lg-12 text-center date" onload="showDate()"></div>
+            <div>&nbsp;</div>   
+            <div id="box4" class="col-lg-12 text-center"><img src="web/images/box4.gif" width="40%"></div>
+            <div id="box3" class="col-lg-12 text-center"><img src="web/images/box3.gif" width="40%"></div>
+            <div id="red" class="col-lg-12 text-center"><img src="web/images/redApple.gif" width="50%"></div>
+            <div id="green" class="col-lg-12 text-center"><img src="web/images/greenApple.gif" width="50%"></div>
+            <div id="orange" class="col-lg-12 text-center"><img src="web/images/oranges.gif" width="50%"></div>
+            <div id="watermelon" class="col-lg-12 text-center"><img src="web/images/watermelon.gif" width="50%"></div>
+            <div id="cantalupe" class="col-lg-12 text-center"><img src="web/images/cantalupe.gif" width="50%"></div>
+            <div id="sun" class="col-lg-12 text-center"><img src="web/images/sun.gif" width="50%"></div>
+            <div id="mars" class="col-lg-12 text-center"><img src="web/images/mars.gif" width="30%"></div>
+            <div id="moon" class="col-lg-12 text-center"><img src="web/images/moon.gif" width="30%"></div>
+            <div class="foot">&nbsp;</div> 
+            <div class="col-lg-12 text-center">
+                <!-- <button type="button" onclick="document.getElementById('box4').style.display='none'">Hide4</button> -->
+                <button type="button" onclick="document.getElementById('box4').style.display='block'">Box4</button>
+                <!-- <button type="button" onclick="document.getElementById('box3').style.display='none'">Hide3</button> -->
+                <button type="button" onclick="document.getElementById('box3').style.display='block'">Box3</button>
+                <button type="button" onclick="document.getElementById('red').style.display='block'">redAppla</button>
+                <button type="button" onclick="document.getElementById('green').style.display='block'">greenApple</button>
+                <button type="button" onclick="document.getElementById('orange').style.display='block'">oranges</button>
+                <button type="button" onclick="document.getElementById('watermelon').style.display='block'">watermelon</button>
+                <button type="button" onclick="document.getElementById('cantalupe').style.display='block'">cantalupe</button>
+                <button type="button" onclick="document.getElementById('sun').style.display='block'">sun</button>
+                <button type="button" onclick="document.getElementById('mars').style.display='block'">mars</button>
+                <button type="button" onclick="document.getElementById('moon').style.display='block'">moon</button>
+            </div>
+        </div>
+    </div>
+    </section>
+    
+<!-- Core theme JS-->
+    
+    <script src="web/js/scripts.js"></script>
+
+    <script>
+    window.onload = function(){
+        document.getElementById('box4').style.display='none';
+        document.getElementById('box3').style.display='none';
+        document.getElementById('red').style.display='none';
+        document.getElementById('green').style.display='none';
+        document.getElementById('orange').style.display='none';
+        document.getElementById('watermelon').style.display='none';
+        document.getElementById('cantalupe').style.display='none';
+        document.getElementById('sun').style.display='none';
+        document.getElementById('mars').style.display='none';
+        document.getElementById('moon').style.display='none';
+    }
+       
+        function showDate(){
+            var dayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+            var dayNamesTH = ["อาทิตย์","จันทร์","อังคาร","พุธ","พฤหัสบดี","ศุกร์","เสาร์"];
+            var date = new Date();
+            document.getElementById("TodayDate").innerText = dayNamesTH[date.getDay()] + ', '+ date.getDate() ;
+            document.getElementById("TodayDate").textContent = dayNamesTH[date.getDay()] + ', '+ date.getDate();
+
+        }
+
+        function showTime(){
+            var date = new Date();
+            var h = date.getHours(); // 0 - 23
+            var m = date.getMinutes(); // 0 - 59
+            var s = date.getSeconds(); // 0 - 59
+            var session = "AM";
+            
+            if(h == 0){
+                h = 12;
+            }
+            
+            if(h > 12){
+                h = h - 12;
+                session = "PM";
+            }
+            
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+            
+            var time = h + ":" + m + ":" + s + " " + session;
+            document.getElementById("MyClockDisplay").innerText = time;
+            document.getElementById("MyClockDisplay").textContent = time;
+            
+            setTimeout(showTime, 1000);
+            
+        }
+
+        showTime();
+        showDate();
+      
+    </script>
+</body>
+</html>
