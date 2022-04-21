@@ -3228,7 +3228,8 @@ def testing_mode7():
 		tn = now.split()
 		mn = (22-int(tn[0]))*60 - int(tn[1])
 		basic_chanting(mn,'300')
-		delay(240)
+		mn = x_minutes(24) + 120
+		delay(mn)
 		fast_buddho('off',5,'500')
 		morning_practice('off','500')
 	else:
@@ -3246,7 +3247,8 @@ def testing_mode7():
 		elif m == 3:
 			wooden_gong_sound(mn)
 		ledc('off')
-		delay(240)
+		mn = x_minutes(24) + 120
+		delay(mn)
 		fast_buddho('off',5,'500')
 		morning_practice('off','500')
 	return None
@@ -3872,38 +3874,54 @@ def my_day(vol='500',st=False):
 			os.system("sudo date -s " + set_dt)
 	now = int(datetime.today().strftime('%H'))
 	if 1< now and now < 4:
-		chk = input("2 a.m - morning practice ? y/n \n")
-		if chk == 'y':
+		if st:
+			chk = input("2 a.m - morning practice ? y/n \n")
+			if chk == 'y':
+				morning_practice()
+		else:
 			morning_practice()
 	elif now == 4:
-		chk = input("4 a.m - morning ? y/n \n")
-		if chk == 'y':
-			play_mp3("../sound/metta.mp3",114,vol)
-			m = random.randint(1,5)
-			print(m)
-			if m == 1:
-				play_vlc_file2('../mars/zen/blood-sutra.mp3',30,0,'1')
-				# play_mp3('../mars/zen/blood-sutra.mp3',1800,'1000','off')
-			elif m == 2:
-				play_vlc_file2('../mars/zen/TaoTeChing.mp3',30,0,'1')
-			elif m == 3:
-				play_vlc_file2('../mars/zen/TaoTeChing.mp3',30,30,'1')
-			elif m == 4:
-				play_vlc_file2('../mars/zen/TaoTeChing.mp3',30,60,'1')
-			else:
-				play_vlc_file2('../mars/zen/suntzu.mp3',30,0,'1.75')
+		if st:
+			chk = input("4 a.m - morning ? y/n \n")
+			if chk == 'y':
+				play_mp3("../sound/metta.mp3",114,vol)
+				m = random.randint(1,5)
+				print(m)
+				if m == 1:
+					play_vlc_file2('../mars/zen/blood-sutra.mp3',30,0,'1')
+					# play_mp3('../mars/zen/blood-sutra.mp3',1800,'1000','off')
+				elif m == 2:
+					play_vlc_file2('../mars/zen/TaoTeChing.mp3',30,0,'1')
+				elif m == 3:
+					play_vlc_file2('../mars/zen/TaoTeChing.mp3',30,30,'1')
+				elif m == 4:
+					play_vlc_file2('../mars/zen/TaoTeChing.mp3',30,60,'1')
+				else:
+					play_vlc_file2('../mars/zen/suntzu.mp3',30,0,'1.75')
+				morning()
+		else:
+			play_vlc_file2('../mars/zen/blood-sutra.mp3',30,0,'1')
 			morning()
 	elif now == 5:
-		chk = input("5 a.m - morning ? y/n \n")
-		if chk == 'y':
+		if st:
+			chk = input("5 a.m - morning ? y/n \n")
+			if chk == 'y':
+				morning()
+		else:
 			morning()
 	elif 6 < now and now < 17:
-		chk = input("6 a.m - noble dhamma ? y/n \n")
-		if chk == 'y':
-			play_four_noble_truth_dhamma()
+		if st:
+			chk = input("6 a.m - noble dhamma ? y/n \n")
+			if chk == 'y':
+				play_four_noble_truth_dhamma()
+		else:
+			dhamma_wisdom()
 	elif now > 16:
-		chk = input("5 p.m - evening practice ? y/n \n")
-		if chk == 'y':
+		if st:
+			chk = input("5 p.m - evening practice ? y/n \n")
+			if chk == 'y':
+				testing_mode7()
+		else:
 			testing_mode7()
 	return None
 
@@ -4037,7 +4055,7 @@ try:
 			vrun += 'one two three four five six seven eight nine ten zero twelve fifteen twenty thirty forty fifty sixty seventy eighty ninety computer '
 			vrun += 'a alfa b bravo c charlie d delta e echo f foxtrot g golf h hotel i india j juliet k kilo l lima m mike n november o oscar p papa '
 			vrun += 'q quebec r romeo s sierra t tango u uniform v victor w whiskey x ray y yankee z zulu '
-			vrun += 'letter repeat space spelling speaker noble japanese chinese red green blue yellow hello wisdom continuous '
+			vrun += 'letter repeat space spelling speaker noble japanese chinese red green blue yellow hello wisdom continuous human book '
 			vrun += 'walk walking mode search translate service cancel restart reboot save anat ta sitting music raining thunder jungle tibetan heart brain '
 			vrun += 'alpha breathing pure monk rule speech morning evening practice web server sound my math next new causes singing bowl '
 			vrun += 'ohm variety basic chinese blessed blessing the sun blooming flower clip quit my display testing water morse code good bye chapter pali '
@@ -4331,6 +4349,10 @@ try:
 										om_meditation(t)
 									elif "wooden" in words:
 										wooden_gong_sound(t)
+
+								elif "human" in words and "book" in words:
+									speak("Human handbook")
+									play_vlc_file("../mars/human-handbook.m4a",'1.50')
 
 								elif "wooden" in words and "heart" in words:
 									speak("wooden heart, heart wood from the bodhi tree")
@@ -4630,14 +4652,9 @@ try:
 										# verify = True
 										# focus  = True
 																		
-								elif "sutra" in words:
-									if "play" in words or "start" in words:
-										play_sutra(30)
-									# else:
-									# 	speak("Do you want to play sutra?")
-									# 	cmd = "sutra"
-									# 	verify = True
-									# 	focus  = True                              
+								elif "sutra" in words and "play" in words:
+									play_sutra()
+									                            
 									
 								elif "mantra" in words:
 
@@ -4806,6 +4823,7 @@ try:
 											dhamma_wisdom(120)
 										elif i == 1:
 											play_vlc_inTime("../mars/buddhaDhamma","12",120)
+										thai_chanting()
 																			  
 								#PLAY
 								elif "light" in words and "on" in words:
