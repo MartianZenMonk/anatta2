@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="th-TH">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=yes">
+    <title>Walking Meditation | Dukkha and the way to the end of Dukkha</title>
+    <meta name="description" content="โครงการอนัตตา | ทุกข์ และ การดับทุกข์">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="web/css/styles.css" rel="stylesheet" />
+    <style type="text/css">
+    body {
+        background: black;
+        font-size: 12px;
+    }
+
+    .clock {
+        color: #ff0000;
+        font-size: 20px;
+        font-family: Orbitron;
+        letter-spacing: 7px;
+    }  
+    </style>
+</head>
+ <body id="page-top">
+    <section class="bg-dark text-white mb-0" id="about">
+    <div class="container">
+        <div class="row">
+        <div id="MyClockDisplay" class="col-lg-12 text-center clock" onload="showTime()"></div>
+
+                <div class="col-lg-12 text-center">
+                <h4> ธรรมเทศนาสำหรับ วันขึ้นบ้านใหม่ ทำบุญบ้าน วันแต่งงาน</h4>
+                <p>ธรรมะของผู้ครองเรือน - panya <br/><audio controls=''><source src='http://thammapedia.com/listen/panya/mp3/051.mp3' type='audio/mp3'></audio></p>
+                <p>หน้าที่ของผู้ครองเรือน - panya <br/><audio controls=''><source src='http://thammapedia.com/listen/panya/mp3/403.mp3' type='audio/mp3'></audio></p>
+
+                <h4> ธรรมเทศนาสำหรับ งานศพ </h4>
+                <p>ทำศพแบบประหยัด - panya <br/><audio controls=''><source src='http://thammapedia.com/listen/panya/mp3/070.mp3' type='audio/mp3'></audio></p>
+                <p>พิจารณา แก่ เจ็บ ตาย - panya <br/><audio controls=''><source src='http://thammapedia.com/listen/panya/mp3/012.mp3' type='audio/mp3'></audio></p>
+                <p>อย่าอยู่อย่างผู้ที่ตายแล้ว - panya <br/><audio controls=''><source src='http://thammapedia.com/listen/panya/mp3/020.mp3' type='audio/mp3'></audio></p>
+                <p>ฆ่าตัวตายเพราะไร้ธรรมะ - panya <br/><audio controls=''><source src='http://thammapedia.com/listen/panya/mp3/265.mp3' type='audio/mp3'></audio></p>
+                <p>ความตายเป็นเรื่องธรรมดา - panya <br/><audio controls=''><source src='http://thammapedia.com/listen/panya/mp3/401.mp3' type='audio/mp3'></audio></p>
+
+                <h4> ธรรมเทศนาสำหรับ ยามป่วยไข้</h4>
+                <p>พุทธวิธีสะเดาะเคราะห์-โศก-โรค-ภัย - panya <br/><audio controls=''><source src='http://thammapedia.com/listen/panya/mp3/390.mp3' type='audio/mp3'></audio></p>
+
+                <h4> ธรรมเทศนาสำหรับ วันเกิด</h4>
+
+
+
+                
+                <div>
+
+        </div>
+    </div>
+    </section>
+    
+<!-- Core theme JS-->
+    <script src="web/js/scripts.js"></script>
+    <script>
+        document.querySelector('audio').playbackRate = 1.75;
+        function showTime(){
+            var date = new Date();
+            var h = date.getHours(); // 0 - 23
+            var m = date.getMinutes(); // 0 - 59
+            var s = date.getSeconds(); // 0 - 59
+            var session = "AM";
+            
+            if(h == 0){
+                h = 12;
+            }
+            
+            if(h > 12){
+                h = h - 12;
+                session = "PM";
+            }
+            
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+            
+            var time = h + ":" + m + ":" + s + " " + session;
+            document.getElementById("MyClockDisplay").innerText = time;
+            document.getElementById("MyClockDisplay").textContent = time;
+            
+            setTimeout(showTime, 1000);
+            
+        }
+
+        showTime();
+        // // Set the date we're counting down to
+        // var countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
+
+        // // Update the count down every 1 second
+        // var x = setInterval(function() {
+
+        //   // Get today's date and time
+        //   var now = new Date().getTime();
+
+        //   // Find the distance between now and the count down date
+        //   var distance = countDownDate - now;
+
+        //   // Time calculations for days, hours, minutes and seconds
+        //   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        //   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        //   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        //   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        //   // Display the result in the element with id="demo"
+        //   document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+        //   + minutes + "m " + seconds + "s ";
+
+        //   // If the count down is finished, write some text
+        //   if (distance < 0) {
+        //     clearInterval(x);
+        //     document.getElementById("demo").innerHTML = "EXPIRED";
+        //   }
+        // }, 1000);
+    </script>
+</body>
+</html>

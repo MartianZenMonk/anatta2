@@ -697,32 +697,33 @@ def save_vocabulary(w):
 
 
 def buddha_day():
-	today = dt.datetime.now()
-	year  = today.strftime("%Y")
-	with open('../csv/'+ year + '.csv', newline='') as f:
-		reader = csv.reader(f)
-		data = list(reader)
-
-	day = datetime.today().strftime('%Y%m%d')
-	holyday = []
-	thholyday = []
-	todayholyday = []
-	for i in range(len(data)):
-		if i > 0:
-			if(int(data[i][1]) > int(day)):
-				holyday.append(data[i][1])
-				thholyday.append(data[i][0])
-			elif (int(data[i][1]) == int(day)):
-				todayholyday = list(str(data[i][0]))
-
-	t = thholyday[0].replace("(", " ")
-	x = t.split()
-	
-	bdaytext = ""
-	for i in range(len(x)-1):
-	  bdaytext += " ../voices/th/" + x[i] + ".mp3"
-
 	if have_internet():
+		today = dt.datetime.now()
+		year  = today.strftime("%Y")
+		with open('../csv/'+ year + '.csv', newline='') as f:
+			reader = csv.reader(f)
+			data = list(reader)
+
+		day = datetime.today().strftime('%Y%m%d')
+		holyday = []
+		thholyday = []
+		todayholyday = []
+		for i in range(len(data)):
+			if i > 0:
+				if(int(data[i][1]) > int(day)):
+					holyday.append(data[i][1])
+					thholyday.append(data[i][0])
+				elif (int(data[i][1]) == int(day)):
+					todayholyday = list(str(data[i][0]))
+
+		t = thholyday[0].replace("(", " ")
+		x = t.split()
+		
+		bdaytext = ""
+		for i in range(len(x)-1):
+		  bdaytext += " ../voices/th/" + x[i] + ".mp3"
+
+		
 
 		today = dt.datetime.now()
 		z = today.strftime("%B %A %d %H %M")
@@ -741,47 +742,50 @@ def buddha_day():
 				stext += " ../voices/th/" + text[i] + ".mp3"
 		os.system("mpg123 -q -f 2100 "+stext)
 
-	y = list(str(holyday))
-	yy = y[2]+y[3]+y[4]+y[5]
-	mm = y[6]+y[7]
-	dd = y[8]+y[9]
-	x = dt.datetime(int(yy), int(mm), int(dd))
+		y = list(str(holyday))
+		yy = y[2]+y[3]+y[4]+y[5]
+		mm = y[6]+y[7]
+		dd = y[8]+y[9]
+		x = dt.datetime(int(yy), int(mm), int(dd))
 
-	z = x.strftime("%B %A %d")
-	speak("next Buddha holy day is " + z)
+		z = x.strftime("%B %A %d")
+		speak("next Buddha holy day is " + z)
 
-	t = "วันพระ,หน้า,คือ,วัน,weekday/%w,ที่,59/%d,เดือน,month/%m"
-	t = t.replace("%w",x.strftime('%w'))
-	t = t.replace("%d",x.strftime('%d'))
-	t = t.replace("%m",x.strftime('%m'))
-	text = t.split(',')
+		t = "วันพระ,หน้า,คือ,วัน,weekday/%w,ที่,59/%d,เดือน,month/%m"
+		t = t.replace("%w",x.strftime('%w'))
+		t = t.replace("%d",x.strftime('%d'))
+		t = t.replace("%m",x.strftime('%m'))
+		text = t.split(',')
 
-	stext = ""
-	for i in range(len(text)):
-			stext += " ../voices/th/" + text[i] + ".mp3" 
-	os.system("mpg123 -q -f 2100 "+stext) 
-	os.system("mpg123 -q -f 2100 "+bdaytext) 
+		stext = ""
+		for i in range(len(text)):
+				stext += " ../voices/th/" + text[i] + ".mp3" 
+		os.system("mpg123 -q -f 2100 "+stext) 
+		os.system("mpg123 -q -f 2100 "+bdaytext) 
 
-	del data
-	del stext
-	del bdaytext
-	del t
-	del text
-	gc.collect()
+		del data
+		del stext
+		del bdaytext
+		del t
+		del text
+		gc.collect()
 
-	if len(todayholyday) >0:
-		if '8' in todayholyday:
-			speak("One nee one phra Lek, today is Buddha day")
-			speakThai_mp3(['วัน','พระ','เล็ก'])
-			clear_q()
-			return 8
+		if len(todayholyday) >0:
+			if '8' in todayholyday:
+				speak("One nee one phra Lek, today is Buddha day")
+				speakThai_mp3(['วัน','พระ','เล็ก'])
+				clear_q()
+				return 8
+			else:
+				speak("One nee one patimok, today is Big Buddha day")
+				speakThai_mp3(['วัน','พระ','ใหญ่'])
+				clear_q()
+				return 15
 		else:
-			speak("One nee one patimok, today is Big Buddha day")
-			speakThai_mp3(['วัน','พระ','ใหญ่'])
 			clear_q()
-			return 15
+			return 0
 	else:
-		clear_q()
+		speak("sorry no internet connection")
 		return 0
 
 
@@ -1632,10 +1636,10 @@ def mixed_mode2(c='',t=10,n=0,vol='1000'):
 
 
 # log : timestamp data1 data2 
-def lastlog(logpath='../mars/log/'):
+def lastlog(logpath='../mars/log/log.txt'):
 	last_logs = []
 	try:
-		infile = open(logpath+'log.txt','r')
+		infile = open(logpath,'r')
 		for line in infile :
 			fx = line.strip().split()
 			last_logs.append(fx)
@@ -1645,16 +1649,140 @@ def lastlog(logpath='../mars/log/'):
 	return last_logs
 
 
-def reclog(data,logpath='../mars/log/'):
+def reclog(data,logpath='../mars/log/log.txt'):
 	try:
-		outfile = open(logpath+'log.txt','a')
+		outfile = open(logpath,'a')
 		outfile.write(str(data)+'\n')
 		outfile.close()
 		return 1
 	except:
 		return 0
 
-def dhamma_wisdom(t=0,fp='../mars/',gain='0.1',rate='1.75'):
+#TEST
+def vlc_one(t=0,fp='../mars/suttanta/',logpath="../mars/log/log_vlc1.txt",m=0,gain='0.1',rate='1.75'):
+	files = get_files_list(fp,m)
+	# print(files)
+	timeout = 0
+	if t > 0:
+		tlimit = time.time() + t*60
+		random.shuffle(files)
+	b = lastlog(logpath)
+	fn = len(files)
+	if len(b) >= fn:
+		infile = open(logpath,'w')
+		infile.close()
+		speak("end of playlist, clear log file")
+		b = []
+	n = 0
+	for f in files:
+		c = True
+		if len(b) > 0:
+			for a in b:
+				if f == a[2]:
+					c = False
+				else:
+					pass
+		if t == 0 and n == fn:
+			break
+		elif c:
+			n += 1
+			fx = fp + f
+			print(fx)
+			try:
+				tfx = media_info(fx)
+				tx = tfx / (1000*float(rate))
+				# print(tx)
+				speak(str(round(tx/60))+" minutes")
+				if t > 0:
+					t = tlimit - time.time()
+					if tx > t:
+						tx = t
+					print(t)
+				cmd = "cvlc --play-and-exit --global-key-vol-up u --global-key-vol-down d" + " --gain " + gain + " --rate " + rate + " " + fx
+				proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
+				press_for_stop(led_color,proc,tx)
+				data = str(time.time()) + " " + fp + " " + f
+				reclog(data,logpath)
+			except:
+				speak('file not found')
+				data = str(time.time()) + " " + fp + " " + f
+				reclog(data,logpath)
+			# speak('press button in 5 seconds for exit or wait to continue')
+			ledc('r')
+			t0 = time.time()
+			board.button.wait_for_press(5) 
+			if time.time() - t0 < 5:
+				break
+			elif  t > 0 and time.time() > tlimit:
+				break
+			ledc('d')
+
+
+def dhamma_one(t=0,fp='../mars/',fpath='pyt.json',gain='0.1',rate='1.75',logpath="../mars/log/log1.txt"):
+	files = json.load(open(fp+fpath,mode='r',newline='',encoding='UTF-8'))
+	# print(files)
+	timeout = 0
+	if t > 0:
+		tlimit = time.time() + t*60
+		random.shuffle(files)
+	b = lastlog(logpath)
+	fn = len(files)
+	if len(b) >= fn:
+		infile = open(logpath,'w')
+		infile.close()
+		speak("end of playlist, clear log file")
+		b = []
+	n = 0
+	for f in files:
+		c = True
+		f = f.split(',')
+		if len(b) > 0:
+			for a in b:
+				if f[1] == a[2]:
+					c = False
+					n +=1
+				else:
+					pass
+		if t == 0 and n == fn:
+			infile = open(logpath,'w')
+			infile.close()
+			speak("end of playlist, clear log file,please call again")
+			break
+		elif c:
+			n += 1
+			fx = fp + f[0] + '/' + f[1]
+			print(fx)
+			try:
+				tfx = media_info(fx)
+				tx = tfx / (1000*float(rate))
+				# print(tx)
+				speak(str(round(tx/60))+" minutes")
+				if t > 0:
+					t = tlimit - time.time()
+					if tx > t:
+						tx = t
+					print(t)
+				cmd = "cvlc --play-and-exit --global-key-vol-up u --global-key-vol-down d" + " --gain " + gain + " --rate " + rate + " " + fx
+				proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
+				press_for_stop(led_color,proc,tx)
+				data = str(time.time()) + " " + f[0] + " " + f[1]
+				reclog(data,logpath)
+			except:
+				speak('file not found')
+				data = str(time.time()) + " " + f[0] + " " + f[1]
+				reclog(data,logpath)
+			# speak('press button in 5 seconds for exit or wait to continue')
+			ledc('r')
+			t0 = time.time()
+			board.button.wait_for_press(5) 
+			if time.time() - t0 < 5:
+				break
+			elif  t > 0 and time.time() > tlimit:
+				break
+			ledc('d')
+
+
+def dhamma_wisdom(t=0,fp='../mars/',logpath="../mars/log/log.txt",gain='0.1',rate='1.75'):
 	files = [
 	['bdd','6027.mp3'],
 	['bdd','6030.mp3'],
@@ -1922,7 +2050,11 @@ def dhamma_wisdom(t=0,fp='../mars/',gain='0.1',rate='1.75'):
 		random.shuffle(files)
 	b = lastlog()
 	fn = len(files)
-	i = 0
+	if len(b) >= fn:
+		infile = open(logpath,'w')
+		infile.close()
+		speak("end of playlist, clear log file")
+		b = []
 	n = 0
 	for f in files:
 		c = True
@@ -1930,14 +2062,13 @@ def dhamma_wisdom(t=0,fp='../mars/',gain='0.1',rate='1.75'):
 			for a in b:
 				if f[1] == a[2]:
 					c = False
-					i += 1
-					if i == fn:
-						infile = open(logpath+'log.txt','w')
-						infile.close()
-						speak("just clear log file")
+					n += 1
 				else:
 					pass
-		if t == 0 and n == 4:
+		if t == 0 and n == fn:
+			infile = open(logpath,'w')
+			infile.close()
+			speak("end of playlist, clear log file, please call again")
 			break
 		elif c:
 			n += 1
@@ -1946,7 +2077,9 @@ def dhamma_wisdom(t=0,fp='../mars/',gain='0.1',rate='1.75'):
 			try:
 				tfx = media_info(fx)
 				tx = tfx / (1000*float(rate))
-				print(tx)
+				# print(tx)
+				speak(str(round(tx/60))+" minutes")
+				what_time2()
 				if t > 0:
 					t = tlimit - time.time()
 					if tx > t:
@@ -1959,6 +2092,84 @@ def dhamma_wisdom(t=0,fp='../mars/',gain='0.1',rate='1.75'):
 				reclog(data)
 			except:
 				speak('file not found')
+				data = str(time.time()) + " " + f[0] + " " + f[1]
+				reclog(data)
+			# speak('press button in 5 seconds for exit or wait to continue')
+			ledc('r')
+			t0 = time.time()
+			board.button.wait_for_press(5) 
+			if time.time() - t0 < 5:
+				speak("bye")
+				break
+			elif  t > 0 and time.time() > tlimit:
+				break
+			ledc('d')
+
+def dhamma_meditation(t=0,fp='../mars/',logpath="../mars/log/log-med.txt",gain='0.1',rate='1.75'):
+	files = [
+	['payutto','05_10.wma'],
+	['payutto','05_21.wma'],
+	['payutto','05_32.wma'],
+	['payutto','05_33.wma'],
+	['payutto','05_34.wma'],
+	['payutto','05_35.wma'],
+	['payutto','05_36.wma'],
+	['payutto','05_41.wma'],
+	['payutto','05_42.wma'],
+	['payutto','05_47.wma'],
+	['payutto','05_48.wma'],
+	['payutto','05_49.wma'],
+	['payutto','05_50.wma'],
+	['payutto','09_34.wma'],
+	['payutto','09_35.wma']
+	]
+
+	timeout = 0
+	if t > 0:
+		tlimit = time.time() + t*60
+		random.shuffle(files)
+	b = lastlog()
+	fn = len(files)
+	if len(b) >= fn:
+		infile = open(logpath,'w')
+		infile.close()
+		speak("end of playlist, clear log file")
+		b = []
+	n = 0
+	for f in files:
+		c = True
+		if len(b) > 0:
+			for a in b:
+				if f[1] == a[2]:
+					c = False
+				else:
+					pass
+		if t == 0 and n == fn:
+			break
+		elif c:
+			n += 1
+			fx = fp + f[0] + '/' + f[1]
+			print(fx)
+			try:
+				tfx = media_info(fx)
+				tx = tfx / (1000*float(rate))
+				# print(tx)
+				speak(str(round(tx/60))+" minutes")
+				what_time2()
+				if t > 0:
+					t = tlimit - time.time()
+					if tx > t:
+						tx = t
+					print(t)
+				cmd = "cvlc --play-and-exit --global-key-vol-up u --global-key-vol-down d" + " --gain " + gain + " --rate " + rate + " " + fx
+				proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
+				press_for_stop(led_color,proc,tx)
+				data = str(time.time()) + " " + f[0] + " " + f[1]
+				reclog(data)
+			except:
+				speak('file not found')
+				data = str(time.time()) + " " + f[0] + " " + f[1]
+				reclog(data)
 			# speak('press button in 5 seconds for exit or wait to continue')
 			ledc('r')
 			t0 = time.time()
@@ -2155,6 +2366,7 @@ def play_vlc_by_list(fp="../mars/4nt2",cmd='dhamma_4nt2',limit=2,m=0,gain='0.1',
 		print(fx)
 		tfx = media_info(fx)
 		t = tfx / (1000*float(rate))
+		speak(str(round(t/60))+" minutes")
 		cmd = "cvlc --play-and-exit --global-key-play-pause p --global-key-vol-up u --global-key-vol-down d" + " --gain " + gain + " --rate " + rate + " " + fx
 		proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
 		press_for_stop(led_color,proc,t+5)
@@ -2314,8 +2526,8 @@ def play_vlc_by_list_all(fp="../mars/4nt2",gain='0.1',rate='1.50',n=0):
 	gc.collect()
 	return None
 
-# play vlc - a file
 
+# play vlc - a file
 # press btn for stop
 def play_vlc_file(fp="../mars/muttothai.m4a",rate='1.50',gain='0.10'):
 	adjust_volume()
@@ -2499,6 +2711,12 @@ def basic_chanting(t=0,vol='1000',c='off'):
 	proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
 	press_for_stop(c,proc,60*t) 
 
+
+def basic_chanting2(t=0,vol="1500"):
+	killPlayer()  
+	ledc('off') 
+	play_mp3_folder("../mars/sutta_chanting",vol,t)
+
 	
 def play_four_noble_truth_dhamma(t=0,r='1.75',g='0.1',c='o'):
 	pass
@@ -2594,7 +2812,6 @@ def thai_chanting(t=0,vol="1500"):
 	killPlayer()   
 	play_mp3_folder("../datath/chanting",vol,t)
 
-
 def play_radio(vol='2000'):
 	killPlayer()                                    
 	if have_internet():
@@ -2689,10 +2906,11 @@ def meditation_time():
 	press_for_stop(led_color,proc)
 
 
-def buddha_dhamma():
+def buddha_dhamma(n=1):
 	killPlayer()    
 	speak("Buddha dhamma")
-	play_vlc_by_list_all("../mars/buddhaDhamma",'0.1','1.50',1)
+	vlc_one(0,'../mars/buddhaDhamma/',"../mars/log/log_buddhadham.txt",0,'0.1','1.50')
+	# play_vlc_by_list_all("../mars/buddhaDhamma",'0.1','1.50',n)
 
 
 def dhamma_dhamma(t=60):
@@ -2718,6 +2936,10 @@ def play_dhamma(vol='1000',fp='../datath/dhamma'):
 	board.button.wait_for_press()
 	os.write(slave, b'f')
 	press_for_stop(led_color,proc)
+
+
+def play_dhamma2():
+	play_vlc_by_list("../datath/dhamma","dhamma_2",4,0)
 
 
 def play_sutra(t=0,vol='2000',fp='../datath/sutta'):
@@ -3204,6 +3426,21 @@ def testing_mode3():
 	
 	return None
 
+def testing_4():
+	i = random.randint(0,2)
+	mn = x_minutes(22) 
+	if i == 0:
+		play_sutra(mn)
+	elif i == 1:
+		play_vlc_all_inTime("../mars//buddhaDhamma",mn,'1.75','0.1',0)
+	elif i == 2:
+		dhamma_dhamma(mn)
+	else:
+		dhamma_wisdom(mn)
+	fast_buddho(240)
+	blessed_one()
+	return None
+
 def testing_mode5():
 	blessed_one(5)
 	fast_buddho('off',30,'500')
@@ -3609,7 +3846,7 @@ def morning_dhamma():
 	elif a == 15:
 		monk_rules()
 	else:
-		play_vlc_file("../mars/monk/nava_vinai.mp3",'2.00')
+		play_vlc_file("../mars/monk/nava_dhamma.mp3",'2.00')
 		if len(mdm) == 0:
 			mdm = [1,2,3,4,5,6,7,8,9]
 		random.shuffle(mdm)
@@ -3619,21 +3856,36 @@ def morning_dhamma():
 		if m == 1:
 			buddha_dhamma()
 		elif m == 2:
-			play_vlc_by_list_all("../mars/4nt",'0.1','1.50',1)
+			speak("4 noble truth")
+			vlc_one(0,'../mars/4nt/',"../mars/log/log_morning.txt",0,'0.1','1.50')
+			# play_vlc_by_list_all("../mars/4nt",'0.1','1.50',1)
 		elif m == 3:
-			play_vlc_by_list_all("../mars/12paticca",'0.1','1.50',1)
+			speak("Paticcasamupbada")
+			vlc_one(0,'../mars/12paticca/',"../mars/log/log_morning.txt",0,'0.1','1.50')
+			# play_vlc_by_list_all("../mars/12paticca",'0.1','1.50',1)
 		elif m == 4:
-			play_vlc_by_list_all("../mars/tripitaka",'0.1','1.50',1)
+			speak("Tipitaka")
+			vlc_one(0,'../mars/tripitaka/',"../mars/log/log_morning.txt",0,'0.1','1.50')
+			# play_vlc_by_list_all("../mars/tripitaka",'0.1','1.50',1)
 		elif m == 5:
-			play_vlc_by_list_all("../mars/suttanta",'0.1','1.50',0)
+			speak("Suttanta")
+			vlc_one(0,'../mars/suttanta/',"../mars/log/log_morning.txt",0,'0.1','1.50')
+			# play_vlc_by_list_all("../mars/suttanta",'0.1','1.50',0)
 		elif m == 6:
-			play_vlc_by_list_all("../mars/gold",'0.1','1.50',1)
+			speak("Buddha 's gold")
+			vlc_one(0,'../mars/gold/',"../mars/log/log_morning.txt",0,'0.1','1.50')
+			# play_vlc_by_list_all("../mars/gold",'0.1','1.50',1)
 		elif m == 7:
-			play_vlc_by_list_all("../mars/one",'0.1','1.50',1)
+			speak("Buddha history")
+			vlc_one(0,'../mars/one/',"../mars/log/log_morning.txt",0,'0.1','1.50')
+			# play_vlc_by_list_all("../mars/one",'0.1','1.50',1)
 		elif m == 8:
+			speak("Human handbook")
 			play_vlc_file("../mars/human-handbook.m4a",'1.50')
-		else:
-			dhamma_wisdom()
+		elif m == 9:
+			speak("Heart wood from bodhi tree")
+			vlc_one(0,'../mars/heartwood/',"../mars/log/log_morning.txt",0,'0.1','1.50')
+			# play_vlc_by_list_all("../mars/heartwood",'0.1','1.50',0)
 	return None
 
 
@@ -3691,7 +3943,8 @@ def morning_practice(c='off',vol="500"):
 	morning_merit(vol)
 	play_mp3("../sound/metta.mp3",114,vol)
 	# dhamma_dhamma()
-	dhamma_wisdom(60)
+	mn = x_minutes(5)
+	dhamma_wisdom(mn)
 	morning()
 	return None
 
@@ -3860,6 +4113,30 @@ def evening_practice(d=0,vol="500"):
  
 	return None
 
+def my_dhamma():
+	files  = [["../datath/sutta/moggallana.mp3","2","0.1"],["../mars/anapanasati16.mp3","2","0.1"],["../mars/bodhipakkhiyadhamma-37.mp3","2","0.05"]]
+	files += [["../mars/sati.mp3","1.25","0.2"],["../mars/paticcasamuppda.mp3","1.25","0.1"],["../mars/yoniso.mp3","1.25","0.1"]]
+	for f in files:
+		try:
+			tfx = media_info(f[0])
+			rate = f[1]
+			gain = f[2]
+			tx = tfx / (1000*float(rate))
+			# print(tx)
+			speak(str(round(tx/60))+" minutes")
+			cmd = "cvlc --play-and-exit --global-key-vol-up u --global-key-vol-down d" + " --gain " + gain + " --rate " + rate + " " + f[0]
+			proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
+			press_for_stop(led_color,proc,tx)
+		except:
+			speak("file not found")
+# def my_dhamma(t=0,vol='3000',c='off'):
+	# killPlayer()
+	# files =  " ../datath/sutta/moggallana.mp3 ../mars/anapanasati16.mp3 ../mars/bodhipakkhiyadhamma-37.mp3 ../mars/sati.mp3 ../mars/paticcasamuppda.mp3 ../mars/yoniso.mp3"
+	# command = "mpg123 -d 2 -q -Z -f " + vol + files
+	# proc = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
+	# press_for_stop(c,proc,60*t) 
+
+
 def my_day(vol='500',st=False):
 	what_time()
 	if st:
@@ -3942,10 +4219,12 @@ def wait_for_answer(ans='yes',sec=5):
 			if ans in words:
 				check = True
 				# speak(ans)
-			# print(words)
+			print(words)
 		else:
 			pass
 	ledc('off')
+	words = []
+	clear_q()
 	return check
 
 
@@ -4249,6 +4528,8 @@ try:
 									if "one" in words:
 										speak("testing 1")
 										testing_mode1()
+									elif "four" in words:
+										testing_4()
 									# elif "two" in words:
 									# 	speak("testing 2")
 									# 	testing_mode2()
@@ -4451,7 +4732,7 @@ try:
 									walking_meditation_count()
 
 								elif "chinese" in words and "monk" in words:
-									play_vlc_by_list_all('../mars/fahien','0.1','1.75',0)
+									play_vlc_by_list_all('../mars/fahien','0.1','1.50',0)
 
 								elif "practice" in words:
 
@@ -4603,6 +4884,9 @@ try:
 									elif "thai" in words:
 										thai_chanting()
 
+									elif "sutra" in words:
+										basic_chanting2(0)
+
 									elif "breathing" in words:
 										play_breathing_chanting_thai()
 
@@ -4627,7 +4911,10 @@ try:
 										else:
 											heart_sutra(0)
 									else:
-										pass
+										speak("Do you want to play sutta chanting ?")
+										c = wait_for_answer()
+										if c:
+											basic_chanting2(0)
 										# speak("Do you want to play Thai Chanting ?")
 										# cmd = "thai_chanting"
 										# focus = True
@@ -4745,7 +5032,17 @@ try:
 								   
 								elif "dhamma" in words:
 									if "buddha" in words:
-										buddha_dhamma()
+										speak("i will play in order, ok?")
+										c = wait_for_answer()
+										if c:
+											speak("play in order")
+											buddha_dhamma(0)
+										else:
+											buddha_dhamma()
+									elif "my" in words:
+										my_dhamma()
+									elif "meditation" in words:
+										dhamma_meditation(0)
 									elif "play" in words:
 										play_my_dhamma("../datath/dhamma")
 										# play_dhamma()
@@ -4759,10 +5056,12 @@ try:
 											play_vlc_by_list("../mars/bdd","dhamma_9",4,0,'0.1','1.75')
 										# play_vlc_by_list_all("../mars/bdd")
 									elif "one" in words:
-										speak("Do you want to play Buddhadasa Bikkhu years 35 36 ?")
-										c = wait_for_answer('yes')
-										if c:
-											play_vlc_by_list_all("../mars/bdd-3536",'0.1','1.50',1)
+										speak("Dhamma 1")
+										dhamma_one()
+										# speak("Do you want to play Buddhadasa Bikkhu years 35 36 ?")
+										# c = wait_for_answer('yes')
+										# if c:
+										# 	play_vlc_by_list_all("../mars/bdd-3536",'0.1','1.50',1)
 									elif "two" in words:
 										speak("Dhamma 2, Luang poo riean")
 										speakThai_mp3(['หลวง','ปู่','เหรียญ'])
@@ -4793,11 +5092,13 @@ try:
 											speak("continuous")
 											play_vlc_by_list_all("../mars/suttanta",'0.1','1.75',1)
 										else:
-											play_vlc_by_list("../mars/suttanta","dhamma_6",2,0)
+											vlc_one()
+											# play_vlc_by_list("../mars/suttanta","dhamma_6",2,0)
 									elif "seven" in words:
 										speak("Dhamma 7, Luang poo Panya")
 										speakThai_mp3(['หลวง','ปู่','ปัญญา'])
-										play_vlc_by_list("../mars/panya","dhamma_7",4,0,'0.1','1.75')
+										dhamma_one(0,'../mars/','panya.json','0.1','1.75',"../mars/log/log_panya.txt")
+										# play_vlc_by_list("../mars/panya","dhamma_7",4,0,'0.1','1.75')
 									elif "ten" in words:
 										speak("Dhamma 10, spoke by Pope")
 										speakThai_mp3(['หลวง','ปู่','ญาณสังวร'])
@@ -4806,8 +5107,9 @@ try:
 										play_vlc_by_list("../mars/4nt2","dhamma_noble",4,0,'0.1','1.50')
 										# play_four_noble_truth_dhamma()
 									elif "fifteen" in words:
-										speak("Dhamma 15, Phra Paisan Visalo")
-										play_vlc_by_list("../mars/paisan","dhamma_12",4,0,'0.1','1.50')
+										pass
+										# speak("Dhamma 15, Phra Paisan Visalo")
+										# play_vlc_by_list("../mars/paisan","dhamma_12",4,0,'0.1','1.50')
 									elif "wisdom" in words:
 										speak("Dhamma wisdom")
 										dhamma_wisdom()
@@ -4820,7 +5122,8 @@ try:
 											play_vlc_inTime("../mars/gold","12",120)
 										i = random.choices([0,1],[5,1])[0]
 										if i == 0:
-											dhamma_wisdom(120)
+											play_vlc_inTime("../mars/one","12",120)
+											# dhamma_wisdom(120)
 										elif i == 1:
 											play_vlc_inTime("../mars/buddhaDhamma","12",120)
 										thai_chanting()
