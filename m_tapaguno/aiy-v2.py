@@ -3432,7 +3432,7 @@ def testing_4():
 	if i == 0:
 		play_sutra(mn)
 	elif i == 1:
-		play_vlc_all_inTime("../mars//buddhaDhamma",mn,'1.75','0.1',0)
+		play_vlc_all_inTime("../mars//buddhaDhamma",mn,'1.50','0.1',0)
 	elif i == 2:
 		dhamma_dhamma(mn)
 	else:

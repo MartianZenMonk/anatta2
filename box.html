@@ -24,7 +24,7 @@
     .box  {display: none;}
     .clock {
         color: #ff0000;
-        font-size: 35px;
+        font-size: 80px;
         font-family:'digital-7';
         letter-spacing: 7px;
         padding-top: 10px;
@@ -42,6 +42,7 @@
             <div id="MyClockDisplay" class="col-lg-12 text-center clock" onload="showTime()"></div> 
             <div id="TodayDate" class="col-lg-12 text-center date" onload="showDate()"></div>
             <div>&nbsp;</div> 
+            <div id="wh" class="col-lg-12 text-center"><img src="web/images/white.png" width="50%"></div> 
             <div id="sw" class="col-lg-12 text-center"><img src="web/images/white.gif" width="40%"></div> 
             <div id="sy" class="col-lg-12 text-center"><img src="web/images/yel.gif" width="40%"></div> 
             <div id="sg" class="col-lg-12 text-center"><img src="web/images/green.gif" width="40%"></div> 
@@ -83,6 +84,11 @@
                 <button type="button" onclick="slide1()">Green/White</button>
                 <button type="button" onclick="slide()">Box/Square</button>
                 <button type="button" onclick="slide2()">Red/Green Apple</button>
+                <button type="button" onclick="document.getElementById('wh').style.display='block'">white</button>
+                <br/><br/>
+                <p><audio controls=""><source src="sound/buddho-60m.mp3" type="audio/mp3"></audio></p>
+                <p><audio controls=""><source src="sound/buddho-hiphop-60mn.mp3" type="audio/mp3"></audio></p>
+                <p><audio controls=""><source src="sound/sitting-30-buddho-bowl.mp3" type="audio/mp3"></audio></p> 
             </div>
         </div>
     </div>
@@ -94,6 +100,7 @@
 
     <script>
     window.onload = function(){
+        document.getElementById('wh').style.display='none';
         document.getElementById('sy').style.display='none';
         document.getElementById('sr').style.display='none';
         document.getElementById('sg').style.display='none';
