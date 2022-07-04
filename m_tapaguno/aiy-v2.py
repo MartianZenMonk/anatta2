@@ -819,6 +819,21 @@ def fast_buddho_hiphop(c='off', t=30, vol='2000'):
    
 	return None
 
+def kidnor(c='off', t=30, vol='2000'):
+
+	ledc(c)
+
+	if t==0:
+		proc = subprocess.Popen(["mpg123","-d","1","-f",vol,"-q","--loop","-1","../voices/kidnor30min.mp3"])
+		press_for_stop(c,proc)
+	else:
+		proc = subprocess.Popen(["mpg123","-d","1","-f",vol,"-q","--loop","-1","../voices/kidnor30min.mp3"])
+		delay(t)
+		proc.kill()
+		clear_q()
+   
+	return None
+
 
 def bell(l='3',vol='500'):
 	subprocess.run(["mpg123","-q","-f",vol,"--loop",l,"../dataen/bell.mp3"])
@@ -2122,13 +2137,16 @@ def play_vlc_by_list(fp="../mars/4nt2",cmd='dhamma_4nt2',limit=2,m=0,gain='0.1',
 	files= get_files_folder_list(fp,cmd,limit,m)
 	for fx in files:
 		fx = fp + '/' + fx
-		print(fx)
-		tfx = media_info(fx)
-		t = tfx / (1000*float(rate))
-		speak(str(round(t/60))+" minutes")
-		cmd = "cvlc --play-and-exit --global-key-play-pause p --global-key-vol-up u --global-key-vol-down d" + " --gain " + gain + " --rate " + rate + " " + fx
-		proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
-		press_for_stop(led_color,proc,t+5)
+		# print(fx)
+		try:
+			tfx = media_info(fx)
+			t = tfx / (1000*float(rate))
+			speak(str(round(t/60))+" minutes")
+			cmd = "cvlc --play-and-exit --global-key-play-pause p --global-key-vol-up u --global-key-vol-down d" + " --gain " + gain + " --rate " + rate + " " + fx
+			proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
+			press_for_stop(led_color,proc,t+5)
+		except:
+			speak("can not get duration")
 		# speak('press button in 5 seconds for exit or wait to continue')
 		ledc('r')
 		t0 = time.time()
@@ -2173,18 +2191,21 @@ def play_vlc_inTime(fp="../mars/4nt2",cmd='dhamma_4nt2',t=60,rate='1.50',gain='0
 		
 		for f in files:
 			fx = fp + '/' + f
-			print(fx)
-			tfx = media_info(fx)
-			tx = tfx / (1000*float(rate))
-			print(tx)
-			t = tlimit - time.time()
-			if tx > t:
-				tx = t
-			print(t)
-			cmd = "cvlc --play-and-exit --global-key-vol-up u --global-key-vol-down d" + " --gain " + gain + " --rate " + rate + " " + fx
-			proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
-			press_for_stop(led_color,proc,tx)
-			outfile.write(str(f)+'\n')
+			# print(fx)
+			try:
+				tfx = media_info(fx)
+				tx = tfx / (1000*float(rate))
+				print(tx)
+				t = tlimit - time.time()
+				if tx > t:
+					tx = t
+				print(t)
+				cmd = "cvlc --play-and-exit --global-key-vol-up u --global-key-vol-down d" + " --gain " + gain + " --rate " + rate + " " + fx
+				proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
+				press_for_stop(led_color,proc,tx)
+				outfile.write(str(f)+'\n')
+			except:
+				speak("can not get duration")
 			# speak('press button in 5 seconds for exit or wait to continue')
 			ledc('r')
 			t0 = time.time()
@@ -2268,12 +2289,15 @@ def play_vlc_by_list_all(fp="../mars/4nt2",gain='0.1',rate='1.50',n=0):
 	killPlayer()
 	files= get_dhamma_list(fp,n)
 	for fx in files:
-		print(fx)
-		tfx = media_info(fx)
-		t = tfx / (1000*float(rate))
-		cmd = "cvlc --play-and-exit --global-key-play-pause p --global-key-vol-up u --global-key-vol-down d --global-key-jump+medium j" + " --gain " + gain + " --rate " + rate + " " + fx
-		proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
-		press_for_stop(led_color,proc,t+5)
+		# print(fx)
+		try:
+			tfx = media_info(fx)
+			t = tfx / (1000*float(rate))
+			cmd = "cvlc --play-and-exit --global-key-play-pause p --global-key-vol-up u --global-key-vol-down d --global-key-jump+medium j" + " --gain " + gain + " --rate " + rate + " " + fx
+			proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True, stdin=master)
+			press_for_stop(led_color,proc,t+5)
+		except:
+			speak("can not get duration")
 		# speak('press button in 5 seconds for exit or wait to continue')
 		ledc('r')
 		t0 = time.time()
@@ -2723,7 +2747,7 @@ def play_sutra2(t=0):
 	killPlayer()
 	i = random.choices([1,2,3,4],[7,5,3,1])[0]
 	if i == 1:
-		play_vlc_all_inTime(fp,t,'1.50','0.1',0)
+		play_vlc_all_inTime("../datath/sutra",t,'1.50','0.1',0)
 	elif i == 2:
 		play_vlc_all_inTime("../mars/sutta",t,'1.50','0.1',0)
 	elif i == 3:
@@ -3202,16 +3226,20 @@ def testing_mode3():
 
 def umong_testing_4():
 	speak("Testing 4, meditation practice at watumong")
+	mm = True
 	now = int(datetime.today().strftime('%H'))
 	if now < 3:
 		mn = x_minutes(3)
 		wooden_gong_sound(mn,'500','off')
 		bell('1')
 		relax_thai()
-		fast_buddho('off',60,'666')
+		fast_buddho('off',60,'500')
+		mm = False
+	elif now < 5:
+		mm = False
 
 	elif now > 16 and now < 21:
-		if now < 19:
+		if now < 20:
 			mn = x_minutes(20)
 			dhamma_wisdom(mn)
 		# efp = ["../datath/chanting/anapanasati.mp3","../datath/chanting/8.mp3"]
@@ -3219,36 +3247,42 @@ def umong_testing_4():
 		i = weekday()%2
 		mn = x_minutes(22) 
 		if i == 0:
-			play_sutra(mn)
-			fast_buddho('off',240,'666')
-			bell('1')
-			singing_bowl(5)
-			wooden_gong_sound(40,'500','off')
-			anapanasati_walk(10,"20%")
-			singing_bowl(5)
-			relax_thai()
-			fast_buddho_hiphop('off',60,'666')	
-			
+			i = random.randint(0,2)
+			if i == 0:
+				dm = [["../mars/zen","1.50","0.10"],["../mars/zen2","2.00","0.10"]]
+				dmc = random.choices(dm,[2,1])[0]
+				play_vlc_all_inTime(dmc[0],mn,dmc[1],dmc[2],1)
+			else:
+				play_sutra(mn,'900')			
 		else:
-			dm = [["../mars/buddhaDhamma","1.50","0.1"],["../mars/wisdom-en/mp3","1.00","0.15"]]
+			dm = [["../mars/buddhaDhamma","1.50","0.075"],["../mars/wisdom-en/mp3","1.00","0.10"]]
 			dmc = random.choices(dm,[2,1])[0]
 			play_vlc_all_inTime(dmc[0],mn,dmc[1],dmc[2],1)
 			# play_vlc_all_inTime(random.choices(dm,[5,1])[0],mn,'1.50','0.1',1)
-			fast_buddho('off',120,'666')
-			delay(120)
-			bell('1')
-			singing_bowl(5)
-			wooden_gong_sound(40,'500','off')
-			anapanasati_walk(10,"20%")
-			singing_bowl(5)
-			relax_thai()
-			fast_buddho('off',60,'666')
+			
+	if mm:
+		mn = x_minutes(24)
+		fast_buddho('off',mn,'500')
+		delay(120)
+		bell('3')
+		wooden_gong_sound(45,'400','off')
+		anapanasati_walk(10,"20%")
+		singing_bowl(5)
+		relax_thai()
+		i = random.randint(0,2)
+		if i == 0:
+			fast_buddho_hiphop('off',60,'500')
+		elif i ==1 :
+			kidnor('off',60,'500')
+		else:
+			fast_buddho('off',60,'500')
+
 	bell('1')
 	play_mp3('../mars/monk/rbut.mp3',127,'800')
 
 	efp2 = [["../dataen/chanting/anapanasati.mp3",0,"tbc"]]
-	efp2 += [["../datath/chanting/anapanasati.mp3",1,["../mars/anapanasati16.mp3","../mars/bdd/8014.mp3"]]]
-	efp2 += [["../datath/chanting/8.mp3",1,["../datath/dhamma/bdd_8foldpath.mp3","../mars/pyt/09_45.wma","../mars/bdd/8025.mp3"]]]
+	efp2 += [["../datath/chanting/anapanasati.mp3",1,["../mars/anapanasati16.mp3","../mars/bdd/8014.mp3","../mars/bdd/1006.mp3","../mars/bdd/10019.mp3"]]]
+	efp2 += [["../datath/chanting/8.mp3",1,["../datath/dhamma/bdd_8foldpath.mp3","../mars/pyt/09_45.wma","../mars/bdd/8025.mp3","../mars/bdd/04_12.wma"]]]
 	efp2c = random.choice(efp2)
 	play_vlc_file(efp2c[0],'1.00')
 	if efp2c[1] == 1:
@@ -3261,7 +3295,9 @@ def umong_testing_4():
 	mn = 90
 	i = weekday()
 	if i == 1:
-		play_vlc_all_inTime("../mars/4nt",mn,'1.50','0.1',1)
+		dm = ["../mars/12paticca","../mars/4nt"]
+		play_vlc_all_inTime(random.choice(dm),mn,'1.50','0.1',1)
+		# play_vlc_all_inTime("../mars/4nt",mn,'1.50','0.1',1)
 	elif i == 2:
 		bd = ["../mars/gold","../mars/bdd3","../mars/bdd-3536"]
 		play_vlc_all_inTime(random.choice(bd),mn,'1.50','0.1',1)
@@ -3278,7 +3314,7 @@ def umong_testing_4():
 		st = ["../mars/sutta","../mars/sutta2","../mars/sutta3"]
 		play_vlc_all_inTime(random.choice(st),mn,'1.50','0.1',1)
 	else:
-		play_vlc_all_inTime("../mars/12paticca",mn,'1.50','0.1',1)
+		play_vlc_all_inTime("../mars/wisdom-en/mp3",mn,'1.00','0.1',1)
 	return None
 
 def testing_mode5():
@@ -4912,7 +4948,8 @@ try:
 											speak("continuous")
 											play_vlc_by_list_all("../mars/bdd",'0.1','1.75',1)
 										else:
-											play_vlc_by_list("../mars/bdd","dhamma_9",4,0,'0.1','1.75')
+											speak("play 10 dhamma talk")
+											play_vlc_by_list("../mars/bdd","dhamma_9",10,0,'0.1','1.75')
 										# play_vlc_by_list_all("../mars/bdd")
 									elif "one" in words:
 										speak("Dhamma 1")
@@ -4928,11 +4965,13 @@ try:
 											speak("continuous")
 											play_vlc_by_list_all("../mars/luangpoorian",'0.1','1.50',1)
 										else:
+											speak("play 4 dhamma talk")
 											play_vlc_by_list("../mars/luangpoorian","dhamma_2",4,0)
 									elif "three" in words:
 										# play_vlc_by_list_all("../mars/char",'0.1','1.50',1)
 										speak("Dhamma 3, Luang poo char")
 										speakThai_mp3(['หลวง','ปู่','ชา'])
+										speak("play 4 dhamma talk")
 										play_vlc_by_list("../mars/char","dhamma_3",4,0)
 									elif "four" in words:
 										speak("Dhamma 4, Luang por Payutto")
@@ -4961,8 +5000,10 @@ try:
 									elif "ten" in words:
 										speak("Dhamma 10, spoke by Pope")
 										speakThai_mp3(['หลวง','ปู่','ญาณสังวร'])
+										speak("play 4 dhamma talk")
 										play_vlc_by_list("../mars/pope","dhamma_10",4,0,'0.1','1.75')
 									elif "noble" in words:
+										speak("play 4 dhamma talk")
 										play_vlc_by_list("../mars/4nt2","dhamma_noble",4,0,'0.1','1.50')
 										# play_four_noble_truth_dhamma()
 									elif "fifteen" in words:
