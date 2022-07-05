@@ -2137,7 +2137,7 @@ def play_vlc_by_list(fp="../mars/4nt2",cmd='dhamma_4nt2',limit=2,m=0,gain='0.1',
 	files= get_files_folder_list(fp,cmd,limit,m)
 	for fx in files:
 		fx = fp + '/' + fx
-		# print(fx)
+		print(fx)
 		try:
 			tfx = media_info(fx)
 			t = tfx / (1000*float(rate))
@@ -2191,7 +2191,7 @@ def play_vlc_inTime(fp="../mars/4nt2",cmd='dhamma_4nt2',t=60,rate='1.50',gain='0
 		
 		for f in files:
 			fx = fp + '/' + f
-			# print(fx)
+			print(fx)
 			try:
 				tfx = media_info(fx)
 				tx = tfx / (1000*float(rate))
@@ -3240,8 +3240,15 @@ def umong_testing_4():
 
 	elif now > 16 and now < 21:
 		if now < 20:
-			mn = x_minutes(20)
-			dhamma_wisdom(mn)
+			a = buddha_day()
+			if a == 0:
+				mn = x_minutes(20)
+				dhamma_wisdom(mn)
+			else:
+				mn = x_minutes(19)
+				dhamma_wisdom(mn)
+				play_vlc_file("../mars/bdd/7005.mp3",'2.00')
+				play_vlc_file("../mars/bdd/7007.mp3",'2.00')
 		# efp = ["../datath/chanting/anapanasati.mp3","../datath/chanting/8.mp3"]
 		# play_vlc_file(random.choice(efp),'1.00')
 		i = weekday()%2
@@ -3279,19 +3286,23 @@ def umong_testing_4():
 
 	bell('1')
 	play_mp3('../mars/monk/rbut.mp3',127,'800')
-
-	efp2 = [["../dataen/chanting/anapanasati.mp3",0,"tbc"]]
-	efp2 += [["../datath/chanting/anapanasati.mp3",1,["../mars/anapanasati16.mp3","../mars/bdd/8014.mp3","../mars/bdd/1006.mp3","../mars/bdd/10019.mp3"]]]
-	efp2 += [["../datath/chanting/8.mp3",1,["../datath/dhamma/bdd_8foldpath.mp3","../mars/pyt/09_45.wma","../mars/bdd/8025.mp3","../mars/bdd/04_12.wma"]]]
-	efp2c = random.choice(efp2)
-	play_vlc_file(efp2c[0],'1.00')
-	if efp2c[1] == 1:
-		play_vlc_file(random.choice(efp2c[2]),'1.50')
+	a = buddha_day()
+	if a == 0:
+		efp2 = [["../dataen/chanting/anapanasati.mp3",0,"tbc"]]
+		efp2 += [["../datath/chanting/anapanasati.mp3",1,["../mars/anapanasati16.mp3","../mars/bdd/8014.mp3","../mars/bdd/1006.mp3","../mars/bdd/10019.mp3"]]]
+		efp2 += [["../datath/chanting/8.mp3",1,["../datath/dhamma/bdd_8foldpath.mp3","../mars/pyt/09_45.wma","../mars/bdd/8025.mp3","../mars/bdd/04_12.wma"]]]
+		efp2c = random.choice(efp2)
+		play_vlc_file(efp2c[0],'1.00')
+		if efp2c[1] == 1:
+			play_vlc_file(random.choice(efp2c[2]),'1.50')
+		else:
+			efp = ["../dataen/chanting/noble8fold.mp3","../datath/chanting/paticca.mp3","../dataen/chanting/heart-sutra.mp3"]
+			play_vlc_file(random.choice(efp),'1.00')
+			efp3 = ["../datath/chanting/sungkharn.mp3","../datath/chanting/dhammaniyam.mp3","../datath/chanting/Bhadhdherattakadha.mp3","../datath/chanting/ituppajjayata.mp3"]
+			play_vlc_file(random.choice(efp3),'1.00')
 	else:
-		efp = ["../dataen/chanting/noble8fold.mp3","../datath/chanting/paticca.mp3","../dataen/chanting/heart-sutra.mp3"]
-		play_vlc_file(random.choice(efp),'1.00')
-		efp3 = ["../datath/chanting/sungkharn.mp3","../datath/chanting/dhammaniyam.mp3","../datath/chanting/Bhadhdherattakadha.mp3","../datath/chanting/ituppajjayata.mp3"]
-		play_vlc_file(random.choice(efp3),'1.00')
+		play_vlc_file("../mars/bdd/7004.mp3",'2.00')
+		play_vlc_file("../mars/bdd/7006.mp3",'2.00')
 	mn = 90
 	i = weekday()
 	if i == 1:
