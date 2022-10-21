@@ -335,7 +335,7 @@ def ledc(c='', f='16hz'):
 		led_color = randC
 		led_color2 = 'r'
 	else:
-		led_color = 'off'
+		led_color = random.choice(["r","off"])
 		led_color2 = 'off'
 
 	# print('Set blink pattern: period=500ms (2Hz)')
@@ -947,7 +947,7 @@ def bell_5minutes(l='1',vol='500'):
 def adjust_volume():
 	now = int(datetime.today().strftime('%H'))		
 	if now > 17 or now < 5:
-		call(["amixer","-q","-M","sset","Master","50%"])
+		call(["amixer","-q","-M","sset","Master","60%"])
 	else:
 		call(["amixer","-q","-M","sset","Master","80%"])
 
@@ -985,7 +985,7 @@ def relax_walk(t=5,vol="20%"):
 		else:
 			# os.system("cvlc --play-and-exit --gain 1 " + tx_list[i])
 			os.system("mpg123 " + tx_list[i])
-		time.sleep(0.1)
+		# time.sleep(0.1)
 		if i < n:
 			i += 1
 		else:
@@ -1076,16 +1076,16 @@ def anapanasati_walk(ts=5,vol="40%"):
 	return None
 
 
-def musk_walk(ts=5):
-	call(["amixer","-q","-M","sset","Master","40%"])
-	t  = 'พุท โธ พุท โธ เหยียบ เหยียบ ความ เห็น ชอบ สัม มา ทิฏ ฏิ ความ รู้ ใน ทุกข์ ความ รู้ ใน เหตุ ให้ เกิด ทุกข์ ความ รู้ ใน ความ ดับ แห่ง ทุกข์ ความ รู้ ใน ทาง ดำ เนิน ให้ ถึง ความ ดับ แห่ง ทุกข์ '
-	t += 'พุท โธ พุท โธ เหยียบ เหยียบ ความ ดำริ ชอบ สัม มา สัง กัป โป ดำริ ใน การ ออก จาก กาม ดำริ ใน การ ไม่ มุ่ง ร้าย ดำริ ใน การ ไม่ เบียด เบียน '
-	t += 'พุท โธ พุท โธ เหยียบ เหยียบ การ พูด จา ชอบ สัม มา วา จา เว้น จาก การ พูด ไม่ จริง เว้น จาก การ พูด ส่อ เสียด เว้น จาก การ พูด หยาบ เว้น จาก การ พูด เพ้อ เจ้อ '
-	t += 'พุท โธ พุท โธ เหยียบ เหยียบ การ ทำ การ งาน ชอบ สัม มา กัม มัน โต เว้น จาก การ ฆ่า เว้น จาก การ ถือ เอา สิ่ง ของ ที่ เจ้า ของ ไม่ ได้ ให้ เว้น จาก การ ประพฤติ ผิด ใน กาม '
-	t += 'พุท โธ พุท โธ เหยียบ เหยียบ การ เลี้ยง ชี วิต ชอบ สัม มา อา ชี โว ไม่ ทำ อา ชีพ ทุ จริต ทำ อา ชีพ สุ จริต '
-	t += 'พุท โธ พุท โธ เหยียบ เหยียบ ความ เพียร ชอบ สัม มา วา ยา โม ไม่ ทำ ชั่ว ใหม่ เลิก ทำ ชั่ว ที่ ยัง ทำ อยู่ ทำ ความ ดี เพิ่ม รัก ษา ความ ดี ที่ ทำ ไว้ '
-	t += 'พุท โธ พุท โธ เหยียบ เหยียบ ความ ระ ลึก ชอบ สัม มา สติ มี สติ ใน กาย มี สติ ใน เว ทะ นา มี สติ ใน จิต มี สติ ใน ธรรม มี ความ เพียร เผา กิเลส มี ความ รู้ สึก ตัว มี สติ ถอน ความ พอ ใจ และ ความ ไม่ พอ ใจ ใน ใจ ออก เสีย ได้ '
-	t += 'พุท โธ พุท โธ เหยียบ เหยียบ ความ ตั้ง ใจ มั่น ชอบ สัม มา สมา ธิ เข้า ถึง ปฐม ฌาน มี วิตก วิจาร ปีติ สุข เอกัคคตา เข้า ถึง ทุติย ฌาน ไม่ มี วิตก วิจาร มี แต่ ปีติ สุข เอกัคคตา '
+def musk_walk(ts=5,vol="40%"):
+	call(["amixer","-q","-M","sset","Master",vol])
+	t  = 'พุท โธ พุท โธ ความ เห็น ชอบ สัม มา ทิฏ ฏิ ความ รู้ ใน ทุกข์ ความ รู้ ใน เหตุ ให้ เกิด ทุกข์ ความ รู้ ใน ความ ดับ แห่ง ทุกข์ ความ รู้ ใน ทาง ดำ เนิน ให้ ถึง ความ ดับ แห่ง ทุกข์ '
+	t += 'พุท โธ พุท โธ ความ ดำริ ชอบ สัม มา สัง กัป โป ดำริ ใน การ ออก จาก กาม ดำริ ใน การ ไม่ มุ่ง ร้าย ดำริ ใน การ ไม่ เบียด เบียน '
+	t += 'พุท โธ พุท โธ การ พูด จา ชอบ สัม มา วา จา เว้น จาก การ พูด ไม่ จริง เว้น จาก การ พูด ส่อ เสียด เว้น จาก การ พูด หยาบ เว้น จาก การ พูด เพ้อ เจ้อ '
+	t += 'พุท โธ พุท โธ การ ทำ การ งาน ชอบ สัม มา กัม มัน โต เว้น จาก การ ฆ่า เว้น จาก การ ถือ เอา สิ่ง ของ ที่ เจ้า ของ ไม่ ได้ ให้ เว้น จาก การ ประพฤติ ผิด ใน กาม '
+	t += 'พุท โธ พุท โธ การ เลี้ยง ชี วิต ชอบ สัม มา อา ชี โว ไม่ ทำ อา ชีพ ทุ จริต ทำ อา ชีพ สุ จริต '
+	t += 'พุท โธ พุท โธ ความ เพียร ชอบ สัม มา วา ยา โม ไม่ ทำ ชั่ว ใหม่ เลิก ทำ ชั่ว ที่ ยัง ทำ อยู่ ทำ ความ ดี เพิ่ม รัก ษา ความ ดี ที่ ทำ ไว้ '
+	t += 'พุท โธ พุท โธ ความ ระ ลึก ชอบ สัม มา สติ มี สติ ใน กาย มี สติ ใน เว ทะ นา มี สติ ใน จิต มี สติ ใน ธรรม มี ความ เพียร เผา กิเลส มี ความ รู้ สึก ตัว มี สติ ถอน ความ พอ ใจ และ ความ ไม่ พอ ใจ ใน ใจ ออก เสีย ได้ '
+	t += 'พุท โธ พุท โธ ความ ตั้ง ใจ มั่น ชอบ สัม มา สมา ธิ เข้า ถึง ปฐม ฌาน มี วิตก วิจาร ปีติ สุข เอกัคคตา เข้า ถึง ทุติย ฌาน ไม่ มี วิตก วิจาร มี แต่ ปีติ สุข เอกัคคตา '
 	t += 'เข้า ถึง ตติย ฌาน ไม่ มี ปีติ มี ความ สุข ด้วย นามกาย เป็น ผู้ อยู่ อุ เบก ขา มี สติ อยู่ เป็น ปกติ สุข เข้า ถึง จตุตถ ฌาน ไม่ มี ทุกข์ ไม่ มี สุข มี แต่ ความ ที่ สติ เป็น ธรรมชาติ บริสุทธ์ เพราะ อุ เบก ขา แล้ว แล อยู่'
 
 	text = t.split(' ')
@@ -2674,6 +2674,16 @@ def x_minutes(hr=22):
 def what_time():
 	today = datetime.today().strftime('%H %M')
 	speak("The time is " + today)
+	today = dt.datetime.now() 
+	t = "เวลา,59/%H,นาฬิกา,59/%M,นาที"
+	t = t.replace("%H",today.strftime('%H'))
+	t = t.replace("%M",today.strftime('%M'))
+	text = t.split(',')
+
+	stext = ""
+	for i in range(len(text)):
+			stext += " ../voices/th/" + text[i] + ".mp3"
+	os.system("mpg123 -q -f 2100 "+stext)
 	clear_q()
 	
 	
@@ -3466,20 +3476,31 @@ def umong_testing_4():
 		if mn > 30:
 			wooden_gong_sound(mn-27,'400','off')
 			anapanasati_walk(10,"20%")
-			relax_walk(5)
-			relax_walk2(5)
+			musk_walk(10,"20%")
 			bell_5minutes()
 			singing_bowl(2)
 		else:
 			wooden_gong_sound(mn,'500','off')
-		bell('1')
+		bell('3')
+		play_vlc_file("../mars/uttayandokmai.mp3",'1.00')
 		relax_thai()
-		dokmai(20,'500')
-		remind_breathing3(5,'500')
-		dokmai(20,'500')
-		remind_breathing2(5,'500')
+		dokmai(24,'500')
+		remind_breathing3(1,'500')
+		dokmai(25,'500')
 		bell('1')
 		play_mp3('../mars/monk/rbut.mp3',127,'800')
+		play_vlc_file("../mars/uttayandokmai.mp3",'1.00')
+		mm = False
+	elif now < 4:
+		bell_5minutes()
+		play_vlc_file("../mars/uttayandokmai.mp3",'1.00')
+		relax_thai()
+		dokmai(24,'500')
+		remind_breathing3(1,'500')
+		dokmai(25,'500')
+		bell('1')
+		play_mp3('../mars/monk/rbut.mp3',127,'800')
+		play_vlc_file("../mars/uttayandokmai.mp3",'1.00')
 		mm = False
 	elif now < 5:
 		mm = False
@@ -3494,12 +3515,19 @@ def umong_testing_4():
 					dhamma_wisdom(mn)
 				else:
 					play_dhamma3(mn)
-				play_vlc_file("../mars/monk/nava_dhamma_chanting.mp3",'2.00')
-				play_vlc_all_inTime("../mars/gold",60,'1.50','0.1',1)
+				bell('3')
+				play_vlc_file("../sound/a-rahung.mp3",'1.00')
+				singing_bowl(5)
+				nava = ["../mars/monk/nava_dhamma_chanting.mp3","../mars/monk/nava_vinai.mp3"]
+				play_vlc_file(random.choice(nava),'2.00')
+				bell('1')
+				bd = ["../mars/gold","../mars/12paticca","../mars/4nt"]
+				play_vlc_all_inTime(random.choice(bd),40,'1.50','0.1',1)
+				bell('1')
 				adjust_volume()
-				play_vlc_file3("../datath/chanting/paticca.mp3")
+				play_vlc_file("../datath/chanting/paticca.mp3",'1.00')
 				i = weekday()%2
-				mn = 120
+				mn = 90
 				if i == 0:
 					i = random.randint(0,1)
 					if i == 0:
@@ -3519,6 +3547,7 @@ def umong_testing_4():
 					play_vlc_all_inTime(dmc[0],mn,dmc[1],dmc[2],1)
 					# play_vlc_all_inTime(random.choices(dm,[5,1])[0],mn,'1.50','0.1',1)
 			else:
+				bell('3')
 				mm = False
 				mn = x_minutes(19)
 				dhamma_wisdom(mn)
@@ -3528,50 +3557,48 @@ def umong_testing_4():
 				st = ["../mars/sutta","../mars/sutta3","../mars/sutta4"]
 				play_vlc_all_inTime(random.choice(st),mn,'1.50','0.1',1)
 				mn = x_minutes(24)
-				fast_buddho('off',mn,'500')
-				singing_bowl(120)
-				bell('3')
-				wooden_gong_sound(30,'400','off')
-				anapanasati_walk(10,"20%")
-				relax_walk(5)
-				relax_walk2(5)
+				singing_bowl(mn)
+				ledc('off')
+				bell30sec(120,'500','off')
 				bell_5minutes()
+				wooden_gong_sound(25,'400','r')
+				anapanasati_walk(10,"20%")
+				musk_walk(10,"20%")
+				bell_5minutes()
+				ledc('off')
 				singing_bowl(2)
 				relax_thai()
-				dokmai(20,'500')
-				remind_breathing3(5,'500')
-				dokmai(20,'500')
-				remind_breathing2(5,'500')
+				play_vlc_inTime('../mars/pope','pope_dhamma',60,'1.00','0.1',0)
 				bell('1')
-				play_mp3('../mars/monk/rbut.mp3',127,'800')
-		
-		
+				play_mp3('../mars/monk/rbut.mp3',127,'800')		
 			
 	if mm:
+		bell('3')
 		mn = x_minutes(24)
 		i = random.randint(0,1)
 		if i == 0:
-			fast_buddho('off',mn,'500')
+			fast_buddho('r',mn,'500')
 		else:
-			bell30sec(mn,'500','off')
+			bell30sec(mn,'500','r')
+		ledc('off')
 		delay(120)
-		bell('3')
-		wooden_gong_sound(30,'400','off')
-		anapanasati_walk(10,"20%")
-		relax_walk(5)
-		relax_walk2(5)
 		bell_5minutes()
-		singing_bowl(2)
+		wooden_gong_sound(25,'400','r')
+		anapanasati_walk(10,"20%")
+		musk_walk(10,"20%")
+		bell_5minutes()
+		ledc('off')
+		# singing_bowl(2)
+		play_vlc_file("../mars/uttayandokmai.mp3",'1.00')
 		relax_thai()
 		# remind_breathing3(15,'500')
-		dokmai(10,'500')
-		remind_breathing2(5,'500')
-		dokmai(10,'500')
-		remind_breathing2(5,'500')
-		dokmai(10,'500')
-		remind_breathing2(5,'500')
-		dokmai(10,'500')
-		remind_breathing2(5,'500')
+		dokmai(14,'500')
+		remind_breathing2(1,'500')
+		dokmai(14,'500')
+		remind_breathing2(1,'500')
+		dokmai(14,'500')
+		remind_breathing2(1,'500')
+		dokmai(15,'500')
 		# i = random.choice([0,1,2,3,4])
 		# if i == 0:
 		# 	fast_buddho_hiphop('off',60,'500')
@@ -3586,45 +3613,45 @@ def umong_testing_4():
 		# ledc('off')
 		bell('1')
 		play_mp3('../mars/monk/rbut.mp3',127,'800')
+		# play_vlc_file("../mars/uttayandokmai.mp3",'1.00')
 		adjust_volume()
-		play_vlc_file("../mars/monk/nava_dhamma.mp3",'2.00')
-		play_vlc_file3("../datath/sutta/moggallana.mp3",'1.50')
+		bell('3')
+		play_vlc_file3("../datath/sutta/moggallana.mp3",'2.00')
 		mn = x_minutes(5)
-		i = weekday()
-		if i == 1:
-			dm = ["../mars/12paticca","../mars/4nt"]
-			play_vlc_all_inTime(random.choice(dm),mn,'1.50','0.1',1)
-			# play_vlc_all_inTime("../mars/4nt",mn,'1.50','0.1',1)
-		elif i == 2:
-			bd = ["../mars/gold","../mars/bdd3","../mars/bdd-3536"]
-			play_vlc_all_inTime(random.choice(bd),mn,'1.50','0.1',1)
-			# play_vlc_all_inTime("../mars/gold",mn,'1.50','0.1',1)
-		elif i == 3:
-			play_vlc_all_inTime("../mars/payutto6264",mn,'1.50','0.1',1)
-		elif i == 4:
-			dm = ["../datath/dhamma","../mars/4nt2"]
-			play_vlc_all_inTime(random.choice(dm),mn,'1.50','0.1',1)
-			# play_vlc_all_inTime("../datath/dhamma",mn,'1.50','0.1',1)
-		elif i == 5:
-			play_vlc_all_inTime("../mars/zen",mn,'1.50','0.1',1)
-		elif i == 6:
-			play_sutra(mn,'800')
-		else:
-			bd = ["../mars/gold"]
-			play_vlc_all_inTime(random.choice(bd),mn,'1.50','0.1',1)
+		# play_vlc_all_inTime("../mars/dead",mn,'1.50','0.1',1)
+		play_vlc_inTime('../mars/dead','dead_dhamma',mn,'1.50','0.1',0)
+		# i = weekday()
+		# if i == 1:
+		# 	dm = ["../mars/12paticca","../mars/4nt"]
+		# 	play_vlc_all_inTime(random.choice(dm),mn,'1.50','0.1',1)
+		# 	# play_vlc_all_inTime("../mars/4nt",mn,'1.50','0.1',1)
+		# elif i == 2:
+		# 	bd = ["../mars/bdd3","../mars/bdd-3536"]
+		# 	play_vlc_all_inTime(random.choice(bd),mn,'1.50','0.1',1)
+		# elif i == 3:
+		# 	play_vlc_all_inTime("../mars/payutto6264",mn,'1.50','0.1',1)
+		# elif i == 4:
+		# 	play_vlc_all_inTime("../mars/dead",mn,'1.50','0.1',1)
+		# elif i == 5:
+		# 	play_vlc_all_inTime("../mars/zen",mn,'1.50','0.1',1)
+		# elif i == 6:
+		# 	play_vlc_all_inTime("../mars/gold",mn,'1.50','0.1',1)
+		# else:
+		# 	play_vlc_all_inTime("../mars/dead",mn,'1.50','0.1',1)
 
 	a = buddha_day()
 	adjust_volume()
 	if a == 0:
+		play_vlc_file("../sound/a-rahung.mp3",'1.00')
 		play_vlc_file("../datath/chanting/Bhadhdherattakadha.mp3",'1.00')
 		efp3 = ["../datath/chanting/sungkharn.mp3","../datath/chanting/patimok-chanting.mp3"]
 		play_vlc_file(random.choice(efp3),'1.00')
 		i = weekday() % 2
 		if i == 0:
-			play_vlc_file("../mars/monk/nava_dhamma.mp3",'1.50')
+			play_vlc_file("../mars/monk/nava_vinai.mp3",'2.00')
 		else:
-			play_vlc_file("../mars/monk/nava_dhamma_chanting.mp3",'1.50')
-			play_vlc_file("../mars/monk/pali.mp3",'1.00')
+			play_vlc_file("../mars/monk/nava_dhamma_chanting.mp3",'2.00')
+			# play_vlc_file("../mars/monk/pali.mp3",'1.00')
 
 		# efp2 = [["../dataen/chanting/anapanasati.mp3",0,"tbc"]]
 		# efp2 += [["../dataen/chanting/noble8fold.mp3",0,"tbc"]]
@@ -3696,20 +3723,20 @@ def umong_testing_4():
 
 def SevenDays_dhamma():
 	adjust_volume()
-	mn = 180
+	mn = 120
 	i = weekday()
 	if i == 1:
 		dm = ["../mars/12paticca","../mars/4nt"]
 		play_vlc_all_inTime(random.choice(dm),mn,'1.50','0.1',1)
 		# play_vlc_all_inTime("../mars/4nt",mn,'1.50','0.1',1)
 	elif i == 2:
-		bd = ["../mars/gold","../mars/bdd3","../mars/bdd-3536"]
-		play_vlc_all_inTime(random.choice(bd),mn,'1.50','0.1',1)
-		# play_vlc_all_inTime("../mars/gold",mn,'1.50','0.1',1)
+		# bd = ["../mars/bdd3","../mars/bdd-3536"]
+		# play_vlc_all_inTime(random.choice(bd),mn,'1.50','0.1',1)
+		play_vlc_all_inTime("../mars/tripidok",mn,'1.50','0.1',1)
 	elif i == 3:
 		play_vlc_all_inTime("../mars/payutto6264",mn,'1.50','0.1',1)
 	elif i == 4:
-		dm = ["../datath/dhamma","../mars/milin"]
+		dm = ["../datath/dhamma","../mars/4nt2"]
 		play_vlc_all_inTime(random.choice(dm),mn,'1.50','0.1',1)
 		# play_vlc_all_inTime("../datath/dhamma",mn,'1.50','0.1',1)
 	elif i == 5:
@@ -3717,11 +3744,11 @@ def SevenDays_dhamma():
 	elif i == 6:
 		play_sutra(mn,'800')
 	else:
-		bd = ["../mars/gold"]
+		bd = ["../mars/gold","../mars/12paticca"]
 		play_vlc_all_inTime(random.choice(bd),mn,'1.50','0.1',1)
 	mn  = x_minutes(17)
-	dhf = ["../mars/buddhaDhamma/","../mars/4nt2","../mars/tripitaka"]
-	i   = i % 3
+	dhf = ["../mars/buddhaDhamma/","../mars/tripitaka"]
+	i   = i % 2
 	play_vlc_all_inTime(dhf[i],mn,'1.50','0.1',1)
 
 def testing_mode5():
@@ -4622,16 +4649,19 @@ try:
 			a = buddha_day()
 			now = int(datetime.today().strftime('%H'))
 			if a > 0:
-				if now >= 8 and now < 12:
+				if now < 3:
+					args.mode = 4
+				elif now >= 8 and now < 12:
 					args.mode = 3
 			else:
 				if now < 3:
 					args.mode = 4
-				else:
+				elif now < 12:
+					play_vlc_file3("../datath/sutta/moggallana.mp3",'2.00')
 					args.mode = 5
 
-			play_vlc_file3("../datath/chanting/paticca.mp3")
-			play_vlc_file3("../datath/sutta/moggallana.mp3",'1.50')
+				play_vlc_file3("../datath/chanting/paticca.mp3")
+			
 			# new runtime vocabulary
 			# new_vocab = runtime_vocabulary()
 			# vrun  = '["anat ta '
@@ -5444,7 +5474,7 @@ try:
 											dhamma_one()
 										
 									elif "five" in words:
-										play_vlc_by_list_all("../mars/12paticca")
+										play_vlc_by_list_all("../mars/tripidok")
 										
 									elif "six" in words:
 										if "continuous" in words:
@@ -5469,12 +5499,15 @@ try:
 										# 	play_vlc_by_list("../mars/payutto6264","dhamma_10_pyt",2,0,'0.1','1.50')
 										# speak("Dhamma 10, spoke by Pope")
 										# speakThai_mp3(['หลวง','ปู่','ญาณสังวร'])
-										speak("play 4 dhamma talk")
-										play_vlc_by_list("../mars/wisdom2","dhamma_102",4,0,'0.1','2.00')
-										# play_vlc_by_list("../mars/pope","dhamma_10",4,0,'0.1','2.00')
+										# speak("play 4 dhamma talk")
+										# play_vlc_by_list("../mars/wisdom2","dhamma_102",4,0,'0.1','2.00')
+										play_vlc_by_list("../mars/pope","dhamma_10",2,0,'0.1','1.00')
 									elif "noble" in words:
 										speak("play 4 dhamma talk")
 										play_vlc_by_list("../mars/4nt2","dhamma_noble",2,0,'0.1','1.50')
+									elif "new" in words:
+										speak("play playlist dhamma talk")
+										play_vlc_by_list("../mars/new","dhamma_playlist",1,0,'0.1','1.50')
 										# play_four_noble_truth_dhamma()
 									elif "fifteen" in words:
 										play_dhamma2(0)
